@@ -1,4 +1,7 @@
 package com.vsu.amm.medframe.repository;
 
-public class TestRepository {
+import com.vsu.amm.medframe.entity.Test;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TestRepository extends JpaRepository<Test, Long>{
 }
