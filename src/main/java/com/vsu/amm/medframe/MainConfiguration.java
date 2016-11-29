@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.app;
+package com.vsu.amm.medframe;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;

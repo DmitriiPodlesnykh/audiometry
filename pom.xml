@@ -55,7 +55,7 @@
 
     <properties>
         <project-version>1.0-SNAPSHOT</project-version>
-        <spring-boot-starter-web-version>1.4.2.RELEASE</spring-boot-starter-web-version>
+        <spring-boot-starter-web-version>1.4.1.RELEASE</spring-boot-starter-web-version>
         <spring-boot-starter-jetty-version>1.4.1.RELEASE</spring-boot-starter-jetty-version>
         <postgresql-version>9.4.1211.jre7</postgresql-version>
         <spring-data-jpa-version>1.10.5.RELEASE</spring-data-jpa-version>
