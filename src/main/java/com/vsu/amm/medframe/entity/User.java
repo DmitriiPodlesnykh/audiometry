@@ -1,35 +1,40 @@
 package com.vsu.amm.medframe.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
+@Table(name = "MED_USERS")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "USER_ID")
+    private Long id;
 
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
+    @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "MIDDLE_NAME")
     private String middleName;
 
+    @Column(name = "USER_TYPE")
     private String userType;
 
+    @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "PASSWORD")
     private String password;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -84,7 +89,7 @@ public class User {
     public User() {
     }
 
-    public User(long id, String firstName,
+    public User(Long id, String firstName,
                 String lastName, String middleName,
                 String userType, String email,
                 String password) {

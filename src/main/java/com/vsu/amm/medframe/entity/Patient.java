@@ -1,17 +1,15 @@
 package com.vsu.amm.medframe.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name = "MED_PATIENTS")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String firstName;
 
@@ -23,15 +21,15 @@ public class Patient {
 
     private String sex;
 
-    private long doctorId;
+    private Long doctorId;
 
     private String description;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,7 +73,7 @@ public class Patient {
         this.sex = sex;
     }
 
-    public long getDoctorId() {
+    public Long getDoctorId() {
         return doctorId;
     }
 
@@ -94,7 +92,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(long id, String firstName,
+    public Patient(Long id, String firstName,
                    String lastName, String middleName,
                    Date birthday, String sex,
                    long doctorId, String description) {
