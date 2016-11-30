@@ -1,5 +1,7 @@
 package com.vsu.amm.medframe.app;
 
+import com.vsu.amm.medframe.entity.Simple;
+import com.vsu.amm.medframe.repository.SimpleRepository;
 import com.vsu.amm.medframe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
 
-    @Autowired
-    private UserRepository userRepository;
+    //@Autowired
+    //private UserRepository userRepository;
 
     @RequestMapping("/")
     public String test(){
@@ -23,15 +25,23 @@ public class MainController {
         return "test1";
     }
 
-    @RequestMapping("/t")
+    /*@RequestMapping("/t")
     public Object testUser(){
         System.out.println("in testUser");
-        if(userRepository.findByFirstName("Ivan") != null){
+        if(userRepository.findT() != null){
             System.out.println("userRepository.findByFirstName != null");
-            return userRepository.findByFirstName("Ivan");
+            return userRepository.findT();
         }else {
             System.out.println("userRepository.findByFirstName = null");
             return "result null";
         }
-    };
+    };*/
+
+    @Autowired
+    private SimpleRepository simpleRepository;
+
+    @RequestMapping
+    public Object simple(){
+        return simpleRepository.findById(1L);
+    }
 }
