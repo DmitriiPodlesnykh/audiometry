@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.app;
+package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
