@@ -2,13 +2,15 @@ package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 
 @Entity
 @Table(name = "MED_USERS")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "USER_ID")
     private Long id;
 
@@ -83,22 +85,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User() {
-    }
-
-    public User(Long id, String firstName,
-                String lastName, String middleName,
-                String userType, String email,
-                String password) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.userType = userType;
-        this.email = email;
         this.password = password;
     }
 }
