@@ -9,20 +9,28 @@ import java.sql.Date;
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PATIENT_ID")
     private Long id;
 
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
+    @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "MIDDLE_NAME")
     private String middleName;
 
+    @Column(name = "DATE")
     private Date birthday;
 
+    @Column(name = "SEX")
     private String sex;
 
+    @Column(name = "DOCTOR_ID")
     private Long doctorId;
 
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public Long getId() {
