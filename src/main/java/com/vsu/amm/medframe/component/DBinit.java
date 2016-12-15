@@ -24,7 +24,7 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        /*User user = new User();
+        User user = new User();
         user.setFirstName("Pop");
         user.setLastName("qwerty");
         user.setUserType("Admin");
@@ -32,7 +32,7 @@ public class DBinit {
         user.setPassword("sde");
         user.setMiddleName("qwqqq");
 
-        userRepository.save(user);*/
+        userRepository.save(user);
     }
 
 }
