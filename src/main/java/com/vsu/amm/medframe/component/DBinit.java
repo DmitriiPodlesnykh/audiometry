@@ -24,6 +24,15 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
+        //checkTables();
+        addUserForTest();
+    }
+
+    private void checkTables(){
+        System.out.println("All tables checked");
+    }
+
+    private void addUserForTest(){
         User user = new User();
         user.setFirstName("Pop");
         user.setLastName("qwerty");
@@ -33,6 +42,8 @@ public class DBinit {
         user.setMiddleName("qwqqq");
 
         userRepository.save(user);
+
+        System.out.println("User added");
     }
 
 }

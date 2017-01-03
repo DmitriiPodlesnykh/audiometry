@@ -18,7 +18,7 @@ public class MainController {
         return "string test";
     }
 
-    @RequestMapping("/t")
+    @RequestMapping("/test")
     public Object testUser(){
         if(userRepository.findById(1L) != null){
             System.out.println("userRepository.findByFirstName != null");
@@ -28,4 +28,5 @@ public class MainController {
             return "result null";
         }
     }
+
 }
