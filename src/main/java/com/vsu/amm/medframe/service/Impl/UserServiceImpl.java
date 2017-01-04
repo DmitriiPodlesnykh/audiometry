@@ -32,11 +32,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getOne(Long id) {
-        return null;
+        return userRepository.getOne(id);
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return userRepository.findAll();
     }
 }

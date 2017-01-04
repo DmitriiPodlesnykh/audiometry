@@ -30,5 +30,11 @@ public class UserController {
         modelMap.addAttribute("users", userService.getAll());
         return "user/userList";
     }
-    
+
+    @RequestMapping(value = "user", method = GET)
+    public String test(ModelMap modelMap){
+        modelMap.addAttribute("user", userService.getOne(1L));
+        return "user/user";
+    }
+
 }
