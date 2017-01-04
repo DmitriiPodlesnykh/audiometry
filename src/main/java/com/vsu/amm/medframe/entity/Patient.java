@@ -21,7 +21,7 @@ public class Patient {
     @Column(name = "MIDDLE_NAME")
     private String middleName;
 
-    @Column(name = "DATE")
+    @Column(name = "BIRTHDAY")
     private Date birthday;
 
     @Column(name = "SEX")

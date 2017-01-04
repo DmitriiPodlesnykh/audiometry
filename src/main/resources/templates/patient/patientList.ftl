@@ -1,0 +1,20 @@
+<div>
+    <div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Фамилия</th>
+            </tr>
+        <#list patients as patient>
+            <tr>
+                <td>${patient.getId()}</td>
+                <td>${patient.getFirstName()}</td>
+                <td>${patient.getMiddleName()}</td>
+                <td>${patient.getLastName()}</td>
+            </tr>
+        </#list>
+        </table>
+    </div>
+</div>
