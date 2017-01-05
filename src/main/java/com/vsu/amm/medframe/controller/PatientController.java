@@ -12,31 +12,26 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
+@RequestMapping("/patients")
 public class PatientController {
 
     @Autowired
     private PatientServiceImpl patientService;
 
-    @RequestMapping(value = "/patients", method = GET)
+    @RequestMapping(value = "", method = GET)
     public String getDoctorPatients(ModelMap modelMap){
         modelMap.addAttribute("patients", patientService.getAllPatientsOfTheDoctor(1L));
         return "patient/patientList";
     }
 
-    @RequestMapping(value = "/addpatient", method = GET)
+    @RequestMapping(value = "/add", method = GET)
     public String createForm(){
         return "patient/addPatient";
     }
 
-    @RequestMapping(value = "/addpatient", method = POST)
+    @RequestMapping(value = "/add", method = POST)
     public String create(@ModelAttribute("patient")Patient patient){
-
-        System.out.println("in POST create");
-
         patientService.save(patient);
-
-        System.out.println("after save");
-
-        return "patient/patient";
+        return "redirect:/patients";
     }
 }

@@ -13,6 +13,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "allusers", method = GET)
+    @RequestMapping(value = "", method = GET)
     public String getAll(ModelMap modelMap){
         modelMap.addAttribute("users", userService.getAll());
         return "user/userList";
