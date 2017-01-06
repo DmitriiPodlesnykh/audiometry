@@ -2,17 +2,22 @@
     <div>
         <table>
             <tr>
-                <th>ID</th>
-                <th>Имя</th>
+                <th>Название</th>
                 <th>Автор:</th>
+
+
             </tr>
         <#list templates as template>
             <tr>
-                <td>${template.getId()}</td>
-                <td>${template.getName()}</td>
+                <td><a href="/templates/${template.getId()}">${template.getName()}</a></td>
                 <td>${template.getAuthorId()}</td>
             </tr>
         </#list>
         </table>
+    </div>
+    <div>
+        <a href="/templates/add" target="_blank">
+            <button id="openAddForm">Добавить шаблон</button>
+        </a>
     </div>
 </div>

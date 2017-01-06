@@ -16,7 +16,7 @@ public class TemplateServiceImpl implements TemplateService{
 
     @Override
     public Template save(Template template) {
-        return null;
+        return templateRepository.save(template);
     }
 
     @Override
@@ -27,5 +27,10 @@ public class TemplateServiceImpl implements TemplateService{
     @Override
     public Template getOne(Long id) {
         return templateRepository.findOne(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        templateRepository.delete(id);
     }
 }

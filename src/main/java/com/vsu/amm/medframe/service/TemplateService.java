@@ -8,5 +8,6 @@ public interface TemplateService {
     Template save(Template template);
     List<Template> getAll();
     Template getOne(Long id);
+    void delete(Long id);
 
 }
