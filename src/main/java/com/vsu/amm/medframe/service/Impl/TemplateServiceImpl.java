@@ -23,4 +23,9 @@ public class TemplateServiceImpl implements TemplateService{
     public List<Template> getAll() {
         return templateRepository.findAll();
     }
+
+    @Override
+    public Template getOne(Long id) {
+        return templateRepository.findOne(id);
+    }
 }

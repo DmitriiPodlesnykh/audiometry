@@ -7,5 +7,6 @@ import java.util.List;
 public interface TemplateService {
     Template save(Template template);
     List<Template> getAll();
+    Template getOne(Long id);
 
 }
