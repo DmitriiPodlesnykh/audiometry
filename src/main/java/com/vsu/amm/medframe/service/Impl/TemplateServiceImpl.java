@@ -5,9 +5,10 @@ import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.repository.TemplateRepository;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class TemplateServiceImpl implements TemplateService{
 
     @Autowired
