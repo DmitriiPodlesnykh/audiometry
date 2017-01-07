@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.service.Impl;
 
 
+import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplatePointRepository;
 import com.vsu.amm.medframe.service.TemplatePointService;
@@ -14,9 +15,19 @@ public class TemplatePointServiceImpl implements TemplatePointService{
     @Autowired
     private TemplatePointRepository templatePointRepository;
 
+    @Autowired
+    private TemplateServiceImpl templateService;
+
     @Override
-    public TemplatePoint save(TemplatePoint templatePoint) {
-        return templatePointRepository.save(templatePoint);
+    public TemplatePoint save(TemplatePointDto templatePointDto) {
+
+        TemplatePoint templatePoint = new TemplatePoint();
+
+        templatePoint.setTemplate(templateService.getOne(templatePointDto.getTemplateId()));
+        templatePoint.setInrensityValue(templatePointDto.getIntensityValue());
+        templatePoint.setFrequency(templatePointDto.getFrequency());
+
+        return null;
     }
 
     @Override

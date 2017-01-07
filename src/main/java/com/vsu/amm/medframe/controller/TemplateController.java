@@ -1,10 +1,10 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.entity.Template;
+import com.vsu.amm.medframe.dto.TemplateDto;
+import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.Impl.TemplateServiceImpl;
 import com.vsu.amm.medframe.service.TemplatePointService;
-import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,8 +38,8 @@ public class TemplateController {
     }
 
     @RequestMapping(value = "/add", method = POST)
-    public String create(@ModelAttribute("template") Template template) {
-        templateService.save(template);
+    public String create(@ModelAttribute("template") TemplateDto templateDto) {
+        templateService.save(templateDto);
         return "redirect:/templates";
     }
 
@@ -57,8 +57,8 @@ public class TemplateController {
 
     @RequestMapping(value = "/{id}/add", method = POST)
     public String createTemplatePoint(@PathVariable Long templateId,
-                                      @ModelAttribute("templatePoint") TemplatePoint templatePoint) {
-        templatePointService.save(templatePoint);
+                                      @ModelAttribute("templatePoint") TemplatePointDto templatePointDto) {
+        templatePointService.save(templatePointDto);
 
         StringBuilder returnUrl = new StringBuilder("redirect:/templates/");
         returnUrl.append(templateId);

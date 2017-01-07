@@ -11,8 +11,9 @@ public class TemplatePoint {
     @Column(name = "TEMPLATE_POINT_ID")
     private Long id;
 
-    @Column(name = "TEMPLATE_ID")
-    private Long templateId;
+    @ManyToOne
+    @JoinColumn(name = "TEMPLATE_ID")
+    private Template template;
 
     @Column(name = "INTENSITY_VALUE")
     private Integer intensityValue;
@@ -28,12 +29,12 @@ public class TemplatePoint {
         this.id = id;
     }
 
-    public Long getTemplateId() {
-        return templateId;
+    public void setTemplate(Template template){
+        this.template = template;
     }
 
-    public void setTemplateId(Long templateId) {
-        this.templateId = templateId;
+    public Template getTemplate(){
+        return this.template;
     }
 
     public Integer getInrensityValue() {

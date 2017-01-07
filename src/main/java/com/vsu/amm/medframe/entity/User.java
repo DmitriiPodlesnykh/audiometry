@@ -2,6 +2,11 @@ package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 
@@ -31,6 +36,22 @@ public class User {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @OneToMany()
+    @JoinColumn(name = "USER_ID")
+    private Set<Patient> patients = new HashSet<Patient>();
+
+    @OneToMany()
+    @JoinColumn(name = "USER_ID")
+    private List<Template> templates = new ArrayList<Template>();
+
+    public void setPatients(Set<Patient> patients){
+        this.patients = patients;
+    }
+
+    public Set<Patient> getPatients(){
+        return patients;
+    }
 
     public Long getId() {
         return id;

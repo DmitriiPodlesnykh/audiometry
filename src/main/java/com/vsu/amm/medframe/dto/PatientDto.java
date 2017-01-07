@@ -1,54 +1,22 @@
-package com.vsu.amm.medframe.entity;
+package com.vsu.amm.medframe.dto;
 
-
-import javax.persistence.*;
 import java.sql.Date;
 
-@Entity
-@Table(name = "MED_PATIENTS")
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PATIENT_ID")
-    private Long id;
+public class PatientDto {
 
-    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "MIDDLE_NAME")
     private String middleName;
 
-    @Column(name = "BIRTHDAY")
     private Date birthday;
 
-    @Column(name = "SEX")
     private String sex;
 
-    @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "DOCTOR_ID")
-    private User doctor;
-
-    public User getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(User user) {
-        this.doctor = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long doctorId;
 
     public String getFirstName() {
         return firstName;
@@ -74,12 +42,12 @@ public class Patient {
         this.middleName = middleName;
     }
 
-    public Date getBirthdate() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthday = birthdate;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getSex() {
@@ -98,6 +66,11 @@ public class Patient {
         this.description = description;
     }
 
-    public Patient() {
+    public Long getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 }

@@ -44,20 +44,15 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        //checkTables();
         addUserForTest();
-        addPatieantForTest();
+        addPatientForTest();
         addTemplateForTest();
         addTemplatePointForTest();
     }
 
-    private void checkTables() {
-        System.out.println("All tables checked");
-    }
-
     private void addTemplatePointForTest() {
         TemplatePoint templatePoint = new TemplatePoint();
-        templatePoint.setTemplateId(1L);
+        templatePoint.setTemplate(templateRepository.findOne(1L));
         templatePoint.setFrequency(4000);
         templatePoint.setInrensityValue(10);
         templatePointRepository.save(templatePoint);
@@ -67,22 +62,37 @@ public class DBinit {
     private void addTemplateForTest() {
         Template template = new Template();
         template.setName("First template");
-        template.setAuthorId(1L);
+        template.setAuthor(userRepository.findOne(1L));
         templateRepository.save(template);
         System.out.println("Template added");
     }
 
-    private void addPatieantForTest() {
+    private void addPatientForTest() {
         Patient patient = new Patient();
         patient.setFirstName("Гадя");
         patient.setLastName("Хренова");
         patient.setMiddleName("Петрович");
         patient.setSex("Female");
-        patient.setDoctorId(1L);
+        User userForPatient = addTestUserForPatient();
+        patient.setDoctor(userForPatient);
 
         patientRepository.save(patient);
 
         System.out.println("Patient added");
+    }
+
+    private User addTestUserForPatient(){
+        User user = new User();
+        user.setFirstName("dfghjkfttft");
+        user.setLastName("qwerty");
+        user.setUserType("Admin");
+        user.setEmail("11@qw.ru");
+        user.setPassword("sde");
+        user.setMiddleName("qwqqq");
+
+        userRepository.save(user);
+
+        return user;
     }
 
     private void addUserForTest() {

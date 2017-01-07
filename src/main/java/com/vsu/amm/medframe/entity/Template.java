@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "MED_TEMPLATES")
@@ -16,15 +17,29 @@ public class Template {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "AUTHOR_ID")
-    private Long authorId;
+    @ManyToOne
+    @JoinColumn(name = "AUTHOR_ID")
+    private User author;
 
-    public Long getAuthorId() {
-        return authorId;
+    @OneToMany()
+    @JoinColumn(name = "TEMPLATE_ID")
+    private Set<TemplatePoint> templatePoints;
+
+    public void setTemplatePoints(Set<TemplatePoint> templatePoints){
+        this.templatePoints = templatePoints;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public Set<TemplatePoint> getTemplatePoints(){
+        return this.templatePoints;
+    }
+
+
+    public User getAuthor(){
+        return author;
+    }
+
+    public void setAuthor(User user){
+        this.author = user;
     }
 
     public Long getId() {
@@ -49,5 +64,15 @@ public class Template {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }

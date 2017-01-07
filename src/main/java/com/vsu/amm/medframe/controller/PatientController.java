@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.entity.Patient;
+import com.vsu.amm.medframe.dto.PatientDto;
 import com.vsu.amm.medframe.service.Impl.PatientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +30,8 @@ public class PatientController {
     }
 
     @RequestMapping(value = "/add", method = POST)
-    public String create(@ModelAttribute("patient")Patient patient){
-        patientService.save(patient);
+    public String create(@ModelAttribute("patient")PatientDto patientDto){
+        patientService.save(patientDto);
         return "redirect:/patients";
     }
 }

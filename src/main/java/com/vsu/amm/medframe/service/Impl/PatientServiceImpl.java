@@ -1,5 +1,6 @@
 package com.vsu.amm.medframe.service.Impl;
 
+import com.vsu.amm.medframe.dto.PatientDto;
 import com.vsu.amm.medframe.entity.Patient;
 import com.vsu.amm.medframe.repository.PatientRepository;
 import com.vsu.amm.medframe.service.PatientService;
@@ -14,8 +15,23 @@ public class PatientServiceImpl implements PatientService{
     @Autowired
     private PatientRepository patientRepository;
 
-    @Override
+    @Autowired
+    private UserServiceImpl userService;
+
+    /*@Override
     public Patient save(Patient patient) {
+        return patientRepository.save(patient);
+    }*/
+
+    @Override
+    public Patient save(PatientDto patientDto) {
+        Patient patient = new Patient();
+        patient.setFirstName(patientDto.getFirstName());
+        patient.setLastName(patientDto.getLastName());
+        patient.setMiddleName(patientDto.getMiddleName());
+        patient.setSex(patientDto.getSex());
+        patient.setDescription(patientDto.getDescription());
+        patient.setDoctor(userService.getOne(patientDto.getDoctorId()));
         return patientRepository.save(patient);
     }
 

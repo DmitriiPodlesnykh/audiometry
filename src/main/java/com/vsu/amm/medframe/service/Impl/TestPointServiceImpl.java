@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TestPointServiceImpl implements TestPointService{
+
     @Override
     public TestPoint create(TestPoint testPoint) {
         return null;
