@@ -8,6 +8,7 @@ import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,8 +33,19 @@ public class TemplateServiceImpl implements TemplateService {
 
 
     @Override
-    public List<Template> getAll() {
-        return templateRepository.findAll();
+    public List<TemplateDto> getAll() {
+        List<Template> templates = templateRepository.findAll();
+        List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();
+        for(Template template: templates){
+            TemplateDto templateDto = new TemplateDto();
+            templateDto.setId(template.getId());
+            templateDto.setName(template.getName());
+            templateDto.setDescription(template.getDescription());
+
+            templateDtos.add(templateDto);
+        }
+
+        return templateDtos;
     }
 
 

@@ -2,6 +2,7 @@ package com.vsu.amm.medframe.dto;
 
 
 import java.util.Set;
+import java.util.TreeSet;
 
 public class TemplateDto {
 
@@ -13,7 +14,7 @@ public class TemplateDto {
 
     private Long authorId;
 
-    private Set<TemplatePointDto> points;
+    private Set<TemplatePointDto> points = new TreeSet<TemplatePointDto>();
 
     public void setPoints(Set<TemplatePointDto> points){
         this.points = points;

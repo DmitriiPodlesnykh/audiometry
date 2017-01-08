@@ -16,9 +16,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.apache.log4j.Logger;
+
 @Controller
 @RequestMapping("/templates")
 public class TemplateController {
+
+    private static final Logger log = Logger.getLogger(TemplateController.class);
 
     @Autowired
     private TemplateServiceImpl templateService;
@@ -29,6 +33,7 @@ public class TemplateController {
     @RequestMapping(value = "", method = GET)
     public String getAll(ModelMap modelMap) {
         modelMap.addAttribute("templates", templateService.getAll());
+        log.info("test log");
         return "template/templateList";
     }
 

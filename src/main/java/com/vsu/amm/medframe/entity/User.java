@@ -2,10 +2,7 @@ package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -39,7 +36,7 @@ public class User {
 
     @OneToMany()
     @JoinColumn(name = "USER_ID")
-    private Set<Patient> patients = new HashSet<Patient>();
+    private Set<Patient> patients = new TreeSet<Patient>();
 
     @OneToMany()
     @JoinColumn(name = "USER_ID")

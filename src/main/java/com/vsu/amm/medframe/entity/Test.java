@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "MED_TESTS")
@@ -27,7 +28,7 @@ public class Test {
 
     @OneToMany()
     @JoinColumn(name = "TEST_ID")
-    private Set<TestPoint> testPoints = new HashSet<TestPoint>();
+    private Set<TestPoint> testPoints = new TreeSet<TestPoint>();
 
     public Date getDate() {
         return date;

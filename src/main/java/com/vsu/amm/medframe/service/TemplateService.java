@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TemplateService {
     Template save(TemplateDto template);
-    List<Template> getAll();
+    List<TemplateDto> getAll();
     Template getOne(Long id);
     void delete(Long id);
 

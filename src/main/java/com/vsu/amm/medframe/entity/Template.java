@@ -1,10 +1,7 @@
 package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "MED_TEMPLATES")
@@ -26,7 +23,7 @@ public class Template {
 
     @OneToMany()
     @JoinColumn(name = "TEMPLATE_ID")
-    private Set<TemplatePoint> templatePoints = new HashSet<TemplatePoint>();
+    private Set<TemplatePoint> templatePoints = new TreeSet<TemplatePoint>();
 
     @OneToMany()
     @JoinColumn(name = "TEMPLATE_ID")
