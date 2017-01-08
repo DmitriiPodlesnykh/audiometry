@@ -11,8 +11,9 @@ public class TestPoint {
     @Column(name = "POINT_ID")
     private Long id;
 
-    @Column(name = "TEST_ID")
-    private Long testId;
+    @ManyToOne
+    @JoinColumn(name = "TEST_ID")
+    private Test test;
 
     @Column(name = "FREQUENCY")
     private Integer frequency;
@@ -20,8 +21,8 @@ public class TestPoint {
     @Column(name = "INTENSITY_VALUE")
     private Long intensityValue;
 
-    @Column(name = "TEMPLATE_ID")
-    private Long templateId;
+    @Column(name = "STATUS")
+    private String status;
 
     public Long getId() {
         return id;
@@ -29,14 +30,6 @@ public class TestPoint {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getTestId() {
-        return testId;
-    }
-
-    public void setTestId(Long testId) {
-        this.testId = testId;
     }
 
     public Integer getFrequency() {
@@ -55,19 +48,56 @@ public class TestPoint {
         this.intensityValue = intensityValue;
     }
 
-    public Long getTemplateId() {
-        return templateId;
+    public Test getTest() {
+        return test;
     }
 
-    public void setTemplateId(Long templateId) {
-        this.templateId = templateId;
+    public void setTest(Test test) {
+        this.test = test;
     }
 
-    public TestPoint(Long testId, Integer frequency, Long intensityValue, Long templateId) {
-        this.testId = testId;
-        this.frequency = frequency;
-        this.intensityValue = intensityValue;
-        this.templateId = templateId;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "TestPoint{" +
+                "id=" + id +
+                ", test=" + test.toString() +
+                ", frequency=" + frequency +
+                ", intensityValue=" + intensityValue +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TestPoint testPoint = (TestPoint) o;
+
+        if (id != null ? !id.equals(testPoint.id) : testPoint.id != null) return false;
+        if (test != null ? !test.equals(testPoint.test) : testPoint.test != null) return false;
+        if (frequency != null ? !frequency.equals(testPoint.frequency) : testPoint.frequency != null) return false;
+        if (intensityValue != null ? !intensityValue.equals(testPoint.intensityValue) : testPoint.intensityValue != null)
+            return false;
+        return status != null ? status.equals(testPoint.status) : testPoint.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (test != null ? test.hashCode() : 0);
+        result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
+        result = 31 * result + (intensityValue != null ? intensityValue.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
 }
 

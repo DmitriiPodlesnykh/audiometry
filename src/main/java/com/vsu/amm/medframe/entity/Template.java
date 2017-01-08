@@ -1,6 +1,9 @@
 package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,22 +26,26 @@ public class Template {
 
     @OneToMany()
     @JoinColumn(name = "TEMPLATE_ID")
-    private Set<TemplatePoint> templatePoints;
+    private Set<TemplatePoint> templatePoints = new HashSet<TemplatePoint>();
 
-    public void setTemplatePoints(Set<TemplatePoint> templatePoints){
+    @OneToMany()
+    @JoinColumn(name = "TEMPLATE_ID")
+    private List<Test> tests = new ArrayList<Test>();
+
+    public void setTemplatePoints(Set<TemplatePoint> templatePoints) {
         this.templatePoints = templatePoints;
     }
 
-    public Set<TemplatePoint> getTemplatePoints(){
+    public Set<TemplatePoint> getTemplatePoints() {
         return this.templatePoints;
     }
 
 
-    public User getAuthor(){
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User user){
+    public void setAuthor(User user) {
         this.author = user;
     }
 
@@ -66,13 +73,51 @@ public class Template {
         this.description = description;
     }
 
+    public List<Test> getTests() {
+        return tests;
+    }
+
+    public void setTests(List<Test> tests) {
+        this.tests = tests;
+    }
+
+    @Override
+    public String toString() {
+        return "Template{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", author=" + author.toString() +
+                ", templatePoints=" + templatePoints.toString() +
+                ", tests=" + tests.toString() +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Template template = (Template) o;
+
+        if (id != null ? !id.equals(template.id) : template.id != null) return false;
+        if (name != null ? !name.equals(template.name) : template.name != null) return false;
+        if (description != null ? !description.equals(template.description) : template.description != null)
+            return false;
+        if (author != null ? !author.equals(template.author) : template.author != null) return false;
+        if (templatePoints != null ? !templatePoints.equals(template.templatePoints) : template.templatePoints != null)
+            return false;
+        return tests != null ? tests.equals(template.tests) : template.tests == null;
     }
 
     @Override
     public int hashCode() {
-        return 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (templatePoints != null ? templatePoints.hashCode() : 0);
+        result = 31 * result + (tests != null ? tests.hashCode() : 0);
+        return result;
     }
 }

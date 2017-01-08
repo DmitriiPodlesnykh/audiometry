@@ -3,6 +3,8 @@ package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "MED_TESTS")
@@ -12,30 +14,20 @@ public class Test {
     @Column(name = "TEST_ID")
     private Long id;
 
-    @Column(name = "PATIENT_ID")
-    private Long patientId;
+    @ManyToOne
+    @JoinColumn(name = "PATIENT_ID")
+    private Patient patient;
 
-    @Column(name = "TEMPLATE_ID")
-    private Long templateId;
+    @ManyToOne
+    @JoinColumn(name = "TEMPLATE_ID")
+    private Template template;
 
     @Column(name = "DATE")
     private Date date;
 
-    public Long getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(Long patient_id) {
-        this.patientId = patient_id;
-    }
-
-    public Long getTemplateId() {
-        return templateId;
-    }
-
-    public void setTemplateId(Long template_id) {
-        this.templateId = template_id;
-    }
+    @OneToMany()
+    @JoinColumn(name = "TEST_ID")
+    private Set<TestPoint> testPoints = new HashSet<TestPoint>();
 
     public Date getDate() {
         return date;
@@ -53,12 +45,62 @@ public class Test {
         return id;
     }
 
-    public Test(Long id, Long patientId, Long templateId, Date date) {
-        this.id = id;
-        this.patientId = patientId;
-        this.templateId = templateId;
-        this.date = date;
+    public Template getTemplate() {
+        return template;
     }
 
-    public Test(){};
+    public void setTemplate(Template template) {
+        this.template = template;
+    }
+
+    public Set<TestPoint> getTestPoints() {
+        return testPoints;
+    }
+
+    public void setTestPoints(Set<TestPoint> testPoints) {
+        this.testPoints = testPoints;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id=" + id +
+                ", patient=" + patient.toString() +
+                ", template=" + template.toString() +
+                ", date=" + date +
+                ", testPoints=" + testPoints.toString() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Test test = (Test) o;
+
+        if (id != null ? !id.equals(test.id) : test.id != null) return false;
+        if (patient != null ? !patient.equals(test.patient) : test.patient != null) return false;
+        if (template != null ? !template.equals(test.template) : test.template != null) return false;
+        if (date != null ? !date.equals(test.date) : test.date != null) return false;
+        return testPoints != null ? testPoints.equals(test.testPoints) : test.testPoints == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (patient != null ? patient.hashCode() : 0);
+        result = 31 * result + (template != null ? template.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (testPoints != null ? testPoints.hashCode() : 0);
+        return result;
+    }
 }

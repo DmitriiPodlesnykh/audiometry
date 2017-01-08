@@ -29,11 +29,11 @@ public class TemplatePoint {
         this.id = id;
     }
 
-    public void setTemplate(Template template){
+    public void setTemplate(Template template) {
         this.template = template;
     }
 
-    public Template getTemplate(){
+    public Template getTemplate() {
         return this.template;
     }
 
@@ -51,5 +51,38 @@ public class TemplatePoint {
 
     public void setFrequency(Integer frequency) {
         this.frequency = frequency;
+    }
+
+    @Override
+    public String toString() {
+        return "TemplatePoint{" +
+                "id=" + id +
+                ", template=" + template.toString() +
+                ", intensityValue=" + intensityValue +
+                ", frequency=" + frequency +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TemplatePoint that = (TemplatePoint) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (template != null ? !template.equals(that.template) : that.template != null) return false;
+        if (intensityValue != null ? !intensityValue.equals(that.intensityValue) : that.intensityValue != null)
+            return false;
+        return frequency != null ? frequency.equals(that.frequency) : that.frequency == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (template != null ? template.hashCode() : 0);
+        result = 31 * result + (intensityValue != null ? intensityValue.hashCode() : 0);
+        result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
+        return result;
     }
 }
