@@ -32,8 +32,10 @@ public class TemplateController {
 
     @RequestMapping(value = "", method = GET)
     public String getAll(ModelMap modelMap) {
+        log.info("RUN getAll(ModelMap modelMap)");
         modelMap.addAttribute("templates", templateService.getAll());
-        log.info("test log");
+
+        log.info("Before retutn: modelMap = " + modelMap.toString());
         return "template/templateList";
     }
 
@@ -44,6 +46,7 @@ public class TemplateController {
 
     @RequestMapping(value = "/add", method = POST)
     public String create(@ModelAttribute("template") TemplateDto templateDto) {
+        log.info("RUN create(@ModelAttribute(\"template\") TemplateDto templateDto)");
         templateService.save(templateDto);
         return "redirect:/templates";
     }

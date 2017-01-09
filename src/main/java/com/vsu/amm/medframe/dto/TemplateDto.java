@@ -55,4 +55,15 @@ public class TemplateDto {
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
     }
+
+    @Override
+    public String toString() {
+        return "TemplateDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", authorId=" + authorId +
+                ", points=" + points.toString() +
+                '}';
+    }
 }

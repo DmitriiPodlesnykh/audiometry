@@ -36,8 +36,8 @@ public class Patient {
     @JoinColumn(name = "DOCTOR_ID")
     private User doctor;
 
-    @OneToMany()
-    @JoinColumn(name = "PATIENT_ID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
+    //@JoinColumn(name = "PATIENT_ID")
     private List<Test> tests = new ArrayList<Test>();
 
     public User getDoctor() {

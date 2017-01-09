@@ -21,12 +21,12 @@ public class Template {
     @JoinColumn(name = "AUTHOR_ID")
     private User author;
 
-    @OneToMany()
-    @JoinColumn(name = "TEMPLATE_ID")
+    @OneToMany(mappedBy = "template")
+    //@JoinColumn(name = "TEMPLATE_ID")
     private Set<TemplatePoint> templatePoints = new TreeSet<TemplatePoint>();
 
-    @OneToMany()
-    @JoinColumn(name = "TEMPLATE_ID")
+    @OneToMany(mappedBy = "template")
+    //@JoinColumn(name = "TEMPLATE_ID")
     private List<Test> tests = new ArrayList<Test>();
 
     public void setTemplatePoints(Set<TemplatePoint> templatePoints) {

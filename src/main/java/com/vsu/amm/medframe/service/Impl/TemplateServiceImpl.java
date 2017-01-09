@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 @Service
 public class TemplateServiceImpl implements TemplateService {
+
+    private static final Logger log = Logger.getLogger(TemplateServiceImpl.class);
 
     @Autowired
     private TemplateRepository templateRepository;
@@ -22,29 +26,39 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Override
     public Template save(TemplateDto templateDto) {
+
+        log.info("RUN Template save(TemplateDto templateDto)");
+        log.info("templateDto = " + templateDto.toString());
+
         Template template = new Template();
 
         template.setName(templateDto.getName());
         template.setDescription(template.getDescription());
         template.setAuthor(userService.getOne(templateDto.getAuthorId()));
-
+        log.info("Before return template. template = " + template.toString());
         return template;
     }
 
 
     @Override
     public List<TemplateDto> getAll() {
+        log.info("RUN List<TemplateDto> getAll()");
         List<Template> templates = templateRepository.findAll();
         List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();
         for(Template template: templates){
+            log.info("in for:");
+            log.info("template = " + template.toString());
             TemplateDto templateDto = new TemplateDto();
             templateDto.setId(template.getId());
             templateDto.setName(template.getName());
             templateDto.setDescription(template.getDescription());
 
+            //log.info("templateDto = " + templateDto.toString());
+
             templateDtos.add(templateDto);
         }
-
+        //log.info("after for:");
+        //log.info("templateDtos = " + templateDtos.toString());
         return templateDtos;
     }
 

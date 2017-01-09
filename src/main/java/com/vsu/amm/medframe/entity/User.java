@@ -34,12 +34,12 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany()
-    @JoinColumn(name = "USER_ID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+    //@JoinColumn(name = "DOCTOR_ID")
     private Set<Patient> patients = new TreeSet<Patient>();
 
-    @OneToMany()
-    @JoinColumn(name = "USER_ID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+    //@JoinColumn(name = "USER_ID")
     private List<Template> templates = new ArrayList<Template>();
 
     public void setPatients(Set<Patient> patients) {
