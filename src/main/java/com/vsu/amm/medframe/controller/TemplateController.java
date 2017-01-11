@@ -73,4 +73,12 @@ public class TemplateController {
         return returnUrl.toString();
     }
 
+    @RequestMapping(value = "/a1", method = GET)
+    public String methodForTest() {
+        log.info("start methodForTest()");
+        templateService.methodForTest();
+        log.info("finish methodForTest()");
+        return "user/user";
+    }
+
 }

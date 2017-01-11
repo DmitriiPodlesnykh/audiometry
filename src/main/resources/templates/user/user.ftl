@@ -4,12 +4,7 @@
     <div>
         <table>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-            </tr>
-            <tr>
-                <td>${user.getFirstName()}</td>
-                <td>${user.getLastName()}</td>
+                <h1>rfrfrf</h1>
             </tr>
         </table>
     </div>

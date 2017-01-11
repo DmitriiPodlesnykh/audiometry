@@ -17,7 +17,7 @@ public class Template {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "AUTHOR_ID")
     private User author;
 

@@ -45,7 +45,7 @@ public class TemplateServiceImpl implements TemplateService {
         log.info("RUN List<TemplateDto> getAll()");
         List<Template> templates = templateRepository.findAll();
         List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();
-        for(Template template: templates){
+        for (Template template : templates) {
             log.info("in for:");
             log.info("template = " + template.toString());
             TemplateDto templateDto = new TemplateDto();
@@ -71,5 +71,16 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public void delete(Long id) {
         templateRepository.delete(id);
+    }
+
+    public void methodForTest() {
+        log.info("start methodForTest()");
+        System.out.println("start methodForTest()");
+        Template template = templateRepository.findTemplateWithAuthorByIdQ(1L);
+        //Template template = templateRepository.findWithTemplatePointsByIdQ(1L);
+        System.out.println("template.getName" + template.getName());
+        log.info("template.getName" + template.getName());
+        System.out.println("template author = " + template.getAuthor().getLastName());
+        log.info("finish methodForTest()");
     }
 }

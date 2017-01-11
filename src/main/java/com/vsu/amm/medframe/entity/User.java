@@ -38,8 +38,7 @@ public class User {
     //@JoinColumn(name = "DOCTOR_ID")
     private Set<Patient> patients = new TreeSet<Patient>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
-    //@JoinColumn(name = "USER_ID")
+    @OneToMany(mappedBy = "author")
     private List<Template> templates = new ArrayList<Template>();
 
     public void setPatients(Set<Patient> patients) {
