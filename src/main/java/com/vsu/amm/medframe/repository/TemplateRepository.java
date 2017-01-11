@@ -6,4 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TemplateRepository extends JpaRepository<Template, Long>{
+  
+  @Query("SELECT t FROM Template t JOIN FETCH t.author")
+  List<Template> findAllTemplatesWithAuthorQ();
+  
+  @Query("SELECT t FROM Template t WHERE t.id = (:id)")
+  Template findTemplateByIdQ(@Param("id") Long id);
+  
+  @Query("SELECT t FROM Template t JOIN FETCH t.author WHERE t.id = (:id)")
+  Template findTemplateWithAuthorByIdQ(@Param("id") Long id);
 }
