@@ -1,16 +1,18 @@
-package com.vsu.amm.medframe.service.Impl;
+package com.vsu.amm.medframe.service;
 
 
 import com.vsu.amm.medframe.dto.TemplatePointDto;
+import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplatePointRepository;
-import com.vsu.amm.medframe.service.TemplatePointService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
+
 @Service
-public class TemplatePointServiceImpl implements TemplatePointService{
+public class TemplatePointServiceImpl {
 
     @Autowired
     private TemplatePointRepository templatePointRepository;
@@ -18,7 +20,6 @@ public class TemplatePointServiceImpl implements TemplatePointService{
     @Autowired
     private TemplateServiceImpl templateService;
 
-    @Override
     public TemplatePoint save(TemplatePointDto templatePointDto) {
 
         TemplatePoint templatePoint = new TemplatePoint();
@@ -30,8 +31,12 @@ public class TemplatePointServiceImpl implements TemplatePointService{
         return null;
     }
 
-    @Override
     public List<TemplatePoint> getPointForTheTemplate(Long templateId) {
         return null;
+    }
+
+
+    public Collection<TemplatePoint> getPointByTemplate(Template template) {
+        return templatePointRepository.findByTemplate(template);
     }
 }

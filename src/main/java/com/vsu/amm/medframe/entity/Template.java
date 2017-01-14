@@ -21,22 +21,29 @@ public class Template {
     @JoinColumn(name = "AUTHOR_ID")
     private User author;
 
-    @OneToMany(mappedBy = "template")
-    //@JoinColumn(name = "TEMPLATE_ID")
-    private Set<TemplatePoint> templatePoints = new TreeSet<TemplatePoint>();
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
+    private List<TemplatePoint> templatePoints = new ArrayList<TemplatePoint>();
 
-    @OneToMany(mappedBy = "template")
-    //@JoinColumn(name = "TEMPLATE_ID")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
     private List<Test> tests = new ArrayList<Test>();
 
-    public void setTemplatePoints(Set<TemplatePoint> templatePoints) {
+    public List<TemplatePoint> getTemplatePoints() {
+        return templatePoints;
+    }
+
+    public void setTemplatePoints(List<TemplatePoint> templatePoints) {
         this.templatePoints = templatePoints;
     }
 
-    public Set<TemplatePoint> getTemplatePoints() {
-        return this.templatePoints;
+        public List<Test> getTests() {
+        return tests;
     }
 
+    public void setTests(List<Test> tests) {
+        this.tests = tests;
+    }
+
+    */
 
     public User getAuthor() {
         return author;
@@ -70,13 +77,6 @@ public class Template {
         this.description = description;
     }
 
-    public List<Test> getTests() {
-        return tests;
-    }
-
-    public void setTests(List<Test> tests) {
-        this.tests = tests;
-    }
 
     @Override
     public String toString() {
@@ -85,8 +85,8 @@ public class Template {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", author=" + author.toString() +
-                ", templatePoints=" + templatePoints.toString() +
-                ", tests=" + tests.toString() +
+                //", templatePoints=" + templatePoints.toString() +
+                //", tests=" + tests.toString() +
                 '}';
     }
 
@@ -102,9 +102,10 @@ public class Template {
         if (description != null ? !description.equals(template.description) : template.description != null)
             return false;
         if (author != null ? !author.equals(template.author) : template.author != null) return false;
-        if (templatePoints != null ? !templatePoints.equals(template.templatePoints) : template.templatePoints != null)
-            return false;
-        return tests != null ? tests.equals(template.tests) : template.tests == null;
+        //if (templatePoints != null ? !templatePoints.equals(template.templatePoints) : template.templatePoints != null)
+        //   return false;
+        //return tests != null ? tests.equals(template.tests) : template.tests == null;
+        return true;
     }
 
     @Override
@@ -113,8 +114,8 @@ public class Template {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
-        result = 31 * result + (templatePoints != null ? templatePoints.hashCode() : 0);
-        result = 31 * result + (tests != null ? tests.hashCode() : 0);
+       // result = 31 * result + (templatePoints != null ? templatePoints.hashCode() : 0);
+       // result = 31 * result + (tests != null ? tests.hashCode() : 0);
         return result;
     }
 }

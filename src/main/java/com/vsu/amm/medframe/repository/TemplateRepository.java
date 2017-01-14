@@ -17,6 +17,10 @@ public interface TemplateRepository extends JpaRepository<Template, Long>{
   @Query("SELECT t FROM Template t JOIN FETCH t.author WHERE t.id = (:id)")
   Template findTemplateWithAuthorByIdQ(@Param("id") Long id);
 
-  @Query("SELECT t FROM Template t JOIN FETCH t.author JOIN FETCH t.templatePoints WHERE t.id = (:id)")
+  //@Query("SELECT t FROM Template t JOIN FETCH t.author JOIN FETCH t.templatePoints WHERE t.id = (:id)")
+  @Query("SELECT t FROM Template t WHERE t.id = (:id)")
   Template findWithTemplatePointsByIdQ(@Param("id") Long id);
+
+  @Query("SELECT t FROM Template t JOIN FETCH t.author")
+  List<Template> findTemplatesQ();
 }

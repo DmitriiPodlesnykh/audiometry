@@ -1,16 +1,15 @@
-package com.vsu.amm.medframe.service.Impl;
+package com.vsu.amm.medframe.service;
 
 import com.vsu.amm.medframe.dto.PatientDto;
 import com.vsu.amm.medframe.entity.Patient;
 import com.vsu.amm.medframe.repository.PatientRepository;
-import com.vsu.amm.medframe.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PatientServiceImpl implements PatientService{
+public class PatientServiceImpl {
 
     @Autowired
     private PatientRepository patientRepository;
@@ -18,12 +17,6 @@ public class PatientServiceImpl implements PatientService{
     @Autowired
     private UserServiceImpl userService;
 
-    /*@Override
-    public Patient save(Patient patient) {
-        return patientRepository.save(patient);
-    }*/
-
-    @Override
     public Patient save(PatientDto patientDto) {
         Patient patient = new Patient();
         patient.setFirstName(patientDto.getFirstName());
@@ -35,17 +28,14 @@ public class PatientServiceImpl implements PatientService{
         return patientRepository.save(patient);
     }
 
-    @Override
     public Patient editPatient(Patient patient) {
         return null;
     }
 
-    @Override
     public void deletePatient(Long id) {
 
     }
 
-    @Override
     public List<Patient> getAllPatientsOfTheDoctor(Long doctorId) {
         return patientRepository.findByDoctorId(doctorId);
     }

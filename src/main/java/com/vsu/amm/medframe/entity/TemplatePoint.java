@@ -11,7 +11,8 @@ public class TemplatePoint {
     @Column(name = "TEMPLATE_POINT_ID")
     private Long id;
 
-    @ManyToOne
+    //@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEMPLATE_ID")
     private Template template;
 

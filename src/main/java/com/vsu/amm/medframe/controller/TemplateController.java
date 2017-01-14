@@ -2,9 +2,8 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.TemplatePoint;
-import com.vsu.amm.medframe.service.Impl.TemplateServiceImpl;
-import com.vsu.amm.medframe.service.TemplatePointService;
+import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
+import com.vsu.amm.medframe.service.TemplateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +27,7 @@ public class TemplateController {
     private TemplateServiceImpl templateService;
 
     @Autowired
-    private TemplatePointService templatePointService;
+    private TemplatePointServiceImpl templatePointService;
 
     @RequestMapping(value = "", method = GET)
     public String getAll(ModelMap modelMap) {

@@ -34,12 +34,13 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
-    //@JoinColumn(name = "DOCTOR_ID")
-    private Set<Patient> patients = new TreeSet<Patient>();
-
     @OneToMany(mappedBy = "author")
     private List<Template> templates = new ArrayList<Template>();
+
+
+    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+    //@JoinColumn(name = "DOCTOR_ID")
+    private Set<Patient> patients = new TreeSet<Patient>();
 
     public void setPatients(Set<Patient> patients) {
         this.patients = patients;
@@ -47,7 +48,7 @@ public class User {
 
     public Set<Patient> getPatients() {
         return patients;
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -119,7 +120,7 @@ public class User {
         if (userType != null ? !userType.equals(user.userType) : user.userType != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (patients != null ? !patients.equals(user.patients) : user.patients != null) return false;
+       // if (patients != null ? !patients.equals(user.patients) : user.patients != null) return false;
         return templates != null ? templates.equals(user.templates) : user.templates == null;
     }
 
@@ -132,7 +133,7 @@ public class User {
         result = 31 * result + (userType != null ? userType.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (patients != null ? patients.hashCode() : 0);
+        //result = 31 * result + (patients != null ? patients.hashCode() : 0);
         result = 31 * result + (templates != null ? templates.hashCode() : 0);
         return result;
     }
@@ -147,7 +148,7 @@ public class User {
                 ", userType='" + userType + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", patients=" + patients.toString() +
+                //", patients=" + patients.toString() +
                 ", templates=" + templates.toString() +
                 '}';
     }
