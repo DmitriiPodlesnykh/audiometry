@@ -1,6 +1,10 @@
 package com.vsu.amm.medframe.dto;
 
 
+import com.vsu.amm.medframe.entity.TemplatePoint;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -14,14 +18,14 @@ public class TemplateDto {
 
     private Long authorId;
 
-    private Set<TemplatePointDto> points = new TreeSet<TemplatePointDto>();
+    private List<TemplatePointDto> points = new ArrayList<TemplatePointDto>();
 
-    public void setPoints(Set<TemplatePointDto> points){
-        this.points = points;
+    public List<TemplatePointDto> getPoints() {
+        return points;
     }
 
-    public Set<TemplatePointDto> getPoints(){
-        return points;
+    public void setPoints(List<TemplatePointDto> points) {
+        this.points = points;
     }
 
     public Long getId() {

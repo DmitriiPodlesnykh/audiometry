@@ -24,7 +24,7 @@ public class TemplatePointServiceImpl {
 
         TemplatePoint templatePoint = new TemplatePoint();
 
-        templatePoint.setTemplate(templateService.getOne(templatePointDto.getTemplateId()));
+        //templatePoint.setTemplate(templateService.getOne(templatePointDto.getTemplate()));
         templatePoint.setInrensityValue(templatePointDto.getIntensityValue());
         templatePoint.setFrequency(templatePointDto.getFrequency());
 

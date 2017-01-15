@@ -3,7 +3,9 @@ package com.vsu.amm.medframe.service;
 
 import com.github.jmnarloch.spring.boot.modelmapper.ModelMapperAutoConfiguration;
 import com.vsu.amm.medframe.dto.TemplateDto;
+import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
+import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplateRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,23 +50,42 @@ public class TemplateServiceImpl {
     }
 
 
-    public List<TemplateDto> getAll() {
-        log.info("RUN List<TemplateDto> getAll()");
-        //List<Template> templates = templateRepository.findTemplatesQ();
-        //log.info("template = " + templates.toString());
 
-        //List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();
+
+    public List<TemplateDto> getAll() {
         Template template = templateRepository.findOne(1L);
-        log.info(" Template template = templateRepository.findOne(1L);");
+
         TemplateDto templateDto = new TemplateDto();
-        log.info(" create templatedto");
         templateDto.setName(template.getName());
-        log.info(" set name");
         templateDto.setId(template.getId());
         templateDto.setAuthorId(template.getAuthor().getId());
         templateDto.setDescription(template.getDescription());
+
+        List<TemplatePoint> templatePoints = template.getTemplatePoints();
+        TemplatePoint templatePoint = templatePoints.get(0);
+
+        TemplatePointDto templatePointDto = new TemplatePointDto();
+        templatePointDto.setId(templatePoint.getId());
+        templatePointDto.setFrequency(templatePoint.getFrequency());
+        templatePointDto.setIntensityValue(templatePoint.getInrensityValue());
+
+        log.info(" templatePointDto. attempt to add template id");
+        //templatePointDto.setTemplateId(template.getId());
+        //templatePointDto.setTemplate(templateDto);
+        log.info(" templatePointDto. finished to add template id");
+
+        List<TemplatePointDto> templatePointDtos = new ArrayList<TemplatePointDto>();
+        templatePointDtos.add(templatePointDto);
+        log.info("templatePointDtos.add(templatePointDto);");
+        templateDto.setPoints(templatePointDtos);
+        log.info("templateDto.setPoints(templatePointDtos);");
+
+
         List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();
+        log.info("List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();");
         templateDtos.add(templateDto);
+
+        log.info("templateDto = " + templateDto.toString());
         return templateDtos;
         /*for(Template template : templates){
 

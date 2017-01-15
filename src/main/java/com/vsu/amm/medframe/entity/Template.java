@@ -21,12 +21,12 @@ public class Template {
     @JoinColumn(name = "AUTHOR_ID")
     private User author;
 
-    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
+    @OneToMany(mappedBy = "template")
     private List<TemplatePoint> templatePoints = new ArrayList<TemplatePoint>();
-
+/*
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
     private List<Test> tests = new ArrayList<Test>();
-
+*/
     public List<TemplatePoint> getTemplatePoints() {
         return templatePoints;
     }
@@ -34,16 +34,6 @@ public class Template {
     public void setTemplatePoints(List<TemplatePoint> templatePoints) {
         this.templatePoints = templatePoints;
     }
-
-        public List<Test> getTests() {
-        return tests;
-    }
-
-    public void setTests(List<Test> tests) {
-        this.tests = tests;
-    }
-
-    */
 
     public User getAuthor() {
         return author;
