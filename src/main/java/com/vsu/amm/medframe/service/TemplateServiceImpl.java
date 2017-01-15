@@ -50,68 +50,56 @@ public class TemplateServiceImpl {
     }
 
 
+    private TemplatePointDto convertToTemplatePointDto(TemplatePoint templatePoint) {
 
+        TemplatePointDto dto = new TemplatePointDto();
+
+        dto.setId(templatePoint.getId());
+        dto.setFrequency(templatePoint.getFrequency());
+        dto.setIntensityValue(templatePoint.getInrensityValue());
+
+        return dto;
+    }
+
+    private TemplateDto convertToTemplateDto(Template template) {
+
+        TemplateDto dto = new TemplateDto();
+        dto.setName(template.getName());
+        dto.setId(template.getId());
+        dto.setAuthorId(template.getAuthor().getId());
+        dto.setDescription(template.getDescription());
+
+
+        List<TemplatePoint> points = template.getTemplatePoints();
+        List<TemplatePointDto> pointDtos = new ArrayList<TemplatePointDto>();
+        for (TemplatePoint point : points) {
+            TemplatePointDto templatePointDto = convertToTemplatePointDto(point);
+            pointDtos.add(templatePointDto);
+        }
+        dto.setPoints(pointDtos);
+
+        return dto;
+    }
+
+    private List<TemplateDto> convertToListTemplateDtos(List<Template> templates) {
+        if (templates == null || templates.isEmpty()) {
+            List<TemplateDto> dtos = Collections.EMPTY_LIST;
+            return dtos;
+        }
+        List<TemplateDto> dtos = new ArrayList<TemplateDto>();
+
+        for (Template t : templates) {
+            TemplateDto templateDto = convertToTemplateDto(t);
+            dtos.add(templateDto);
+        }
+        return dtos;
+    }
 
     public List<TemplateDto> getAll() {
-        Template template = templateRepository.findOne(1L);
+        List<Template> templates = templateRepository.findAll();
+        List<TemplateDto> templateDtos = convertToListTemplateDtos(templates);
 
-        TemplateDto templateDto = new TemplateDto();
-        templateDto.setName(template.getName());
-        templateDto.setId(template.getId());
-        templateDto.setAuthorId(template.getAuthor().getId());
-        templateDto.setDescription(template.getDescription());
-
-        List<TemplatePoint> templatePoints = template.getTemplatePoints();
-        TemplatePoint templatePoint = templatePoints.get(0);
-
-        TemplatePointDto templatePointDto = new TemplatePointDto();
-        templatePointDto.setId(templatePoint.getId());
-        templatePointDto.setFrequency(templatePoint.getFrequency());
-        templatePointDto.setIntensityValue(templatePoint.getInrensityValue());
-
-        log.info(" templatePointDto. attempt to add template id");
-        //templatePointDto.setTemplateId(template.getId());
-        //templatePointDto.setTemplate(templateDto);
-        log.info(" templatePointDto. finished to add template id");
-
-        List<TemplatePointDto> templatePointDtos = new ArrayList<TemplatePointDto>();
-        templatePointDtos.add(templatePointDto);
-        log.info("templatePointDtos.add(templatePointDto);");
-        templateDto.setPoints(templatePointDtos);
-        log.info("templateDto.setPoints(templatePointDtos);");
-
-
-        List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();
-        log.info("List<TemplateDto> templateDtos = new ArrayList<TemplateDto>();");
-        templateDtos.add(templateDto);
-
-        log.info("templateDto = " + templateDto.toString());
         return templateDtos;
-        /*for(Template template : templates){
-
-            //templateDtos.add(modelMapper.map(template, TemplateDto.class));
-        }*/
-        /*for (Template template : templates) {
-            log.info("in for:");
-            log.info("template = " + template.toString());
-            TemplateDto templateDto = new TemplateDto();
-            templateDto.setId(template.getId());
-            templateDto.setName(template.getName());
-            templateDto.setDescription(template.getDescription());
-
-            //log.info("templateDto = " + templateDto.toString());
-
-            templateDtos.add(templateDto);
-        }*/
-        //log.info("after for:");
-        //log.info("templateDtos = " + templateDtos.toString());
-
-        /*if(templateDtos == null || templateDtos.isEmpty()){
-            log.info("templateDto is empty");
-            templateDtos = Collections.EMPTY_LIST;
-        }
-
-        return templateDtos;*/
     }
 
 
