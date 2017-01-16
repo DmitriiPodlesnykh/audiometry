@@ -49,6 +49,41 @@ public class TemplateServiceImpl {
         return template;
     }
 
+    private Template convertToTemplate(TemplateDto dto){
+        Template template = new Template();
+        /*
+         ~ if dto.getId() !=null =>template.setId(dto.getId)
+        * */
+
+        template.setAuthor(userService.getOne(dto.getId()));
+        template.setDescription(dto.getDescription());
+        template.setName(dto.getName());
+
+        List<TemplatePointDto> pointDtos = dto.getPoints();
+        List<TemplatePoint> points = new ArrayList<TemplatePoint>();
+        for(TemplatePointDto pointDto: pointDtos){
+            //TemplatePoint point = convertToTemplatePoint(pointDto, template)
+            //что здесь деалать, tempate еще не создан же
+            log.info("for(TemplatePointDto pointDto: pointDtos){");
+            //points.add(point);
+        }
+
+        //template.setTemplatePoints();
+        return template;
+    }
+
+    private TemplatePoint convertToTemplatePoint(TemplatePointDto pointDto, Template template){
+        TemplatePoint point = new TemplatePoint();
+
+        /*point.setId();
+        */
+
+        point.setFrequency(pointDto.getFrequency());
+        point.setInrensityValue(point.getInrensityValue());
+        point.setTemplate(template);
+
+        return point;
+    }
 
     private TemplatePointDto convertToTemplatePointDto(TemplatePoint templatePoint) {
 
