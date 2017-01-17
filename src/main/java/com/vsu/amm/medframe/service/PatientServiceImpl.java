@@ -33,7 +33,6 @@ public class PatientServiceImpl {
     }
 
     public void deletePatient(Long id) {
-
     }
 
     public List<Patient> getAllPatientsOfTheDoctor(Long doctorId) {
