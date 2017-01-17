@@ -40,49 +40,68 @@ public class TemplateServiceImpl {
         log.info("RUN Template save(TemplateDto templateDto)");
         log.info("templateDto = " + templateDto.toString());
 
-        Template template = new Template();
-
-        template.setName(templateDto.getName());
-        template.setDescription(template.getDescription());
-        template.setAuthor(userService.getOne(templateDto.getAuthorId()));
+       // Template template = new Template();
+        Template template = convertToTemplate(templateDto);
+        //template.setName(templateDto.getName());
+        //template.setDescription(template.getDescription());
+        //template.setAuthor(userService.getOne(templateDto.getAuthorId()));
         log.info("Before return template. template = " + template.toString());
         return template;
     }
 
-    private Template convertToTemplate(TemplateDto dto){
+    private Template convertToTemplate(TemplateDto dto) {
         Template template = new Template();
         /*
          ~ if dto.getId() !=null =>template.setId(dto.getId)
         * */
 
-        template.setAuthor(userService.getOne(dto.getId()));
+        log.info("template.setAuthor");
+        log.info("  training:");
+        log.info("  dto.getId() = " + dto.getAuthorId());
+        log.info("  userService.getOne(dto.getId()) = " + userService.getOne(dto.getAuthorId()).toString());
+        log.info("stop training");
+        //template.setAuthor(userService.getOne(dto.getId()));!!!!!!!!!!!!
+        log.info("success");
+        log.info("template.setDescription + name");
         template.setDescription(dto.getDescription());
         template.setName(dto.getName());
+        log.info("success");
 
+        log.info("List<TemplatePointDto> pointDtos = dto.getPoints();");
         List<TemplatePointDto> pointDtos = dto.getPoints();
+        log.info("success");
         List<TemplatePoint> points = new ArrayList<TemplatePoint>();
-        for(TemplatePointDto pointDto: pointDtos){
+        for (TemplatePointDto pointDto : pointDtos) {
+            log.info("start foreach TemplatePointDto pointDto : pointDtos");
+            TemplatePoint point = convertToTemplatePoint(pointDto, template);
             //TemplatePoint point = convertToTemplatePoint(pointDto, template)
             //что здесь деалать, tempate еще не создан же
             log.info("for(TemplatePointDto pointDto: pointDtos){");
-            //points.add(point);
+            points.add(point);
         }
 
-        //template.setTemplatePoints();
         return template;
     }
 
-    private TemplatePoint convertToTemplatePoint(TemplatePointDto pointDto, Template template){
+    private TemplatePoint convertToTemplatePoint(TemplatePointDto pointDto, Template template) {
         TemplatePoint point = new TemplatePoint();
-
-        /*point.setId();
-        */
-
+        point.setId(pointDto.getId());
         point.setFrequency(pointDto.getFrequency());
-        point.setInrensityValue(point.getInrensityValue());
+        point.setInrensityValue(pointDto.getIntensityValue());
         point.setTemplate(template);
 
         return point;
+    }
+
+    private List<Template> convertToListTemplates(List<TemplateDto> dtos) {
+        List<Template> templates = new ArrayList<Template>();
+
+        for (TemplateDto dto : dtos) {
+            Template template = convertToTemplate(dto);
+            templates.add(template);
+        }
+
+        return templates;
     }
 
     private TemplatePointDto convertToTemplatePointDto(TemplatePoint templatePoint) {

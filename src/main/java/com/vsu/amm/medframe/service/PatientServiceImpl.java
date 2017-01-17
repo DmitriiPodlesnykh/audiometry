@@ -24,7 +24,7 @@ public class PatientServiceImpl {
         patient.setMiddleName(patientDto.getMiddleName());
         patient.setSex(patientDto.getSex());
         patient.setDescription(patientDto.getDescription());
-        patient.setDoctor(userService.getOne(patientDto.getDoctorId()));
+        //patient.setDoctor(userService.getOne(patientDto.getDoctorId()));
         return patientRepository.save(patient);
     }
 
