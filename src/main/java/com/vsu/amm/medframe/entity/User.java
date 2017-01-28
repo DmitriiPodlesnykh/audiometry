@@ -148,8 +148,7 @@ public class User {
                 ", userType='" + userType + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                //", patients=" + patients.toString() +
-                ", templates=" + templates.toString() +
+                //", templates=" + templates +
                 '}';
     }
 }

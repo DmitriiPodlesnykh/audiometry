@@ -32,20 +32,14 @@ public class TemplateServiceImpl {
     @Autowired
     private TemplatePointServiceImpl templatePointService;
 
-    //@Autowired
-    //private ModelMapper
-
     public Template save(TemplateDto templateDto) {
 
         log.info("RUN Template save(TemplateDto templateDto)");
         log.info("templateDto = " + templateDto.toString());
-
-       // Template template = new Template();
         Template template = convertToTemplate(templateDto);
-        //template.setName(templateDto.getName());
-        //template.setDescription(template.getDescription());
-        //template.setAuthor(userService.getOne(templateDto.getAuthorId()));
         log.info("Before return template. template = " + template.toString());
+        templateRepository.saveAndFlush(template);
+        log.info("template saved");
         return template;
     }
 
@@ -54,14 +48,8 @@ public class TemplateServiceImpl {
         /*
          ~ if dto.getId() !=null =>template.setId(dto.getId)
         * */
-
-        log.info("template.setAuthor");
-        log.info("  training:");
-        log.info("  dto.getId() = " + dto.getAuthorId());
         log.info("  userService.getOne(dto.getId()) = " + userService.getOne(dto.getAuthorId()).toString());
-        log.info("stop training");
-        //template.setAuthor(userService.getOne(dto.getId()));!!!!!!!!!!!!
-        log.info("success");
+        template.setAuthor(userService.getUser(dto.getAuthorId()));
         log.info("template.setDescription + name");
         template.setDescription(dto.getDescription());
         template.setName(dto.getName());
@@ -69,17 +57,23 @@ public class TemplateServiceImpl {
 
         log.info("List<TemplatePointDto> pointDtos = dto.getPoints();");
         List<TemplatePointDto> pointDtos = dto.getPoints();
-        log.info("success");
-        List<TemplatePoint> points = new ArrayList<TemplatePoint>();
-        for (TemplatePointDto pointDto : pointDtos) {
-            log.info("start foreach TemplatePointDto pointDto : pointDtos");
-            TemplatePoint point = convertToTemplatePoint(pointDto, template);
-            //TemplatePoint point = convertToTemplatePoint(pointDto, template)
-            //что здесь деалать, tempate еще не создан же
-            log.info("for(TemplatePointDto pointDto: pointDtos){");
-            points.add(point);
-        }
 
+        if (pointDtos != null && !pointDtos.isEmpty()) {
+            log.info("success");
+            List<TemplatePoint> points = new ArrayList<TemplatePoint>();
+            for (TemplatePointDto pointDto : pointDtos) {
+                log.info("start foreach TemplatePointDto pointDto : pointDtos");
+                TemplatePoint point = convertToTemplatePoint(pointDto, template);
+                //TemplatePoint point = convertToTemplatePoint(pointDto, template)
+                //что здесь деалать, tempate еще не создан же
+                log.info("for(TemplatePointDto pointDto: pointDtos){");
+                points.add(point);
+            }
+        } else {
+            log.error("pointDtos is empty");
+        }
+        log.info("template:");
+        log.info(template.toString());
         return template;
     }
 
@@ -163,18 +157,5 @@ public class TemplateServiceImpl {
 
     public void delete(Long id) {
         templateRepository.delete(id);
-    }
-
-    public void methodForTest() {
-        log.info("start methodForTest()");
-        System.out.println("start methodForTest()");
-
-
-        Template template = templateRepository.findWithTemplatePointsByIdQ(1L);
-        //Template template = templateRepository.findWithTemplatePointsByIdQ(1L);
-        System.out.println("template.getName" + template.getName());
-        log.info("template.getName" + template.getName());
-        System.out.println("template author = " + template.getAuthor().getLastName());
-        log.info("finish methodForTest()");
     }
 }

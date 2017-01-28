@@ -30,12 +30,6 @@ public class UserServiceImpl {
         return null;
     }
 
-    /*public User getOne(Long id) {
-        log.info("start User getOne(Long id). id = " + id);
-
-        return userRepository.getOne(id);
-    }*/
-
     public UserDto getOne(Long id) {
         log.info("start UserDto getOne(Long id). id = " + id);
         User user = new User();
@@ -56,6 +50,10 @@ public class UserServiceImpl {
         dto.setUserType(user.getUserType());
         //dto.setTemplates(user.get);
         return dto;
+    }
+
+    public User getUser(Long id){
+        return userRepository.findOne(id);
     }
 
     public List<User> getAll() {
