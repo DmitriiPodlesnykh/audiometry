@@ -1,3 +1,7 @@
+<script>
+    $(function () {alert( "You are running jQuery version: " + $.fn.jquery );}
+</script>
+
 <form name="template" role="form" action="/templates/add" method="post">
      <div>
         <label>Название:</label>

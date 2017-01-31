@@ -21,15 +21,27 @@ public class ValidationResources {
         validFreeMarker("/templates/part/header.ftl");
         validFreeMarker("/templates/template/template.ftl");
         validFreeMarker("*/template.ftl");
+        validUltimate("/dataBaseScripts/medDeviceIntensities/CREATE_MED_DEVICE_INTENSITIES.SQL");
+        validUltimate("/templates/template/template.ftl");
         log.info("Stop validation resources");
     }
 
-    private void validFreeMarker(String patch){
+    private void validFreeMarker(String patch) {
         URL url = FreeMarkerConfigurer.class.getClassLoader().getResource(patch);
-        if(url != null) {
+        if (url != null) {
             log.info("url isnot null");
             log.info(url.toString());
-        }else {
+        } else {
+            log.info("url==null");
+        }
+    }
+
+    private void validUltimate(String patch) {
+        URL url = getClass().getResource(patch);
+        if (url != null) {
+            log.info("url isnot null");
+            log.info(url.toString());
+        } else {
             log.info("url==null");
         }
     }
