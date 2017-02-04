@@ -21,7 +21,7 @@ public class PatientController {
     @RequestMapping(value = "", method = GET)
     public String getDoctorPatients(ModelMap modelMap){
         modelMap.addAttribute("patients", patientService.getAllPatientsOfTheDoctor(1L));
-        return "patient/patientList";
+        return "patientList";
     }
 
     @RequestMapping(value = "/add", method = GET)

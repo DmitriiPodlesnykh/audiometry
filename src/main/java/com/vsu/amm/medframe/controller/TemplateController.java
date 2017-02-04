@@ -35,12 +35,12 @@ public class TemplateController {
         modelMap.addAttribute("templates", templateService.getAll());
 
         log.info("Before retutn: modelMap = " + modelMap.toString());
-        return "template/templateList";
+        return "templateList";
     }
 
     @RequestMapping(value = "/add", method = GET)
     public String createForm() {
-        return "/template/addTemplate";
+        return "/addTemplate";
     }
 
     @RequestMapping(value = "/add", method = POST)
@@ -59,7 +59,7 @@ public class TemplateController {
     @RequestMapping(value = "/{id}", method = GET)
     public String getTemplate(@PathVariable("id") Long id, ModelMap modelMap) {
         modelMap.addAttribute("template", templateService.getOne(id));
-        return "template/template";
+        return "template";
     }
 
     @RequestMapping(value = "/{id}/add", method = POST)
