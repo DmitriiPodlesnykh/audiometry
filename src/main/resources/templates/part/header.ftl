@@ -12,6 +12,8 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" th:src="@{/js/src/template/addTemplatePointInTemplate.js}"></script>
 </head>
 <body>
 <h3>header</h3>
