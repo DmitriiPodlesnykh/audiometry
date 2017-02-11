@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.dto;
 
-public class TemplatePointDto {
+public class TemplatePointDto implements Comparable<TemplatePointDto>{
 
     private Long id;
     private Integer intensityValue;
@@ -56,5 +56,10 @@ public class TemplatePointDto {
                 ", intensityValue=" + intensityValue +
                 ", frequency=" + frequency +
                 '}';
+    }
+
+    @Override
+    public int compareTo(TemplatePointDto o) {
+        return 0;
     }
 }

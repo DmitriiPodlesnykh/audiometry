@@ -11,10 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import org.apache.log4j.Logger;
 
@@ -56,7 +53,8 @@ public class TemplateServiceImpl {
         log.info("success");
 
         log.info("List<TemplatePointDto> pointDtos = dto.getPoints();");
-        List<TemplatePointDto> pointDtos = dto.getPoints();
+        Set<TemplatePointDto> pointDtos = dto.getPoints();
+        //List<TemplatePointDto> pointDtos = dto.getPoints();
 
         if (pointDtos != null && !pointDtos.isEmpty()) {
             log.info("success");
@@ -118,8 +116,10 @@ public class TemplateServiceImpl {
         dto.setDescription(template.getDescription());
 
 
-        List<TemplatePoint> points = template.getTemplatePoints();
-        List<TemplatePointDto> pointDtos = new ArrayList<TemplatePointDto>();
+        Set<TemplatePoint> points = template.getTemplatePoints();
+        Set<TemplatePointDto> pointDtos = new TreeSet<TemplatePointDto>();
+        //List<TemplatePoint> points = template.getTemplatePoints();
+        //List<TemplatePointDto> pointDtos = new ArrayList<TemplatePointDto>();
         for (TemplatePoint point : points) {
             TemplatePointDto templatePointDto = convertToTemplatePointDto(point);
             pointDtos.add(templatePointDto);

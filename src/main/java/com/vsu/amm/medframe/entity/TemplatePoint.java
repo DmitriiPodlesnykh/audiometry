@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "MED_TEMPLATE_POINTS")
-public class TemplatePoint {
+public class TemplatePoint implements Comparable<TemplatePoint>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,5 +84,10 @@ public class TemplatePoint {
         result = 31 * result + (intensityValue != null ? intensityValue.hashCode() : 0);
         result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(TemplatePoint o) {
+        return 0;
     }
 }

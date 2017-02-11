@@ -1,15 +1,25 @@
 <#include "header.ftl">
 
 <script>
+
+    var points = [];
+
     $(document).ready(function () {
+
         $("#add-point-for-template").submit(function (event) {
 
             $('#myModal').modal('hide');
             addUIPoint();
+
+            templatePointDto = new Object();
+            templatePointDto.frequency = document.getElementById('new-point-frequency').value;
+            templatePointDto.intensityValue = document.getElementById('new-point-intensity').value;
+            points.push(templatePointDto);
+
             event.preventDefault();
         });
     });
-
+    
     function addUIPoint() {
         var containerId = guid();
         var pointFrequncy = document.getElementById('new-point-frequency').value;
@@ -44,16 +54,15 @@
         <input type="text" name="name">
     </div>
     <input type="hidden" name="authorId" value="1">
-    <div id="div-for-template-form-points">
-        <!--for templatePoints-->
+    <input type="hidden" name="elements" value="1,2,9,15">
+    <p>description</p>
+    <div id="div-for-template-form-points"></div>
 
-    </div>
     <button type="submit" id="submit">Добавить шаблон</button>
 </form>
-<p>description</p>
-
 <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Добавить точку измерения
 </button>
+
 
 <#include "addTemplatePointModal.ftl">
 <#include "footer.ftl">

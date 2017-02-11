@@ -22,16 +22,13 @@ public class Template {
     private User author;
 
     @OneToMany(mappedBy = "template")
-    private List<TemplatePoint> templatePoints = new ArrayList<TemplatePoint>();
-/*
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
-    private List<Test> tests = new ArrayList<Test>();
-*/
-    public List<TemplatePoint> getTemplatePoints() {
+    private Set<TemplatePoint> templatePoints = new TreeSet<TemplatePoint>();
+
+    public Set<TemplatePoint> getTemplatePoints() {
         return templatePoints;
     }
 
-    public void setTemplatePoints(List<TemplatePoint> templatePoints) {
+    public void setTemplatePoints(Set<TemplatePoint> templatePoints) {
         this.templatePoints = templatePoints;
     }
 
@@ -104,8 +101,8 @@ public class Template {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (author != null ? author.hashCode() : 0);
-       // result = 31 * result + (templatePoints != null ? templatePoints.hashCode() : 0);
-       // result = 31 * result + (tests != null ? tests.hashCode() : 0);
+        // result = 31 * result + (templatePoints != null ? templatePoints.hashCode() : 0);
+        // result = 31 * result + (tests != null ? tests.hashCode() : 0);
         return result;
     }
 }

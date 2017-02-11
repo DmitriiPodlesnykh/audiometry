@@ -18,13 +18,13 @@ public class TemplateDto {
 
     private Long authorId;
 
-    private List<TemplatePointDto> points = new ArrayList<TemplatePointDto>();
+    private Set<TemplatePointDto> points = new TreeSet<TemplatePointDto>();
 
-    public List<TemplatePointDto> getPoints() {
+    public Set<TemplatePointDto> getPoints() {
         return points;
     }
 
-    public void setPoints(List<TemplatePointDto> points) {
+    public void setPoints(Set<TemplatePointDto> points) {
         this.points = points;
     }
 
