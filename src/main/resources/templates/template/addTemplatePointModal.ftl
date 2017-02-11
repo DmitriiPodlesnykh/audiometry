@@ -15,7 +15,7 @@
                         </div>
                         <div>
                             <label>Интенсивность:</label>
-                            <input type="text" id="new-point-intensity" name="intensity">
+                            <input type="text" id="new-point-intensity" name="intensity" >
                         </div>
                 </div>
                 <div class="modal-footer">
