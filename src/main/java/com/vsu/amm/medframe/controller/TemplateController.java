@@ -2,6 +2,7 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
+import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
 import com.vsu.amm.medframe.service.TemplateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.apache.log4j.Logger;
+
+import java.util.Set;
 
 @Controller
 @RequestMapping("/templates")
@@ -46,6 +49,10 @@ public class TemplateController {
     @RequestMapping(value = "/add", method = POST)
     public String create(@ModelAttribute("template") TemplateDto templateDto) {
         log.info("RUN create(@ModelAttribute(\"template\") TemplateDto templateDto)");
+        if (templateDto.getPoints() != null)
+            log.info("templateDto.getPoints() ==" + templateDto.getPoints().toString());
+        else
+            log.info("templateDto.getPoints() == NULLL");
         templateService.save(templateDto);
         return "redirect:/templates";
     }

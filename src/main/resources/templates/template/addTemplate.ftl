@@ -16,10 +16,17 @@
             templatePointDto.intensityValue = document.getElementById('new-point-intensity').value;
             points.push(templatePointDto);
 
+
+            var jsonPointsString = JSON.stringify(points);
+            //alert(jsonPointsString);
+            $('#formTemplatePoints').val(jsonPointsString);
+            //document.getElementById('#formTemplatePoints') = jsonPointsString.value;
+
+
             event.preventDefault();
         });
     });
-    
+
     function addUIPoint() {
         var containerId = guid();
         var pointFrequncy = document.getElementById('new-point-frequency').value;
@@ -35,7 +42,7 @@
         document.getElementById('new-point-frequency').value = "";
         document.getElementById('new-point-intensity').value = "";
     }
-    
+
     function guid() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
@@ -53,9 +60,13 @@
         <label>Название:</label>
         <input type="text" name="name">
     </div>
-    <input type="hidden" name="authorId" value="1">
-    <input type="hidden" name="elements" value="1,2,9,15">
-    <p>description</p>
+    <div>
+        <input type="hidden" name="authorId" value="1">
+        <input type="hidden" name="points" id="formTemplatePoints" value="">
+    </div>
+    <div>
+        <p>description</p>
+    </div>
     <div id="div-for-template-form-points"></div>
 
     <button type="submit" id="submit">Добавить шаблон</button>

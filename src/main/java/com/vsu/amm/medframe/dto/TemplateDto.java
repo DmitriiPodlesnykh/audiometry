@@ -1,10 +1,5 @@
 package com.vsu.amm.medframe.dto;
 
-
-import com.vsu.amm.medframe.entity.TemplatePoint;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 

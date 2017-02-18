@@ -2,9 +2,12 @@ package com.vsu.amm.medframe.dto;
 
 public class TemplatePointDto implements Comparable<TemplatePointDto>{
 
-    private Long id;
+    //private Long id;
+
     private Integer intensityValue;
+
     private Integer frequency;
+
     //private Long templateId;
 
    /* private TemplateDto template;
@@ -17,13 +20,13 @@ public class TemplatePointDto implements Comparable<TemplatePointDto>{
         this.template = template;
     }*/
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
+    }*/
 
     public Integer getIntensityValue() {
         return intensityValue;
@@ -52,7 +55,7 @@ public class TemplatePointDto implements Comparable<TemplatePointDto>{
     @Override
     public String toString() {
         return "TemplatePointDto{" +
-                "id=" + id +
+                //"id=" + id +
                 ", intensityValue=" + intensityValue +
                 ", frequency=" + frequency +
                 '}';
