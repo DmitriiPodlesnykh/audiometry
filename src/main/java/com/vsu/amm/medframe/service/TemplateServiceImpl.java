@@ -77,7 +77,8 @@ public class TemplateServiceImpl {
 
     private TemplatePoint convertToTemplatePoint(TemplatePointDto pointDto, Template template) {
         TemplatePoint point = new TemplatePoint();
-        point.setId(pointDto.getId());
+        point.setId(1000L);//hotfix
+        //point.setId(pointDto.getId());
         point.setFrequency(pointDto.getFrequency());
         point.setInrensityValue(pointDto.getIntensityValue());
         point.setTemplate(template);
@@ -100,7 +101,7 @@ public class TemplateServiceImpl {
 
         TemplatePointDto dto = new TemplatePointDto();
 
-        dto.setId(templatePoint.getId());
+        //dto.setId(templatePoint.getId());
         dto.setFrequency(templatePoint.getFrequency());
         dto.setIntensityValue(templatePoint.getInrensityValue());
 

@@ -25,6 +25,35 @@
 
             event.preventDefault();
         });
+
+
+        $("#testajax").click(function (event) {
+
+            var testString = '{"points": [{"frequency":"11","intensityValue":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
+
+            /*
+            tempateDto.name = document.getElementById('name').value;
+            tempateDto.description = document.getElementById('description').value;
+            tempateDto.authorId = 1;
+            tempateDto.points = points;
+
+             */
+
+            $.ajax({
+                url: "/templates/add",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: testString, //Stringified Json Object
+                async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+                cache: false,    //This will force requested pages not to be cached by the browser
+                processData: false, //To avoid making query String instead of JSON
+                success: function (resposeJsonObject) {
+                    // Success Message Handler
+                }
+            });
+        });
+
+
     });
 
     function addUIPoint() {
@@ -72,6 +101,9 @@
     <button type="submit" id="submit">Добавить шаблон</button>
 </form>
 <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Добавить точку измерения
+</button>
+
+<button type="button" id="testajax">test
 </button>
 
 

@@ -2,6 +2,7 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
+import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
 import com.vsu.amm.medframe.service.TemplateServiceImpl;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -46,7 +48,7 @@ public class TemplateController {
         return "/addTemplate";
     }
 
-    @RequestMapping(value = "/add", method = POST)
+    /*@RequestMapping(value = "/add", method = POST)
     public String create(@ModelAttribute("template") TemplateDto templateDto) {
         log.info("RUN create(@ModelAttribute(\"template\") TemplateDto templateDto)");
         if (templateDto.getPoints() != null)
@@ -54,6 +56,15 @@ public class TemplateController {
         else
             log.info("templateDto.getPoints() == NULLL");
         templateService.save(templateDto);
+        return "redirect:/templates";
+    }*/
+
+    @RequestMapping(value = "/add", method = POST)
+    public String create(@RequestBody TemplateDto jsonTemplateDto){
+        log.info("in public String create(@RequestBody TemplateDto jsonTemplateDto){");
+
+        templateService.save(jsonTemplateDto);
+
         return "redirect:/templates";
     }
 
