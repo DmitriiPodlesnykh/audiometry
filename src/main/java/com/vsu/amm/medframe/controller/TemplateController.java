@@ -61,10 +61,7 @@ public class TemplateController {
 
     @RequestMapping(value = "/add", method = POST)
     public String create(@RequestBody TemplateDto jsonTemplateDto){
-        log.info("in public String create(@RequestBody TemplateDto jsonTemplateDto){");
-
         templateService.save(jsonTemplateDto);
-
         return "redirect:/templates";
     }
 

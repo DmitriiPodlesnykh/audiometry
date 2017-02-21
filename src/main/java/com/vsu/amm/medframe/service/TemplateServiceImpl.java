@@ -30,12 +30,21 @@ public class TemplateServiceImpl {
     private TemplatePointServiceImpl templatePointService;
 
     public Template save(TemplateDto templateDto) {
-
-        log.info("RUN Template save(TemplateDto templateDto)");
         log.info("templateDto = " + templateDto.toString());
         Template template = convertToTemplate(templateDto);
-        log.info("Before return template. template = " + template.toString());
         templateRepository.saveAndFlush(template);
+        if(templateDto.getPoints() != null && !templateDto.getPoints().isEmpty()){
+            Set<TemplatePoint> points = new TreeSet<TemplatePoint>();
+            for (TemplatePointDto pointDto : templateDto.getPoints()) {
+                TemplatePoint point = convertToTemplatePoint(pointDto, template);
+                points.add(point);
+                log.info("pointDto: " + pointDto.toString() +"; point: " + point.toString());
+            }
+            log.info(points.size());
+            template.setTemplatePoints(points);
+        }
+        templateRepository.saveAndFlush(template);
+
         log.info("template saved");
         return template;
     }
@@ -45,28 +54,20 @@ public class TemplateServiceImpl {
         /*
          ~ if dto.getId() !=null =>template.setId(dto.getId)
         * */
-        log.info("  userService.getOne(dto.getId()) = " + userService.getOne(dto.getAuthorId()).toString());
         template.setAuthor(userService.getUser(dto.getAuthorId()));
-        log.info("template.setDescription + name");
         template.setDescription(dto.getDescription());
         template.setName(dto.getName());
-        log.info("success");
-
-        log.info("List<TemplatePointDto> pointDtos = dto.getPoints();");
         Set<TemplatePointDto> pointDtos = dto.getPoints();
-        //List<TemplatePointDto> pointDtos = dto.getPoints();
-
         if (pointDtos != null && !pointDtos.isEmpty()) {
-            log.info("success");
-            List<TemplatePoint> points = new ArrayList<TemplatePoint>();
+            log.info("pointDtos.size()" + pointDtos.size());
+            Set<TemplatePoint> points = new TreeSet<TemplatePoint>();
             for (TemplatePointDto pointDto : pointDtos) {
-                log.info("start foreach TemplatePointDto pointDto : pointDtos");
                 TemplatePoint point = convertToTemplatePoint(pointDto, template);
-                //TemplatePoint point = convertToTemplatePoint(pointDto, template)
-                //что здесь деалать, tempate еще не создан же
-                log.info("for(TemplatePointDto pointDto: pointDtos){");
                 points.add(point);
+                log.info("pointDto: " + pointDto.toString() +"; point: " + point.toString());
             }
+            log.info(points.size());
+            template.setTemplatePoints(points);
         } else {
             log.error("pointDtos is empty");
         }
@@ -76,14 +77,17 @@ public class TemplateServiceImpl {
     }
 
     private TemplatePoint convertToTemplatePoint(TemplatePointDto pointDto, Template template) {
-        TemplatePoint point = new TemplatePoint();
-        point.setId(1000L);//hotfix
-        //point.setId(pointDto.getId());
-        point.setFrequency(pointDto.getFrequency());
-        point.setInrensityValue(pointDto.getIntensityValue());
-        point.setTemplate(template);
+        try {
+            TemplatePoint point = new TemplatePoint();
+            point.setFrequency(pointDto.getFrequency());
+            point.setInrensityValue(pointDto.getIntensityValue());
+            point.setTemplate(template);
+            return point;
+        }catch (Exception e){
+            log.error(e.getMessage());
+            return new TemplatePoint();
+        }
 
-        return point;
     }
 
     private List<Template> convertToListTemplates(List<TemplateDto> dtos) {
@@ -115,7 +119,6 @@ public class TemplateServiceImpl {
         dto.setId(template.getId());
         dto.setAuthorId(template.getAuthor().getId());
         dto.setDescription(template.getDescription());
-
 
         Set<TemplatePoint> points = template.getTemplatePoints();
         Set<TemplatePointDto> pointDtos = new TreeSet<TemplatePointDto>();
