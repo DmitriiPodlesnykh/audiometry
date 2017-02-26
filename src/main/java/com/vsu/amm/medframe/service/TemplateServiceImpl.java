@@ -1,13 +1,12 @@
 package com.vsu.amm.medframe.service;
 
 
-import com.github.jmnarloch.spring.boot.modelmapper.ModelMapperAutoConfiguration;
+import com.vsu.amm.medframe.component.mapper.TemplateMapper;
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplateRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +20,9 @@ public class TemplateServiceImpl {
     private static final Logger log = Logger.getLogger(TemplateServiceImpl.class);
 
     @Autowired
+    private TemplateMapper templateMapper;
+
+    @Autowired
     private TemplateRepository templateRepository;
 
     @Autowired
@@ -31,6 +33,7 @@ public class TemplateServiceImpl {
 
     public Template save(TemplateDto templateDto) {
         log.info("templateDto = " + templateDto.toString());
+        //Template template = templateMapper.mapToEntity(templateDto);
         Template template = convertToTemplate(templateDto);
         templateRepository.saveAndFlush(template);
         if(templateDto.getPoints() != null && !templateDto.getPoints().isEmpty()){
