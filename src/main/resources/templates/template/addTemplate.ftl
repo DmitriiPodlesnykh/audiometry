@@ -1,7 +1,7 @@
 <#include "header.ftl">
-
+<script type="text/javascript" src="/assets/js/utils/createUiGUID.js"></script>
+<script type="text/javascript" src="/assets/js/templateAction/add/addTemplateAJAX.js"></script>
 <script>
-
     var points = [];
 
     $(document).ready(function () {
@@ -38,7 +38,6 @@
             tempateDto.points = points;
 
              */
-
             $.ajax({
                 url: "/templates/add",
                 type: "POST",
@@ -57,7 +56,7 @@
     });
 
     function addUIPoint() {
-        var containerId = guid();
+        var containerId = createUiGUID();
         var pointFrequncy = document.getElementById('new-point-frequency').value;
         var pointIntensity = document.getElementById('new-point-intensity').value;
         $("#div-for-template-form-points").append("<div class='container' id='" + containerId + "'></div>");
@@ -65,22 +64,6 @@
         $(containerIdForAppend).append("<div><p>Частота: " + pointFrequncy + "</p></div>");
         $(containerIdForAppend).append("<div><p>Интенсивность: " + pointIntensity + "</p></div>");
 
-    }
-
-    function cleanPointModal() {
-        document.getElementById('new-point-frequency').value = "";
-        document.getElementById('new-point-intensity').value = "";
-    }
-
-    function guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(16)
-                    .substring(1);
-        }
-
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                s4() + '-' + s4() + s4() + s4();
     }
 </script>
 
