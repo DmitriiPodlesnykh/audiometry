@@ -8,8 +8,15 @@ import org.springframework.stereotype.Component;
 public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointDto>{
 
     @Override
-    public TemplatePointDto mapToDto(TemplatePoint templatePoint) {
-        return null;
+    public TemplatePointDto mapToDto(TemplatePoint point) {
+
+        TemplatePointDto pointDto = new TemplatePointDto();
+
+        pointDto.setId(point.getId());
+        pointDto.setFrequency(point.getFrequency());
+        pointDto.setIntensityValue(point.getInrensityValue());
+        pointDto.setTemplateId(point.getTemplate().getId());
+        return pointDto;
     }
 
     @Override

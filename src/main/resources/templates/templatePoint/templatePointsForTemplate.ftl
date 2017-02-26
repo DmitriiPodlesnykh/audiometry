@@ -6,8 +6,8 @@
         </tr>
     <#list templatePoints as templatePoint>
     <tr>
-        <td></td>
-        <td></td>
+        <td>${templatePoint.getFrequency()}</td>
+        <td>${templatePoint.getIntensityValue()}</td>
     </tr>
     </#list>
     </table>

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "MED_TEMPLATE_POINTS")
-public class TemplatePoint implements Comparable<TemplatePoint>{
+public class TemplatePoint implements Comparable<TemplatePoint> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,8 +86,27 @@ public class TemplatePoint implements Comparable<TemplatePoint>{
         return result;
     }
 
+
     @Override
     public int compareTo(TemplatePoint o) {
-        return 0;
+        final int BEFORE = -1;
+        final int EQUAL = 0;
+        final int AFTER = 1;
+
+        if (this.getFrequency() > o.getFrequency()) {
+            return AFTER;
+        }
+        if (this.getFrequency() < o.getFrequency()) {
+            return BEFORE;
+        }
+
+        if (this.getFrequency().equals(o.getFrequency()) && this.getInrensityValue() > o.getInrensityValue()) {
+            return AFTER;
+        }
+        if (this.getFrequency().equals(o.getFrequency()) && this.getInrensityValue() < o.getInrensityValue()) {
+            return BEFORE;
+        }
+
+        return EQUAL;
     }
 }

@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.service;
 
 
+import com.vsu.amm.medframe.component.mapper.TemplatePointMapper;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.log4j.Logger;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class TemplatePointServiceImpl {
@@ -24,9 +23,12 @@ public class TemplatePointServiceImpl {
     @Autowired
     private TemplateServiceImpl templateService;
 
+    @Autowired
+    private TemplatePointMapper pointMapper;
+
     public TemplatePoint save(TemplatePointDto templatePointDto) {
         TemplatePoint templatePoint = new TemplatePoint();
-        if(templatePointDto.getId() != null){
+        if (templatePointDto.getId() != null) {
             templatePoint.setId(templatePointDto.getId());
         }
         templatePoint.setInrensityValue(templatePointDto.getIntensityValue());
@@ -37,11 +39,22 @@ public class TemplatePointServiceImpl {
         return templatePoint;
     }
 
-    public Set<TemplatePointDto> getPointForTemplate(Long templateId) {
-        templatePointRepository.findByTemplate(templateService.getOne(templateId));
-        //convert to dto
-        log.info("NPL now");
-        return null;
+    public List<TemplatePointDto> getPointsByTemplateId(Long templateId) {
+        Set<TemplatePoint> points = new TreeSet<TemplatePoint>(templatePointRepository.findByTemplateId(templateId));
+        log.info(points.toString());
+        List<TemplatePointDto> pointDtos = new ArrayList<TemplatePointDto>();
+        for (TemplatePoint point : points) {
+            TemplatePointDto pointDto = pointMapper.mapToDto(point);
+            pointDtos.add(pointDto);
+        }
+        log.info(pointDtos.toString());
+        return pointDtos;
+    }
+
+    public TemplatePointDto getPointById(Long pointId){
+        TemplatePoint point = templatePointRepository.findOne(pointId);
+        TemplatePointDto pointDto = pointMapper.mapToDto(point);
+        return pointDto;
     }
 
 

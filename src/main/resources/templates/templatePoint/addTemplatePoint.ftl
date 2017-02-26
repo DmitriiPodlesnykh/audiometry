@@ -18,9 +18,6 @@
 
             var dataString = JSON.stringify(pointDto);
             var url = "/templates/" + urlTemplate +"/add";
-
-            alert(dataString);
-
             $.ajax({
                 url: url,
                 type: "POST",

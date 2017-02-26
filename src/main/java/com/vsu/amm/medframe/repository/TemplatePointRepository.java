@@ -10,4 +10,7 @@ public interface TemplatePointRepository extends JpaRepository<TemplatePoint, Lo
 
     Collection<TemplatePoint> findByTemplate(Template template);
 
+    Collection<TemplatePoint> findByTemplateId(Long templateId);
+
+
 }

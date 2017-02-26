@@ -63,18 +63,18 @@ public class TemplateController {
     }*/
 
     @RequestMapping(value = "/add", method = POST)
-    public String create(@RequestBody TemplateDto jsonTemplateDto){
+    public String create(@RequestBody TemplateDto jsonTemplateDto) {
         templateService.save(jsonTemplateDto);
         return "redirect:/templates";
     }
 
-    @RequestMapping(value="/{templateId}/add", method = GET)
-    public String createTemplatePointForm(@PathVariable("templateId") Long templateId){
+    @RequestMapping(value = "/{templateId}/add", method = GET)
+    public String createTemplatePointForm(@PathVariable("templateId") Long templateId) {
         return "/addTemplatePoint";
     }
 
     @RequestMapping(value = "/{templateId}/add", method = POST)
-    public String createTemplatePoint(@PathVariable Long templateId, @RequestBody @Valid TemplatePointDto jsonPointDto){
+    public String createTemplatePoint(@PathVariable Long templateId, @RequestBody @Valid TemplatePointDto jsonPointDto) {
         log.info("createTemplatePoint");
         log.info("templateId = " + templateId.toString());
         log.info("dto = " + jsonPointDto.toString());
@@ -83,11 +83,17 @@ public class TemplateController {
     }
 
     @RequestMapping(value = "/{templateId}/points", method = GET)
-    public String getTemplatePoints(@PathVariable Long templateId, ModelMap modelMap){
+    public String getTemplatePoints(@PathVariable Long templateId, ModelMap modelMap) {
         log.info("getTemplatePoints");
-        modelMap.addAttribute("templatePoints", templatePointService.getPointForTemplate(templateId));
-
+        modelMap.addAttribute("templatePoints", templatePointService.getPointsByTemplateId(templateId));
         return "templatePointsForTemplate";
+    }
+
+    @RequestMapping(value = "/{templateId}/{pointId}", method = GET)
+    public String getTemplatePoint(@PathVariable Long templateId, @PathVariable Long pointId, ModelMap modelMap) {
+        log.info("getTemplatePoint");
+        modelMap.addAttribute("templatePoint", templatePointService.getPointById(pointId));
+        return "templatePoint";
     }
 
     @RequestMapping(value = "/{id}", method = DELETE)
@@ -101,14 +107,4 @@ public class TemplateController {
         modelMap.addAttribute("template", templateService.getOne(id));
         return "template";
     }
-
-    /*@RequestMapping(value = "/{id}/add", method = POST)
-    public String createTemplatePoint(@PathVariable Long templateId,
-                                      @ModelAttribute("templatePoint") TemplatePointDto templatePointDto) {
-        templatePointService.save(templatePointDto);
-
-        StringBuilder returnUrl = new StringBuilder("redirect:/templates/");
-        returnUrl.append(templateId);
-        return returnUrl.toString();
-    }*/
 }
