@@ -1,36 +1,19 @@
 <#include "header.ftl">
-
+<script type="text/javascript" src="/assets/js/templateAction/add/addTemplatePointAJAX.js"></script>
+<script type="text/javascript" src="/assets/js/templateAction/getTemplateIdByUrl.js"></script>
 <script>
     $(document).ready(function () {
+
         $("#add-template-point").click(function (event) {
 
-            var urlTemplate;
-            window.location.pathname.split('/').forEach(function (item, i, arr) {
-                if (i == 2) {
-                    urlTemplate =item.toString();
-                }
-            });
+            var templateUrl = getTemplateIdByUrl();
 
             pointDto = new Object();
             pointDto.frequency = document.getElementById('frequency').value;
             pointDto.intensityValue = document.getElementById('intensityValue').value;
-            pointDto.templateId = urlTemplate;
+            pointDto.templateId = templateUrl;
 
-            var dataString = JSON.stringify(pointDto);
-            var url = "/templates/" + urlTemplate +"/add";
-            $.ajax({
-                url: url,
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: dataString,//'{"frequency": "4", "intensityValue": "1", "authorId": "37"}'
-                async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-                cache: false,    //This will force requested pages not to be cached by the browser
-                processData: false, //To avoid making query String instead of JSON
-                success: function (resposeJsonObject) {
-                    // Success Message Handler
-                }
-            });
-
+            addTemplatePointAJAX(pointDto);
         });
     });
 </script>
