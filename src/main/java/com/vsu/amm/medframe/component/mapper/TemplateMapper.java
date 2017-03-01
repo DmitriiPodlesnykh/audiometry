@@ -26,7 +26,13 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
 
     @Override
     public TemplateDto mapToDto(Template template) {
-        return null;
+        TemplateDto templateDto = new TemplateDto();
+        templateDto.setId(template.getId());
+        templateDto.setAuthorId(template.getAuthor().getId());
+        templateDto.setName(template.getName());
+        templateDto.setDescription(template.getDescription());
+        //templateDto.setPoints();
+        return templateDto;
     }
 
     @Override

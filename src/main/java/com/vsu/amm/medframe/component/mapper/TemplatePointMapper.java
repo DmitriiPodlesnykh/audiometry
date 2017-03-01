@@ -27,7 +27,6 @@ public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointD
         }
         point.setFrequency(pointDto.getFrequency());
         point.setInrensityValue(pointDto.getIntensityValue());
-        //point.setAuthor..
         return point;
     }
 }

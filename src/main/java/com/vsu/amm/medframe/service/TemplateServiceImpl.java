@@ -31,7 +31,7 @@ public class TemplateServiceImpl {
     @Autowired
     private TemplatePointServiceImpl templatePointService;
 
-    public Template save(TemplateDto templateDto) {
+    public TemplateDto save(TemplateDto templateDto) {
         log.info("templateDto = " + templateDto.toString());
         //Template template = templateMapper.mapToEntity(templateDto);
         Template template = convertToTemplate(templateDto);
@@ -46,10 +46,10 @@ public class TemplateServiceImpl {
             log.info(points.size());
             template.setTemplatePoints(points);
         }
-        templateRepository.saveAndFlush(template);
-
+        Template newTemplate = templateRepository.saveAndFlush(template);
+        TemplateDto newTemplateDto = templateMapper.mapToDto(newTemplate);
         log.info("template saved");
-        return template;
+        return newTemplateDto;
     }
 
     private Template convertToTemplate(TemplateDto dto) {

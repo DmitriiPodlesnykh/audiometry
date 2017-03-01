@@ -53,6 +53,23 @@
         });
 
 
+        $("#addTemplate").click(function (event) {
+            var testString = '{"points": [{"frequency":"11","intensityValue":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
+            $.ajax({
+                url: "/rest/templates/",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: testString, //Stringified Json Object
+                async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+                cache: false,    //This will force requested pages not to be cached by the browser
+                processData: false, //To avoid making query String instead of JSON
+                success: function (resposeJsonObject) {
+                    // Success Message Handler
+                }
+            });
+        });
+
+
     });
 
     function addUIPoint() {
@@ -88,6 +105,25 @@
 
 <button type="button" id="testajax">test
 </button>
+
+
+<div>
+    <div>
+        <label>Название:</label>
+        <input type="text" name="name">
+    </div>
+    <div>
+        <input type="hidden" name="authorId" value="1">
+        <input type="hidden" name="points" id="formTemplatePoints" value="">
+    </div>
+    <div>
+        <p>description</p>
+    </div>
+    <div>
+        <button type="button" id="addTemplate">test</button>
+    </div>
+</div>
+
 
 
 <#include "addTemplatePointModal.ftl">

@@ -26,7 +26,7 @@ public class TemplatePointServiceImpl {
     @Autowired
     private TemplatePointMapper pointMapper;
 
-    public TemplatePoint save(TemplatePointDto templatePointDto) {
+    public TemplatePointDto save(TemplatePointDto templatePointDto) {
         TemplatePoint templatePoint = new TemplatePoint();
         if (templatePointDto.getId() != null) {
             templatePoint.setId(templatePointDto.getId());
@@ -34,9 +34,10 @@ public class TemplatePointServiceImpl {
         templatePoint.setInrensityValue(templatePointDto.getIntensityValue());
         templatePoint.setFrequency(templatePointDto.getFrequency());
         templatePoint.setTemplate(templateService.getOne(templatePointDto.getTemplateId()));
-        templatePointRepository.saveAndFlush(templatePoint);
-        log.info(templatePoint.toString());
-        return templatePoint;
+        TemplatePoint newPoint = templatePointRepository.saveAndFlush(templatePoint);
+        TemplatePointDto newPointDto = pointMapper.mapToDto(newPoint);
+        log.info(newPointDto.toString());
+        return newPointDto;
     }
 
     public List<TemplatePointDto> getPointsByTemplateId(Long templateId) {
