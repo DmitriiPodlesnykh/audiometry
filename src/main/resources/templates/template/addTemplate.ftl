@@ -18,40 +18,30 @@
 
 
             var jsonPointsString = JSON.stringify(points);
-            //alert(jsonPointsString);
             $('#formTemplatePoints').val(jsonPointsString);
-            //document.getElementById('#formTemplatePoints') = jsonPointsString.value;
 
 
             event.preventDefault();
         });
 
-
-        $("#testajax").click(function (event) {
-
-            var testString = '{"points": [{"frequency":"11","intensityValue":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
-            $.ajax({
-                url: "/templates/add",
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: testString, //Stringified Json Object
-                async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-                cache: false,    //This will force requested pages not to be cached by the browser
-                processData: false, //To avoid making query String instead of JSON
-                success: function (resposeJsonObject) {
-                    // Success Message Handler
-                }
-            });
-        });
-
-
         $("#addTemplate").click(function (event) {
+
+            pointDto = new Object();
+            pointDto.frequency = "9";
+            pointDto.intensityValue = "15";
+
+            templateDto = new Object();
+            templateDto.authorId = "1";
+            templateDto.name = document.getElementById('templateName').value;
+            templateDto.description = document.getElementById('templateDescription').value;
+            templateDto.points = [pointDto];
+            //addTemplateAJAX();
             var testString = '{"points": [{"frequency":"11","intensityValue":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
             $.ajax({
                 url: "/rest/templates/",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                data: testString, //Stringified Json Object
+                data: JSON.stringify(templateDto), //Stringified Json Object
                 async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
                 cache: false,    //This will force requested pages not to be cached by the browser
                 processData: false, //To avoid making query String instead of JSON
@@ -59,9 +49,9 @@
                     // Success Message Handler
                 }
             });
+
+
         });
-
-
     });
 
     function addUIPoint() {
@@ -75,49 +65,23 @@
 
     }
 </script>
-
-<form name="template" role="form" action="/templates/add" method="post">
-    <div>
-        <label>Название:</label>
-        <input type="text" name="name">
-    </div>
-    <div>
-        <input type="hidden" name="authorId" value="1">
-        <input type="hidden" name="points" id="formTemplatePoints" value="">
-    </div>
-    <div>
-        <p>description</p>
-    </div>
-    <div id="div-for-template-form-points"></div>
-
-    <button type="submit" id="submit">Добавить шаблон</button>
-</form>
-<button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Добавить точку измерения
-</button>
-
-<button type="button" id="testajax">test
-</button>
-
-
 <div>
     <div>
         <label>Название:</label>
-        <input type="text" name="name">
+        <input type="text" name="name" id="templateName">
     </div>
     <div>
         <label>Описание:</label>
-        <input type="text" name="description">
+        <input type="text" name="description" id="templateDescription">
     </div>
     <div>
-        <input type="hidden" name="authorId" value="1">
-        <input type="hidden" name="points" id="formTemplatePoints" value="">
+        <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+            Добавить точку измерения
+        </button>
     </div>
     <div>
         <button type="button" id="addTemplate">Добавить шаблон</button>
     </div>
 </div>
-
-
-
 <#include "addTemplatePointModal.ftl">
 <#include "footer.ftl">
