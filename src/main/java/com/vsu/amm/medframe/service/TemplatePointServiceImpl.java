@@ -20,24 +20,16 @@ public class TemplatePointServiceImpl {
     @Autowired
     private TemplatePointRepository templatePointRepository;
 
-    @Autowired
-    private TemplateServiceImpl templateService;
 
     @Autowired
     private TemplatePointMapper pointMapper;
 
     public TemplatePointDto save(TemplatePointDto templatePointDto) {
-        TemplatePoint templatePoint = new TemplatePoint();
-        if (templatePointDto.getId() != null) {
-            templatePoint.setId(templatePointDto.getId());
-        }
-        templatePoint.setInrensityValue(templatePointDto.getIntensityValue());
-        templatePoint.setFrequency(templatePointDto.getFrequency());
-        templatePoint.setTemplate(templateService.getOne(templatePointDto.getTemplateId()));
-        TemplatePoint newPoint = templatePointRepository.saveAndFlush(templatePoint);
-        TemplatePointDto newPointDto = pointMapper.mapToDto(newPoint);
-        log.info(newPointDto.toString());
-        return newPointDto;
+        TemplatePoint point = pointMapper.mapToEntity(templatePointDto);
+        log.info(templatePointDto.toString());
+        log.info(point.toString());
+        point = templatePointRepository.saveAndFlush(point);
+        return pointMapper.mapToDto(point);
     }
 
     public List<TemplatePointDto> getPointsByTemplateId(Long templateId) {

@@ -48,7 +48,7 @@ public class TemplatePointDto implements Comparable<TemplatePointDto> {
                 "id=" + id +
                 ", intensityValue=" + intensityValue +
                 ", frequency=" + frequency +
-                ", authorId=" + templateId +
+                ", templateId=" + templateId +
                 '}';
     }
 

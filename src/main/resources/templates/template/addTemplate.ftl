@@ -30,14 +30,6 @@
         $("#testajax").click(function (event) {
 
             var testString = '{"points": [{"frequency":"11","intensityValue":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
-
-            /*
-            tempateDto.name = document.getElementById('name').value;
-            tempateDto.description = document.getElementById('description').value;
-            tempateDto.authorId = 1;
-            tempateDto.points = points;
-
-             */
             $.ajax({
                 url: "/templates/add",
                 type: "POST",
@@ -113,14 +105,15 @@
         <input type="text" name="name">
     </div>
     <div>
+        <label>Описание:</label>
+        <input type="text" name="description">
+    </div>
+    <div>
         <input type="hidden" name="authorId" value="1">
         <input type="hidden" name="points" id="formTemplatePoints" value="">
     </div>
     <div>
-        <p>description</p>
-    </div>
-    <div>
-        <button type="button" id="addTemplate">test</button>
+        <button type="button" id="addTemplate">Добавить шаблон</button>
     </div>
 </div>
 

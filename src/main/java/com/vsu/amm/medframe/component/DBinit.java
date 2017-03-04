@@ -44,15 +44,15 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        addUserForTest();
-        addPatientForTest();
-        addTemplateForTest();
-        addTemplatePointForTest();
+        //addUserForTest();
+        //addPatientForTest();
+        //addTemplateForTest();
+        //addTemplatePointForTest();
     }
 
     private void addTemplatePointForTest() {
         TemplatePoint templatePoint = new TemplatePoint();
-        templatePoint.setTemplate(templateRepository.findOne(1L));
+        templatePoint.setTemplate(templateRepository.findOne(411L));
         templatePoint.setFrequency(4000);
         templatePoint.setInrensityValue(10);
         templatePointRepository.save(templatePoint);

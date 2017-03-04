@@ -1,10 +1,14 @@
 package com.vsu.amm.medframe.entity;
 
+import org.apache.log4j.Logger;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "MED_TEMPLATE_POINTS")
 public class TemplatePoint implements Comparable<TemplatePoint> {
+
+    private static final Logger log = Logger.getLogger(TemplatePoint.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +61,7 @@ public class TemplatePoint implements Comparable<TemplatePoint> {
     public String toString() {
         return "TemplatePoint{" +
                 "id=" + id +
-                ", template=" + template.toString() +
+                //", template=" + template.toString() +
                 ", intensityValue=" + intensityValue +
                 ", frequency=" + frequency +
                 '}';
@@ -92,6 +96,17 @@ public class TemplatePoint implements Comparable<TemplatePoint> {
         final int BEFORE = -1;
         final int EQUAL = 0;
         final int AFTER = 1;
+
+        if (this.getFrequency() != null) {
+            log.info("this.getFrequency() = " + this.getFrequency());
+        } else {
+            log.info("this.getFrequency() = null");
+        }
+        if (o.getFrequency() != null) {
+            log.info("o.getFrequency() = " + o.getFrequency());
+        } else {
+            log.info("o.getFrequency() = null");
+        }
 
         if (this.getFrequency() > o.getFrequency()) {
             return AFTER;

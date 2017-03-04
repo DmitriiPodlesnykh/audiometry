@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
 @Component
 public class TemplateMapper implements Mapper<Template, TemplateDto> {
-
-    //private static final Logger log = Logger.getLogger(TemplateMapper<Template, TemplateDto>.class);
 
     @Autowired
     private UserServiceImpl userService;
@@ -31,7 +30,14 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
         templateDto.setAuthorId(template.getAuthor().getId());
         templateDto.setName(template.getName());
         templateDto.setDescription(template.getDescription());
-        //templateDto.setPoints();
+        if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
+            Set<TemplatePointDto> pointsDto = new TreeSet();
+            for (TemplatePoint point : template.getTemplatePoints()) {
+                TemplatePointDto pointDto = pointMapper.mapToDto(point);
+                pointsDto.add(pointDto);
+            }
+            templateDto.setPoints(pointsDto);
+        }
         return templateDto;
     }
 
@@ -60,28 +66,4 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
             return Collections.emptySet();
         }
     }
-
-        /*
-        template.setAuthor(userService.getUser(dto.getAuthorId()));
-        template.setDescription(dto.getDescription());
-        template.setName(dto.getName());
-        Set<TemplatePointDto> pointDtos = dto.getPoints();
-        if (pointDtos != null && !pointDtos.isEmpty()) {
-            log.info("pointDtos.size()" + pointDtos.size());
-            Set<TemplatePoint> points = new TreeSet<TemplatePoint>();
-            for (TemplatePointDto pointDto : pointDtos) {
-                TemplatePoint point = convertToTemplatePoint(pointDto, template);
-                points.add(point);
-                log.info("pointDto: " + pointDto.toString() +"; point: " + point.toString());
-            }
-            log.info(points.size());
-            template.setTemplatePoints(points);
-        } else {
-            log.error("pointDtos is empty");
-        }
-        log.info("template:");
-        log.info(template.toString());
-        return template;
-         */
-
 }

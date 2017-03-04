@@ -50,18 +50,6 @@ public class TemplateController {
         return "/addTemplate";
     }
 
-
-    /*@RequestMapping(value = "/add", method = POST)
-    public String create(@ModelAttribute("template") TemplateDto templateDto) {
-        log.info("RUN create(@ModelAttribute(\"template\") TemplateDto templateDto)");
-        if (templateDto.getPoints() != null)
-            log.info("templateDto.getPoints() ==" + templateDto.getPoints().toString());
-        else
-            log.info("templateDto.getPoints() == NULL");
-        templateService.save(templateDto);
-        return "redirect:/templates";
-    }*/
-
     @RequestMapping(value = "/add", method = POST)
     public String create(@RequestBody TemplateDto jsonTemplateDto) {
         templateService.save(jsonTemplateDto);
