@@ -36,7 +36,6 @@ public class TemplateServiceImpl {
     private TemplatePointServiceImpl templatePointService;
 
     public TemplateDto save(TemplateDto templateDto) {
-        log.info("templateDto = " + templateDto.toString());
         Template template = convertToTemplate(templateDto);
         template = templateRepository.saveAndFlush(template);
         if(templateDto.getPoints() != null && !templateDto.getPoints().isEmpty()){
@@ -51,8 +50,10 @@ public class TemplateServiceImpl {
             template.setTemplatePoints(points);
             log.info("template.getTemplatePoints() = " + template.getTemplatePoints());
             template = templateRepository.saveAndFlush(template);
+            log.info(template.toString());
         }
         TemplateDto newTemplateDto = templateMapper.mapToDto(template);
+        log.info(newTemplateDto.toString());
         log.info("template saved");
         return newTemplateDto;
     }

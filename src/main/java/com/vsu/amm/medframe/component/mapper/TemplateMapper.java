@@ -5,17 +5,18 @@ import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.UserServiceImpl;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 
 @Component
 public class TemplateMapper implements Mapper<Template, TemplateDto> {
+
+    private static final Logger log = Logger.getLogger(TemplateMapper.class);
 
     @Autowired
     private UserServiceImpl userService;
@@ -33,7 +34,9 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
         if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
             Set<TemplatePointDto> pointsDto = new TreeSet();
             for (TemplatePoint point : template.getTemplatePoints()) {
+                log.info(point.toString());
                 TemplatePointDto pointDto = pointMapper.mapToDto(point);
+                log.info(pointDto.toString());
                 pointsDto.add(pointDto);
             }
             templateDto.setPoints(pointsDto);

@@ -72,7 +72,7 @@ public class Template {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", author=" + author.toString() +
-                //", templatePoints=" + templatePoints.toString() +
+                ", templatePoints=" + templatePoints.toString() +
                 //", tests=" + tests.toString() +
                 '}';
     }

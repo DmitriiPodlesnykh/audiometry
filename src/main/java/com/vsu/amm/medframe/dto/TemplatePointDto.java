@@ -54,6 +54,25 @@ public class TemplatePointDto implements Comparable<TemplatePointDto> {
 
     @Override
     public int compareTo(TemplatePointDto o) {
-        return 0;
+        final int BEFORE = -1;
+        final int EQUAL = 0;
+        final int AFTER = 1;
+
+        if (this.getFrequency() > o.getFrequency()) {
+            return AFTER;
+        }
+        if (this.getFrequency() < o.getFrequency()) {
+            return BEFORE;
+        }
+
+        if (this.getFrequency().equals(o.getFrequency()) && this.getIntensityValue() > o.getIntensityValue()) {
+            return AFTER;
+        }
+        if (this.getFrequency().equals(o.getFrequency()) && this.getIntensityValue() < o.getIntensityValue()) {
+            return BEFORE;
+        }
+
+        return EQUAL;
     }
+
 }
