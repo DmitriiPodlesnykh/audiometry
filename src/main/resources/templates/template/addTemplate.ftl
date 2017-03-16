@@ -1,7 +1,6 @@
 <#include "header.ftl">
 <script type="text/javascript" src="/assets/js/utils/createUiGUID.js"></script>
-<script type="text/javascript" src="/assets/js/templateAction/add/addTemplate.js">
-</script>
+<script type="text/javascript" src="/assets/js/templateAction/add/addTemplate.js"></script>
 <div class="row">
     <div id="createFormDiv" class="col-xs-9 bg-success">
         <div>
@@ -24,6 +23,7 @@
                     <input type="text" name="intensityValue" id="intensityValueLocal">
                 </div>
             </div>
+            <button type="button" id="listenPoint">Прослушать</button>
             <button type="button" id="addTemplatePointLocal">Добавить точку измерения</button>
         </div>
         <div>

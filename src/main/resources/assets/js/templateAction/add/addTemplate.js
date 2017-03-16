@@ -47,6 +47,22 @@ $(document).ready(function () {
 
         $( "#pointsTemplateLocalDiv" ).append( "<div class='templatePointLocal'><div>"+ pointDto.frequency + "</div><div>"+ pointDto.intensityValue +"</div></div>" );
     });
+
+    $("#listenPoint").click(function (event) {
+        audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+        var oscillator = audioCtx.createOscillator();
+        var gainNode = audioCtx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        gainNode.gain.value = 0.5;
+        oscillator.frequency.value = 440;
+        oscillator.type = 'sine';
+
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 2); // stop 2 seconds after the current time*/
+    });
 });
 
 function showUIResponseTenplatePoints(responseJsonObject) {
