@@ -57,7 +57,8 @@ $(document).ready(function () {
         gainNode.connect(audioCtx.destination);
 
         gainNode.gain.value = 0.5;
-        oscillator.frequency.value = 440;
+        oscillator.frequency.value = document.getElementById('frequencyLocal').value;
+        //oscillator.frequency.value = 440;
         oscillator.type = 'sine';
 
         oscillator.start();
