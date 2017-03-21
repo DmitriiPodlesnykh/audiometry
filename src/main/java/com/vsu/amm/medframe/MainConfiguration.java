@@ -17,5 +17,6 @@ public class MainConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
+        registry.addResourceHandler("/dataBaseScripts/**").addResourceLocations("classpath:/dataBaseScripts/");
     }
 }
