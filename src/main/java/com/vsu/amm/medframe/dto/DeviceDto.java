@@ -1,20 +1,11 @@
-package com.vsu.amm.medframe.entity;
+package com.vsu.amm.medframe.dto;
 
-import javax.persistence.*;
+public class DeviceDto {
 
-@Entity
-@Table(name = "MED_DEVICES")
-public class Device {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DEVICE_ID")
     private Long id;
 
-    @Column(name = "SOUND_CARD_NAME")
     private String soundCardName;
 
-    @Column(name = "HEADPHONE_NAME")
     private String headphoneName;
 
     public Long getId() {
@@ -33,20 +24,20 @@ public class Device {
         this.soundCardName = soundCardName;
     }
 
-    public String getHeadphoneNsme() {
+    public String getHeadphoneName() {
         return headphoneName;
     }
 
-    public void setHeadphoneNsme(String headphoneNsme) {
-        this.headphoneName = headphoneNsme;
+    public void setHeadphoneName(String headphoneName) {
+        this.headphoneName = headphoneName;
     }
 
     @Override
     public String toString() {
-        return "Device{" +
+        return "DeviceDto{" +
                 "id=" + id +
                 ", soundCardName='" + soundCardName + '\'' +
-                ", headphoneNsme='" + headphoneName + '\'' +
+                ", headphoneName='" + headphoneName + '\'' +
                 '}';
     }
 
@@ -55,12 +46,12 @@ public class Device {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Device device = (Device) o;
+        DeviceDto deviceDto = (DeviceDto) o;
 
-        if (id != null ? !id.equals(device.id) : device.id != null) return false;
-        if (soundCardName != null ? !soundCardName.equals(device.soundCardName) : device.soundCardName != null)
+        if (id != null ? !id.equals(deviceDto.id) : deviceDto.id != null) return false;
+        if (soundCardName != null ? !soundCardName.equals(deviceDto.soundCardName) : deviceDto.soundCardName != null)
             return false;
-        return headphoneName != null ? headphoneName.equals(device.headphoneName) : device.headphoneName == null;
+        return headphoneName != null ? headphoneName.equals(deviceDto.headphoneName) : deviceDto.headphoneName == null;
     }
 
     @Override
