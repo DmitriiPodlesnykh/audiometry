@@ -21,7 +21,7 @@ public class ValidationResources {
         validFreeMarker("/templates/part/header.ftl");
         validFreeMarker("/templates/template/template.ftl");
         validFreeMarker("*/template.ftl");
-        validUltimate("/dataBaseScripts/medDeviceIntensities/CREATE_MED_DEVICE_INTENSITIES.SQL");
+        validUltimate("/dataBaseScripts/medDevicePonts/CREATE_MED_DEVICE_INTENSITIES.SQL");
         validUltimate("/templates/template/template.ftl");
         log.info("Stop validation resources");
     }
