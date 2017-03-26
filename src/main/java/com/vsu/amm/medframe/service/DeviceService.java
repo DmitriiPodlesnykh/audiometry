@@ -19,8 +19,10 @@ public class DeviceService {
     @Autowired
     private DeviceMapper mapper;
 
-    public void save(DeviceDto dto) {
+    public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
-        deviceRepository.saveAndFlush(device);
+        log.info(device.toString());
+        device = deviceRepository.saveAndFlush(device);
+        return mapper.mapToDto(device);
     }
 }

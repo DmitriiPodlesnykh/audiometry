@@ -1,6 +1,8 @@
 package com.vsu.amm.medframe.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "MED_DEVICES")
@@ -15,7 +17,11 @@ public class Device {
     private String soundCardName;
 
     @Column(name = "HEADPHONE_NAME")
-    private String headphoneName;
+    private String headPhoneName;
+
+    @OneToMany(mappedBy = "device")
+    private List<DevicePoint> devicePoints = new ArrayList<DevicePoint>();
+
 
     public Long getId() {
         return id;
@@ -33,41 +39,29 @@ public class Device {
         this.soundCardName = soundCardName;
     }
 
-    public String getHeadphoneNsme() {
-        return headphoneName;
+    public String getHeadphoneName() {
+        return headPhoneName;
     }
 
-    public void setHeadphoneNsme(String headphoneNsme) {
-        this.headphoneName = headphoneNsme;
+    public void setHeadphoneName(String headphoneName) {
+        this.headPhoneName = headphoneName;
+    }
+
+    public List<DevicePoint> getDevicePoints() {
+        return devicePoints;
+    }
+
+    public void setDevicePoints(List<DevicePoint> devicePoints) {
+        this.devicePoints = devicePoints;
     }
 
     @Override
     public String toString() {
         return "Device{" +
-                "id=" + id +
+                "id=" + (id != null ? id : 0) +
                 ", soundCardName='" + soundCardName + '\'' +
-                ", headphoneNsme='" + headphoneName + '\'' +
+                ", headphoneName='" + headPhoneName + '\'' +
+                ", devicePoints=" + devicePoints +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Device device = (Device) o;
-
-        if (id != null ? !id.equals(device.id) : device.id != null) return false;
-        if (soundCardName != null ? !soundCardName.equals(device.soundCardName) : device.soundCardName != null)
-            return false;
-        return headphoneName != null ? headphoneName.equals(device.headphoneName) : device.headphoneName == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (soundCardName != null ? soundCardName.hashCode() : 0);
-        result = 31 * result + (headphoneName != null ? headphoneName.hashCode() : 0);
-        return result;
     }
 }

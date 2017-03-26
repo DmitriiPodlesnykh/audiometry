@@ -11,7 +11,7 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
     public Device mapToEntity(DeviceDto deviceDto) {
         Device device = new Device();
         device.setId(deviceDto.getId());
-        device.setHeadphoneNsme(deviceDto.getHeadphoneName());
+        device.setHeadphoneName(deviceDto.getHeadphoneName());
         device.setSoundCardName(deviceDto.getSoundCardName());
         return device;
     }
