@@ -21,28 +21,33 @@ public class ConfigurationController {
 
 
     @RequestMapping(value = "", method = GET)
-    public String getConfiguration(ModelMap modelMap){
+    public String getConfiguration(ModelMap modelMap) {
         return "";
     }
 
-    @RequestMapping(value = "/device/add", method = GET)
-    public String addDeviceForm(){
+    @RequestMapping(value = "/devices/add", method = GET)
+    public String addDeviceForm() {
         return "/addDevice";
     }
 
-    @RequestMapping(value = "/device/add", method = POST)
-    public String addDevice(@RequestBody DeviceDto dto){
+    @RequestMapping(value = "/devices/{deviceId}/add", method = GET)
+    public String addDevicePointForm(@PathVariable("deviceId") Long templateId) {
+        return "/addDevicePoint";
+    }
+
+    @RequestMapping(value = "/devices/add", method = POST)
+    public String addDevice(@RequestBody DeviceDto dto) {
         deviceService.save(dto);
         return "redirect:/templates";
     }
 
     @RequestMapping(value = "/select/device", method = GET)
-    public String selectDeviceForm(){
+    public String selectDeviceForm() {
         return "";
     }
 
     @RequestMapping(value = "/select/device", method = POST)
-    public String selectDevice(){
+    public String selectDevice() {
         return "";
     }
 

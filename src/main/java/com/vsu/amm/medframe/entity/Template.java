@@ -7,8 +7,9 @@ import java.util.*;
 @Table(name = "MED_TEMPLATES")
 public class Template {
     @Id
+    @Column(name = "TEMPLATE_ID", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TEMPLATE_ID")
+    //@Column(name = "TEMPLATE_ID")
     private Long id;
 
     @Column(name = "NAME")

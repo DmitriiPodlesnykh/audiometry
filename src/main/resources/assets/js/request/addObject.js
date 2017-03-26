@@ -9,7 +9,6 @@ function addObject(url, jsonObject) {
         cache: false,    //This will force requested pages not to be cached by the browser
         processData: false, //To avoid making query String instead of JSON
         success: function (responseJsonObject) {
-            alert(responseJsonObject);
             return responseJsonObject;
         }
     });

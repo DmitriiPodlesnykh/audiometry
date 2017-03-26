@@ -10,10 +10,23 @@ $(document).ready(function () {
         var url = "/rest/configuration/device";
         var jsonObject = JSON.stringify(device);
         var request = addObject(url, jsonObject);
-        alert(request);
     });
 
+    $("#addDevicePoints").click(function (event) {
 
+    });
 
+    $("#addDevicePoint").click(function (event) {
+        var devicePoint = new Object();
+
+        devicePoint.deviceId = getValueFromUrl(3);//document.getElementById('headPhone').value;
+        devicePoint.frequency = document.getElementById('frequency').value;
+        devicePoint.intensityLevel = document.getElementById('intensityLevel').value;
+        devicePoint.soundValue = document.getElementById('soundValue').value;
+
+        var url = "/config/devices/" + devicePoint.deviceId.value();
+        var jsonObject = JSON.stringify(devicePoint);
+        var request = addObject(url,jsonObject);
+    });
 
 });

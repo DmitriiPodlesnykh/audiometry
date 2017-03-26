@@ -1,13 +1,7 @@
 package com.vsu.amm.medframe.component;
 
-import com.vsu.amm.medframe.entity.Patient;
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.entity.TemplatePoint;
-import com.vsu.amm.medframe.entity.User;
-import com.vsu.amm.medframe.repository.PatientRepository;
-import com.vsu.amm.medframe.repository.TemplatePointRepository;
-import com.vsu.amm.medframe.repository.TemplateRepository;
-import com.vsu.amm.medframe.repository.UserRepository;
+import com.vsu.amm.medframe.entity.*;
+import com.vsu.amm.medframe.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,13 +24,17 @@ public class DBinit {
     private final TemplatePointRepository templatePointRepository;
 
     @Autowired
+    private final DeviceRepository deviceRepository;
+
+    @Autowired
     public DBinit(PatientRepository patientRepository,
                   UserRepository userRepository1, TemplateRepository templateRepository,
-                  TemplatePointRepository templatePointRepository) {
+                  TemplatePointRepository templatePointRepository, DeviceRepository deviceRepository) {
         this.userRepository = userRepository1;
         this.patientRepository = patientRepository;
         this.templateRepository = templateRepository;
         this.templatePointRepository = templatePointRepository;
+        this.deviceRepository = deviceRepository;
     }
 
     @PostConstruct
@@ -44,10 +42,18 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
+        //addTestDevice();
         //addUserForTest();
         //addPatientForTest();
         //addTemplateForTest();
         //addTemplatePointForTest();
+    }
+
+    private void addTestDevice(){
+        Device device = new Device();
+        device.setSoundCardName("eded");
+        device.setHeadphoneName("ded");
+        deviceRepository.saveAndFlush(device);
     }
 
     private void addTemplatePointForTest() {

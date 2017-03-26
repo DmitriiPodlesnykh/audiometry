@@ -21,8 +21,8 @@ public class DeviceService {
 
     public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
-        log.info(device.toString());
         device = deviceRepository.saveAndFlush(device);
         return mapper.mapToDto(device);
     }
+
 }
