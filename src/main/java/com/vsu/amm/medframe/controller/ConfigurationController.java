@@ -31,8 +31,21 @@ public class ConfigurationController {
     }
 
     @RequestMapping(value = "/devices/{deviceId}/add", method = GET)
-    public String addDevicePointForm(@PathVariable("deviceId") Long templateId) {
+    public String addDevicePointForm(@PathVariable("deviceId") Long deviceId) {
         return "/addDevicePoint";
+    }
+
+    @RequestMapping(value = "/devices/{deviceId}", method = GET)
+    public String getDevice(@PathVariable("deviceId") Long deviceId,
+                            ModelMap modelMap) {
+        modelMap.addAttribute("device", deviceService.getOne(deviceId));
+        return "getDevice";
+    }
+
+    @RequestMapping(value = "/devices")
+    public String getDevices(ModelMap modelMap) {
+        modelMap.addAttribute("devices", deviceService.getAll());
+        return "getAllDevices";
     }
 
     @RequestMapping(value = "/devices/add", method = POST)

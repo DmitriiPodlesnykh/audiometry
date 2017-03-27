@@ -42,18 +42,20 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        //addTestDevice();
+        addTestDevices(4);
         //addUserForTest();
         //addPatientForTest();
         //addTemplateForTest();
         //addTemplatePointForTest();
     }
 
-    private void addTestDevice(){
-        Device device = new Device();
-        device.setSoundCardName("eded");
-        device.setHeadphoneName("ded");
-        deviceRepository.saveAndFlush(device);
+    private void addTestDevices(int count) {
+        for (int i = 0; i < count; i++) {
+            Device device = new Device();
+            device.setSoundCardName("Аудиокарта" + i);
+            device.setHeadphoneName("Наушники" + i);
+            deviceRepository.saveAndFlush(device);
+        }
     }
 
     private void addTemplatePointForTest() {
@@ -87,7 +89,7 @@ public class DBinit {
         System.out.println("Patient added");
     }
 
-    private User addTestUserForPatient(){
+    private User addTestUserForPatient() {
         User user = new User();
         user.setFirstName("dfghjkfttft");
         user.setLastName("qwerty");

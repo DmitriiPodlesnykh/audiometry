@@ -1,7 +1,9 @@
 package com.vsu.amm.medframe.dto;
 
 public class TemplatePointDto implements Comparable<TemplatePointDto> {
-
+    /*
+    only in dto intensityLevel, frequency, soundValue, id
+     */
     private Long id;
 
     private Integer intensityValue;

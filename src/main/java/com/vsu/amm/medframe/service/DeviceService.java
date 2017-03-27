@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DeviceService {
 
@@ -25,4 +27,12 @@ public class DeviceService {
         return mapper.mapToDto(device);
     }
 
+    public DeviceDto getOne(Long id) {
+        Device device = deviceRepository.findOne(id);
+        return mapper.mapToDto(device);
+    }
+
+    public List<DeviceDto> getAll(){
+        return null;
+    }
 }
