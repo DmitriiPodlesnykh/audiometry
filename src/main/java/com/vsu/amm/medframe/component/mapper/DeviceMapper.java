@@ -21,7 +21,7 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
         DeviceDto dto = new DeviceDto();
         dto.setSoundCardName(device.getSoundCardName());
         dto.setId(device.getId());
-        dto.setHeadphoneName(device.getSoundCardName());
+        dto.setHeadphoneName(device.getHeadphoneName());
         return dto;
     }
 }

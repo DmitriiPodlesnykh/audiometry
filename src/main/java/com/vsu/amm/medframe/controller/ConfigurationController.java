@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.DeviceDto;
+import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class ConfigurationController {
     @Autowired
     private DeviceService deviceService;
 
+    @Autowired
+    private DevicePointService devicePointService;
+
 
     @RequestMapping(value = "", method = GET)
     public String getConfiguration(ModelMap modelMap) {
@@ -33,6 +37,20 @@ public class ConfigurationController {
     @RequestMapping(value = "/devices/{deviceId}/add", method = GET)
     public String addDevicePointForm(@PathVariable("deviceId") Long deviceId) {
         return "/addDevicePoint";
+    }
+
+    @RequestMapping(value = "/devices/{deviceId}/{devicePointId}", method = GET)
+    public String getDevicePoint(@PathVariable("deviceId") Long deviceId,
+                                 @PathVariable("devicePointId") Long devicePointId,
+                                 ModelMap modelMap) {
+        modelMap.addAttribute("devicePoint", devicePointService.getOne(devicePointId));
+        return "getDevicePoint";
+    }
+
+    @RequestMapping(value = "/devices/{deviceId}/points", method = GET)
+    public String getDevicePoints(@PathVariable("deviceId") Long deviceId, ModelMap modelMap) {
+        modelMap.addAttribute("devicePoints", devicePointService.getDevicePoints(deviceId));
+        return "getDevicePoints";
     }
 
     @RequestMapping(value = "/devices/{deviceId}", method = GET)

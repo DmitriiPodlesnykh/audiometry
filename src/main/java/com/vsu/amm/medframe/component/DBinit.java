@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 
 @Component
 public class DBinit {
@@ -27,14 +28,20 @@ public class DBinit {
     private final DeviceRepository deviceRepository;
 
     @Autowired
+    private final DevicePointRepository devicePointRepository;
+
+    @Autowired
     public DBinit(PatientRepository patientRepository,
                   UserRepository userRepository1, TemplateRepository templateRepository,
-                  TemplatePointRepository templatePointRepository, DeviceRepository deviceRepository) {
+                  TemplatePointRepository templatePointRepository,
+                  DeviceRepository deviceRepository,
+                  DevicePointRepository devicePointRepository) {
         this.userRepository = userRepository1;
         this.patientRepository = patientRepository;
         this.templateRepository = templateRepository;
         this.templatePointRepository = templatePointRepository;
         this.deviceRepository = deviceRepository;
+        this.devicePointRepository = devicePointRepository;
     }
 
     @PostConstruct
@@ -43,10 +50,22 @@ public class DBinit {
         System.out.println("DBinit init() start");
 
         addTestDevices(4);
+        addDevicePoints(1L, 4);
         //addUserForTest();
         //addPatientForTest();
         //addTemplateForTest();
         //addTemplatePointForTest();
+    }
+
+    private void addDevicePoints(Long deviceId, int count) {
+        for (int i = 0; i < count; i++) {
+            DevicePoint point = new DevicePoint();
+            point.setDevice(deviceRepository.getOne(deviceId));
+            point.setVolumeValue(new BigDecimal("0.5"));
+            point.setIntensityLevel(10);
+            point.setFrequency(500+ i*500);
+            devicePointRepository.saveAndFlush(point);
+        }
     }
 
     private void addTestDevices(int count) {

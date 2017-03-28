@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -33,6 +36,15 @@ public class DeviceService {
     }
 
     public List<DeviceDto> getAll(){
-        return null;
+        List<Device> devices = deviceRepository.findAll();
+        if(devices == null || devices.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
+        List<DeviceDto> deviceDos = new ArrayList<DeviceDto>();
+        for(Device device : devices) {
+            DeviceDto deviceDto = mapper.mapToDto(device);
+            deviceDos.add(deviceDto);
+        }
+        return deviceDos;
     }
 }

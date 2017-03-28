@@ -3,16 +3,16 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>Аудиовыход</th>
+                <th>Частота</th>
                 <th>Аудиокарта</th>
             </tr>
-        <#list devices as device>
+        <#list devicePoints as devicePoint>
             <tr>
                 <td>
-                    <a href="/config/devices/${device.getId()}">${device.getId()}</a>
+                    <a href="/config/devices/${devicePoint.getId()}">${devicePoint.getId()}</a>
                 </td>
-                <td>${device.getHeadphoneName()}</td>
-                <td>${device.getSoundCardName()}</td>
+                <td>${devicePoint.getFrequency()}</td>
+                <td>${devicePoint.getIntensityLevel()}</td>
             </tr>
         </#list>
         </table>
