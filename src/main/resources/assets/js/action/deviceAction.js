@@ -22,11 +22,11 @@ $(document).ready(function () {
         devicePoint.deviceId = getValueFromUrl(3);//document.getElementById('headPhone').value;
         devicePoint.frequency = document.getElementById('frequency').value;
         devicePoint.intensityLevel = document.getElementById('intensityLevel').value;
-        devicePoint.soundValue = document.getElementById('volumeValue').value;
+        devicePoint.volumeValue = document.getElementById('volumeValue').value;
 
-        var url = "/config/devices/" + devicePoint.deviceId.value();
+        var url = "/config/devices/" + getValueFromUrl(3);
         var jsonObject = JSON.stringify(devicePoint);
-        var request = addObject(url,jsonObject);
+        var request = addObject(url,jsonObject, "PUT");
     });
 
     $("#openAddDeviceForm").click(function (event) {
