@@ -47,4 +47,16 @@ public class DeviceService {
         }
         return deviceDos;
     }
+
+    public DeviceDto updateDevice(DeviceDto deviceDto) {
+        Device device = deviceRepository.getOne(deviceDto.getId());
+        if(!device.getHeadphoneName().equals(deviceDto.getHeadphoneName())) {
+            device.setHeadphoneName(deviceDto.getHeadphoneName());
+        }
+        if(!device.getSoundCardName().equals(deviceDto.getSoundCardName())) {
+            device.setSoundCardName(deviceDto.getSoundCardName());
+        }
+        device = deviceRepository.saveAndFlush(device);
+        return mapper.mapToDto(device);
+    }
 }
