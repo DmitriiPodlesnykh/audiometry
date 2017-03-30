@@ -7,9 +7,12 @@ $(document).ready(function () {
         device.headphoneName = document.getElementById('headPhone').value;
         device.soundCardName = document.getElementById('soundCard').value;
 
-        var url = "/rest/configuration/device";
+        var url = "/rest/configuration/devices";
         var jsonObject = JSON.stringify(device);
-        var request = addObject(url, jsonObject);
+        var request = addObject(url, jsonObject, "PUT");
+
+        if(!request) {
+        }
     });
 
     $("#addDevicePoints").click(function (event) {
@@ -24,7 +27,7 @@ $(document).ready(function () {
         devicePoint.intensityLevel = document.getElementById('intensityLevel').value;
         devicePoint.volumeValue = document.getElementById('volumeValue').value;
 
-        var url = "/config/devices/" + getValueFromUrl(3);
+        var url = "/rest/configuration/devices/" + getValueFromUrl(3);
         var jsonObject = JSON.stringify(devicePoint);
         var request = addObject(url,jsonObject, "PUT");
     });
@@ -38,7 +41,9 @@ $(document).ready(function () {
     });
 
     $("#playDevicePointSound").click(function (event) {
-        playSound(document.getElementById('frequency').value, document.getElementById('volumeValue').value);
+        var volume =  document.getElementById('volumeValue').value;
+        var frequency = document.getElementById('frequency').value;
+        playSound(frequency, volume);
     });
 
     $("#cancelAddDevice").click(function (event) {

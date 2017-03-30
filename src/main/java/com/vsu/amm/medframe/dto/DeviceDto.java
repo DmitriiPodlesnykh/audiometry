@@ -1,5 +1,8 @@
 package com.vsu.amm.medframe.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DeviceDto {
 
     private Long id;
@@ -7,6 +10,8 @@ public class DeviceDto {
     private String soundCardName;
 
     private String headphoneName;
+
+    private List<DevicePointDto> pointList = new ArrayList<DevicePointDto>();
 
     public Long getId() {
         return id;
@@ -32,12 +37,21 @@ public class DeviceDto {
         this.headphoneName = headphoneName;
     }
 
+    public List<DevicePointDto> getPointList() {
+        return pointList;
+    }
+
+    public void setPointList(List<DevicePointDto> pointList) {
+        this.pointList = pointList;
+    }
+
     @Override
     public String toString() {
         return "DeviceDto{" +
                 "id=" + id +
                 ", soundCardName='" + soundCardName + '\'' +
                 ", headphoneName='" + headphoneName + '\'' +
+                ", pointList=" + pointList +
                 '}';
     }
 }

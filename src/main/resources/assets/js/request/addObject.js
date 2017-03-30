@@ -2,7 +2,7 @@ function addObject(url, jsonObject, responseType) {
 
     $.ajax({
         url: url,
-        type: "PUT",//responseType.value,//"POST",
+        type: responseType,//"POST",
         contentType: "application/json; charset=utf-8",
         data: jsonObject,
         async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation

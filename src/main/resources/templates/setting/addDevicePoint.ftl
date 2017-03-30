@@ -16,7 +16,7 @@
         <div>
             <label>Громкость:</label>
             <input type="text" name="volumeValue" id="volumeValue">
-            <button type="button" id="playSound">Прослушать</button>
+            <button type="button" id="playDevicePointSound">Прослушать</button>
         </div>
         <div>
             <button type="button" id="addDevicePoint">Добавить точку</button>

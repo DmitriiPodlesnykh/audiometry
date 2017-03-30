@@ -1,3 +1,4 @@
+<#include "header.ftl">
 <div>
     <div>
         <table>
@@ -9,7 +10,7 @@
         <#list devicePoints as devicePoint>
             <tr>
                 <td>
-                    <a href="/config/devices/${devicePoint.getId()}">${devicePoint.getId()}</a>
+                    <a href="/config/devices/${devicePoint.getDeviceId()}/${devicePoint.getId()}">${devicePoint.getId()}</a>
                 </td>
                 <td>${devicePoint.getFrequency()}</td>
                 <td>${devicePoint.getIntensityLevel()}</td>
@@ -18,8 +19,6 @@
         </table>
     </div>
     <div>
-        <a href="/config/devices/add">
-            <button id="goToAddDeviceForm">Добавить Устройство</button>
-        </a>
+            <button id="goToAddDevicePointForm">Добавить точку измерения</button>
     </div>
 </div>

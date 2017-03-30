@@ -9,6 +9,9 @@
     <link href="/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/view/showDeviceObjects.js"></script>
+    <script type="text/javascript" src="/assets/js/sound/playSound.js"></script>
+    <script type="text/javascript" src="/assets/js/action/deviceAction.js"></script>
 </head>
 <body>
 <h3>header</h3>
