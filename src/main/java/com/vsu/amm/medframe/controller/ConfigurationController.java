@@ -3,6 +3,7 @@ package com.vsu.amm.medframe.controller;
 import com.vsu.amm.medframe.dto.DeviceDto;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping("/config")
 public class ConfigurationController {
+
+    private static final Logger log = Logger.getLogger(ConfigurationRestController.class);
 
     @Autowired
     private DeviceService deviceService;
@@ -56,7 +59,9 @@ public class ConfigurationController {
     @RequestMapping(value = "/devices/{deviceId}", method = GET)
     public String getDevice(@PathVariable("deviceId") Long deviceId,
                             ModelMap modelMap) {
-        modelMap.addAttribute("device", deviceService.getOne(deviceId));
+        DeviceDto deviceDto = deviceService.getOne(deviceId);
+        log.info(deviceDto.toString());
+        modelMap.addAttribute("device", deviceDto);
         return "getDevice";
     }
 

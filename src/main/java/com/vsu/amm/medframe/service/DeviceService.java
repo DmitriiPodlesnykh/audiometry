@@ -31,8 +31,8 @@ public class DeviceService {
     }
 
     public DeviceDto getOne(Long id) {
-        Device device = deviceRepository.findOne(id);
-        //log.info("device = " + device.toString()); need to config hibernate
+        Device device = deviceRepository.findDeviceWithPointsByIdQuery(id);
+        log.info("device = " + device.toString());
         return mapper.mapToDto(device);
     }
 

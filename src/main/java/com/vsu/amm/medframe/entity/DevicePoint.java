@@ -68,8 +68,8 @@ public class DevicePoint {
     @Override
     public String toString() {
         return "DevicePoint{" +
-                "id=" + id +
-                ", device=" + device +
+                "id=" + (id != null ? id : 0L) +
+                ", deviceId=" + device.getId() +
                 ", intensityLevel=" + intensityLevel +
                 ", frequency=" + frequency +
                 ", volumeValue=" + volumeValue +
