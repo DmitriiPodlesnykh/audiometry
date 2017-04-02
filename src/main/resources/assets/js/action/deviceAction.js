@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
 
     $("#addDevice").click(function (event) {
@@ -11,7 +9,7 @@ $(document).ready(function () {
         var jsonObject = JSON.stringify(device);
         var request = addObject(url, jsonObject, "PUT");
 
-        if(!request) {
+        if (!request) {
         }
     });
 
@@ -29,7 +27,7 @@ $(document).ready(function () {
 
         var url = "/rest/configuration/devices/" + getValueFromUrl(3);
         var jsonObject = JSON.stringify(devicePoint);
-        var request = addObject(url,jsonObject, "PUT");
+        var request = addObject(url, jsonObject, "PUT");
     });
 
     $("#openAddDeviceForm").click(function (event) {
@@ -40,9 +38,22 @@ $(document).ready(function () {
 
     });
 
-    $("#playDevicePointSound").click(function (event) {
-        var volume =  document.getElementById('volumeValue').value;
-        var frequency = document.getElementById('frequency').value;
+    $(".btn-play-sound").click(function (event) {
+
+        if (document.getElementById('volumeValue') && document.getElementById('frequency')) {
+            var volume = document.getElementById('volumeValue').value;
+            var frequency = document.getElementById('frequency').value;
+        }
+
+        if ($(this).parent().parent().hasClass("device-point-record")) {
+
+            var a = $(this).parent();
+            var b = $(this).parent().parent();
+
+            volume = $(this).parent().parent().children().hasClass("sound-volume-view");
+            frequency = $(this).parent().parent().children().hasClass("frequency-view");
+        }
+
         playSound(frequency, volume);
     });
 
@@ -52,6 +63,14 @@ $(document).ready(function () {
 
     $("#cancelAddDevicePoint").click(function (event) {
 
+    });
+
+    $(".generate-device-value").click(function (event) {
+        alert("тут пока ничего нет");
+    });
+
+    $(".btn-device-point-open-form").click(function (event) {
+        alert("тут пока ничего нет");
     });
 
 });
