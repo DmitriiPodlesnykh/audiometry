@@ -30,6 +30,16 @@ $(document).ready(function () {
         var request = addObject(url, jsonObject, "PUT");
     });
 
+    $(".add-device-point-btn").click(function (event) {
+        var devicePoint = {};
+
+        if($(this).parent().hasClass("add-device-point-form")) {
+            var volume = $(this).parent().children().hasClass("sound-volume-field");
+            var frequency = $(this).parent().children().hasClass("frequency-field");
+            var soundValue = $(this).parent().children().hasClass("intensity-level-field");
+        }
+    });
+
     $("#openAddDeviceForm").click(function (event) {
 
     });
@@ -70,6 +80,8 @@ $(document).ready(function () {
     });
 
     $(".btn-device-point-open-form").click(function (event) {
+        showAddDevicePointForm("show");
+        showAddDevicePointFormBtns("hide");
         alert("тут пока ничего нет");
     });
 

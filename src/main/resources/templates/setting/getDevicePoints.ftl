@@ -25,9 +25,9 @@
         </#list>
         </table>
     </div>
-    <div>
+    <div class="device-point-control-btms">
         <button id="goToAddDevicePointForm" class="btn-device-point-open-form btn btn-outline-secondary">Добавить точку измерения</button>
-        <button class="generate-device-value btn btn-outline-primary">Сгенеровать точки</button>
+        <button class="generate-device-value-btn btn btn-outline-primary">Сгенеровать точки</button>
     </div>
 </div>
 <#include "footer.ftl">
