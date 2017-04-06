@@ -47,4 +47,18 @@ public class DevicePointService {
         log.info(pointDtos.toString());
         return pointDtos;
     }
+
+    public List<DevicePointDto> getZeroIntensityLevelDevicePoints(Long deviceId) {
+        List<DevicePoint> devicePoints = (List<DevicePoint>) devicePointRepository.getZeroIntensityLevelDevicePointsByDeviceId(deviceId);
+        if(devicePoints==null || devicePoints.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
+        List<DevicePointDto> pointDtos = new ArrayList<DevicePointDto>();
+        for(DevicePoint point : devicePoints) {
+            DevicePointDto pointDto = mapper.mapToDto(point);
+            pointDtos.add(pointDto);
+        }
+        log.info(pointDtos.toString());
+        return pointDtos;
+    }
 }
