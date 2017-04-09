@@ -8,7 +8,7 @@
             <tr>
                 <th>ID</th>
                 <th>Частота</th>
-                <th>Аудиокарта</th>
+                <th>Уровень интенсивности</th>
             </tr>
         <#list device.getPointList() as devicePoint>
             <tr>

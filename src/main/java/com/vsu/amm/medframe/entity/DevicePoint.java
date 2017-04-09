@@ -1,5 +1,7 @@
 package com.vsu.amm.medframe.entity;
 
+import com.vsu.amm.medframe.enums.Frequency;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -49,20 +51,20 @@ public class DevicePoint {
         this.intensityLevel = intensityLevel;
     }
 
-    public Integer getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Integer frequency) {
-        this.frequency = frequency;
-    }
-
     public BigDecimal getVolumeValue() {
         return volumeValue;
     }
 
     public void setVolumeValue(BigDecimal volumeValue) {
         this.volumeValue = volumeValue;
+    }
+
+    public Frequency getFrequency() {
+        return Frequency.parse(this.frequency);
+    }
+
+    public void setFrequency(Frequency frequency) {
+        this.frequency = frequency.getValue();
     }
 
     @Override

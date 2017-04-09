@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.component;
 
 import com.vsu.amm.medframe.entity.*;
+import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,22 +51,18 @@ public class DBinit {
         System.out.println("DBinit init() start");
 
         addTestDevices(4);
-        addDevicePoints(1L, 4);
-        //addUserForTest();
-        //addPatientForTest();
-        //addTemplateForTest();
-        //addTemplatePointForTest();
+        addDevicePoint(1L, Frequency.FREQUENCY_40_HZ, 0, 0.5);
+        addDevicePoint(1L, Frequency.FREQUENCY_100_HZ, 0, 0.4);
+        addDevicePoint(1L, Frequency.FREQUENCY_250_HZ, 0, 0.3);
     }
 
-    private void addDevicePoints(Long deviceId, int count) {
-        for (int i = 0; i < count; i++) {
-            DevicePoint point = new DevicePoint();
-            point.setDevice(deviceRepository.getOne(deviceId));
-            point.setVolumeValue(new BigDecimal("0.5"));
-            point.setIntensityLevel(10);
-            point.setFrequency(500+ i*500);
-            devicePointRepository.saveAndFlush(point);
-        }
+    private void addDevicePoint(Long deviceId, Frequency frequency, Integer IntensityLevel, Double volumeValue) {
+        DevicePoint point = new DevicePoint();
+        point.setDevice(deviceRepository.getOne(deviceId));
+        point.setVolumeValue(new BigDecimal(volumeValue));
+        point.setIntensityLevel(IntensityLevel);
+        point.setFrequency(frequency);
+        devicePointRepository.saveAndFlush(point);
     }
 
     private void addTestDevices(int count) {

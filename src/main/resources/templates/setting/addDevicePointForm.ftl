@@ -1,4 +1,4 @@
-<div id="addDevicePointForm">
+<div id="addDevicePointForm" xmlns:s="http://www.w3.org/1999/html">
     <div id="addDevicePointFormHeader">
         <h2>Добавить точку устройства</h2>
     </div>
@@ -6,6 +6,9 @@
         <div>
             <label for="frequency">Частота: </label>
             <input type="text" id="frequency">
+        </div>
+        <div>
+           <!-- <s:select label="frequency selector"-->
         </div>
         <div>
             <label for="intensityLevel">Уровень интенсивности: </label>
