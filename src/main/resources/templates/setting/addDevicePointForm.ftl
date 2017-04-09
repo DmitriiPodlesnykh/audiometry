@@ -8,9 +8,6 @@
             <input type="text" id="frequency">
         </div>
         <div>
-           <!-- <s:select label="frequency selector"-->
-        </div>
-        <div>
             <label for="intensityLevel">Уровень интенсивности: </label>
             <input type="text" id="intensityLevel">
         </div>

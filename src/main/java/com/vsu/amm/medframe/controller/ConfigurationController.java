@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.DeviceDto;
+import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
 import org.apache.log4j.Logger;
@@ -38,7 +39,8 @@ public class ConfigurationController {
     }
 
     @RequestMapping(value = "/devices/{deviceId}/add", method = GET)
-    public String addDevicePointForm(@PathVariable("deviceId") Long deviceId) {
+    public String addDevicePointForm(@PathVariable("deviceId") Long deviceId, ModelMap modelMap) {
+        modelMap.addAttribute("frequencyListValues", Frequency.getAvilableValues());
         return "/addDevicePoint";
     }
 

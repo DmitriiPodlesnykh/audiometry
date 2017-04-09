@@ -79,6 +79,10 @@ $(document).ready(function () {
         alert("тут пока ничего нет");
     });
 
+    $(".btn-generate-device-points").click(function (event) {
+
+    });
+
     $(".btn-device-point-open-form").click(function (event) {
         showAddDevicePointForm("show");
         showAddDevicePointFormBtns("hide");

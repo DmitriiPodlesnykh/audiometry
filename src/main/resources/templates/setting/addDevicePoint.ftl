@@ -9,9 +9,17 @@
             <input type="text" name="intensityLevel" id="intensityLevel">
             <label>ДБ</label>
         </div>
-        <div>
+        <!--<div>
             <label>Частота:</label>
             <input type="text" name="frequency" id="frequency">
+        </div>-->
+        <div>
+            <label for="frequency">Частота:</label>
+            <select id="frequency" name="frequency">
+                <#list frequencyListValues as frequencyValue>
+                    <option value="${frequencyValue}">${frequencyValue}</option>
+                </#list>
+            </select>
         </div>
         <div>
             <label>Громкость:</label>

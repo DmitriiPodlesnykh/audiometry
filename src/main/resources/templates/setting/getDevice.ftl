@@ -1,3 +1,4 @@
+<#include "header.ftl">
 <div id="deviceInfo">
     <h1>Устройство id ${device.getId()}</h1>
     <h2>${device.getHeadphoneName()}</h2>
@@ -21,4 +22,9 @@
         </#list>
         </table>
     </div>
+    <div>
+        <button class="btn btn-info btn-generate-device-points" name="generate-device-points">Сгенерировать точки</button>
+        <button class="btn btn-info btn-add-device-point" name="add-device-point">Добавить точку</button>
+    </div>
 </div>
+<#include "footer.ftl">
