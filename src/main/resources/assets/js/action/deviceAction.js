@@ -83,7 +83,8 @@ $(document).ready(function () {
         alert("пытаемся нагененрировать");
         var deviceId = getValueFromUrl(3);
         var url = "/rest/configuration/devices/" + deviceId + "/generate/allpoints";
-        var request = addObject(url, "", "PUT");
+        var jsonObject = JSON.stringify(deviceId);
+        var request = addObject(url, jsonObject, "POST");
     });
 
     $(".btn-device-point-open-form").click(function (event) {

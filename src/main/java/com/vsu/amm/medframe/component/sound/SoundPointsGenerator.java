@@ -17,7 +17,7 @@ import java.util.List;
 public class SoundPointsGenerator {
 
     @Autowired
-    DevicePointService devicePointService;
+    private DevicePointService devicePointService;
 
     public Device generateBasePoints(Device device) {
         List<DevicePointDto> zeroIntensityLevelPoints = getZeroDevicePoints(device);

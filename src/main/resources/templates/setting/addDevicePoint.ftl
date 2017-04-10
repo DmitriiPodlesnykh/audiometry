@@ -1,7 +1,5 @@
 <#include "header.ftl">
 <script type="text/javascript" src="/assets/js/action/deviceAction.js" xmlns="http://www.w3.org/1999/html"></script>
-<script type="text/javascript" src="/assets/js/request/addObject.js"></script>
-<script type="text/javascript" src="/assets/js/utils/getValueFromUrl.js"></script>
 <div class="row">
     <div id="createFormDiv" class="col-xs-9 bg-success">
         <div>

@@ -1,6 +1,5 @@
 <#include "header.ftl">
 <script type="text/javascript" src="/assets/js/action/deviceAction.js"></script>
-<script type="text/javascript" src="/assets/js/request/addObject.js"></script>
 <div class="row">
     <div id="createFormDiv" class="col-xs-9 bg-success">
         <div>

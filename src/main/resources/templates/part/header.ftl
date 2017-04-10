@@ -15,6 +15,8 @@
     <script type="text/javascript" src="/assets/js/view/showDeviceObjects.js"></script>
     <script type="text/javascript" src="/assets/js/sound/playSound.js"></script>
     <script type="text/javascript" src="/assets/js/action/deviceAction.js"></script>
+    <script type="text/javascript" src="/assets/js/utils/getValueFromUrl.js"></script>
+    <script type="text/javascript" src="/assets/js/request/addObject.js"></script>
 </head>
 <body>
 <h3>header</h3>
