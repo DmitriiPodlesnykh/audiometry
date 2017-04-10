@@ -3,6 +3,7 @@ package com.vsu.amm.medframe.component.sound;
 import com.vsu.amm.medframe.dto.DevicePointDto;
 import com.vsu.amm.medframe.entity.Device;
 import com.vsu.amm.medframe.entity.DevicePoint;
+import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.service.DevicePointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,24 @@ public class SoundPointsGenerator {
     @Autowired
     DevicePointService devicePointService;
 
-    public Device generateForDevice(Device device) {
+    public Device generateBasePoints(Device device) {
         List<DevicePointDto> zeroIntensityLevelPoints = getZeroDevicePoints(device);
 
-        for(DevicePointDto item : zeroIntensityLevelPoints) {
-            for(int i=0; i < Frequency.values().length; i++) {
-                //DevicePointDto pointDto = generatePoint()
-            }
+        for (DevicePointDto item : zeroIntensityLevelPoints) {
+            generatePointForBaseIntensityLevelRange(item);
         }
-
         return device;
     }
+
+    private void generatePointForBaseIntensityLevelRange(DevicePointDto zeroPoint) {
+        for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
+            if (!intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
+                DevicePointDto pointDto = generatePoint(intensityLevel.getValue(), zeroPoint);
+                devicePointService.save(pointDto);
+            }
+        }
+    }
+
 
     private DevicePointDto generatePoint(int intensityLevel, DevicePointDto deviceZero) {
         DevicePointDto pointDto = new DevicePointDto();

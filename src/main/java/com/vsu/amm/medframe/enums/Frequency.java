@@ -36,7 +36,7 @@ public enum Frequency {
         return frequency;
     }
 
-    public static List<Integer> getAvilableValues() {
+    public static List<Integer> getAvailableValues() {
         List<Integer> values = new ArrayList();
         for(Frequency item : Frequency.values()) {
             if(!item.equals(NULL_VALUE)) {

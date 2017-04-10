@@ -62,4 +62,6 @@ public class DevicePointService {
         return pointDtos;
     }
 
+
+
 }

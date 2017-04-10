@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,7 +66,7 @@ public class DeviceService {
 
     public DeviceDto generateDevicePoints(Long deviceId) {
         Device device = deviceRepository.findOne(deviceId);
-        device = soundPointsGenerator.generateForDevice(device);
+        device = soundPointsGenerator.generateBasePoints(device);
         device = deviceRepository.saveAndFlush(device);
         return mapper.mapToDto(device);
     }

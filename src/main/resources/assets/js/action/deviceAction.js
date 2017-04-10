@@ -80,7 +80,10 @@ $(document).ready(function () {
     });
 
     $(".btn-generate-device-points").click(function (event) {
-
+        alert("пытаемся нагененрировать");
+        var deviceId = getValueFromUrl(3);
+        var url = "/rest/configuration/devices/" + deviceId + "/generate/allpoints";
+        var request = addObject(url, "", "PUT");
     });
 
     $(".btn-device-point-open-form").click(function (event) {

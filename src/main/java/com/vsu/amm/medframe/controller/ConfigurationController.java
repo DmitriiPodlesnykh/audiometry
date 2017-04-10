@@ -40,7 +40,7 @@ public class ConfigurationController {
 
     @RequestMapping(value = "/devices/{deviceId}/add", method = GET)
     public String addDevicePointForm(@PathVariable("deviceId") Long deviceId, ModelMap modelMap) {
-        modelMap.addAttribute("frequencyListValues", Frequency.getAvilableValues());
+        modelMap.addAttribute("frequencyListValues", Frequency.getAvailableValues());
         return "/addDevicePoint";
     }
 
