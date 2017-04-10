@@ -61,4 +61,5 @@ public class DevicePointService {
         log.info(pointDtos.toString());
         return pointDtos;
     }
+
 }

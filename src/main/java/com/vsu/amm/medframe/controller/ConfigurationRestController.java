@@ -24,10 +24,10 @@ public class ConfigurationRestController {
     private static final Logger log = Logger.getLogger(ConfigurationRestController.class);
 
     @Autowired
-    DeviceService deviceService;
+    private DeviceService deviceService;
 
     @Autowired
-    DevicePointService devicePointService;
+    private DevicePointService devicePointService;
 
     @RequestMapping(value = "/devices", method = PUT)
     public DeviceDto create(@RequestBody DeviceDto deviceDto) {
@@ -56,5 +56,10 @@ public class ConfigurationRestController {
     public DeviceDto updateDevice(@PathVariable("deviceId") Long deviceID,
                                   @RequestBody DeviceDto deviceDto) {
         return deviceService.updateDevice(deviceDto);
+    }
+
+    @RequestMapping(value = "/devices/{deviceId}/generate/allpoints", method = POST)
+    public DeviceDto generatePointsForFullFrequencies(@PathVariable("deviceId") Long deviceID) {
+        return deviceService.generateDevicePoints(deviceID);
     }
 }

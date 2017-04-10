@@ -1,6 +1,7 @@
 package com.vsu.amm.medframe.service;
 
 import com.vsu.amm.medframe.component.mapper.DeviceMapper;
+import com.vsu.amm.medframe.component.sound.SoundPointsGenerator;
 import com.vsu.amm.medframe.dto.DeviceDto;
 import com.vsu.amm.medframe.entity.Device;
 import com.vsu.amm.medframe.repository.DeviceRepository;
@@ -23,6 +24,9 @@ public class DeviceService {
 
     @Autowired
     private DeviceMapper mapper;
+
+    @Autowired
+    private SoundPointsGenerator soundPointsGenerator;
 
     public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
@@ -57,6 +61,13 @@ public class DeviceService {
         if(!device.getSoundCardName().equals(deviceDto.getSoundCardName())) {
             device.setSoundCardName(deviceDto.getSoundCardName());
         }
+        device = deviceRepository.saveAndFlush(device);
+        return mapper.mapToDto(device);
+    }
+
+    public DeviceDto generateDevicePoints(Long deviceId) {
+        Device device = deviceRepository.findOne(deviceId);
+        device = soundPointsGenerator.generateForDevice(device);
         device = deviceRepository.saveAndFlush(device);
         return mapper.mapToDto(device);
     }
