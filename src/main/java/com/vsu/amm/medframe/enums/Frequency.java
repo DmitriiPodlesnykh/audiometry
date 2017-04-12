@@ -36,11 +36,11 @@ public enum Frequency {
         return frequency;
     }
 
-    public static List<Integer> getAvailableValues() {
-        List<Integer> values = new ArrayList();
+    public static List<String> getAvailableValues() {
+        List<String> values = new ArrayList();
         for(Frequency item : Frequency.values()) {
             if(!item.equals(NULL_VALUE)) {
-                values.add(item.getValue());
+                values.add(String.valueOf(item.getValue()));
             }
         }
         return values;

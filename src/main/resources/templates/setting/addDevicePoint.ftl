@@ -18,6 +18,7 @@
                     <option value="${frequencyValue}">${frequencyValue}</option>
                 </#list>
             </select>
+            <p>Гц</p>
         </div>
         <div>
             <label>Громкость:</label>
