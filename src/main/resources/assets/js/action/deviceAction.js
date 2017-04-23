@@ -64,7 +64,13 @@ $(document).ready(function () {
             frequency = $(this).parent().parent().children().hasClass("frequency-view");
         }
 
+        if($(this).parent().parent().hasClass("start-device-point-form")) {
+            frequency = 1000;
+            volume = $(this).parent().parent().children().hasClass("amplitudeValue");
+        }
+
         playSound(frequency, volume);
+
     });
 
     $("#cancelAddDevice").click(function (event) {

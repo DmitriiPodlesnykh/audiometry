@@ -30,7 +30,12 @@ public class ConfigurationController {
 
     @RequestMapping(value = "", method = GET)
     public String getConfiguration(ModelMap modelMap) {
-        return "";
+        return "/";
+    }
+
+    @RequestMapping(value = "/mainpoint", method = GET)
+    public String getStartSoundPointForm() {
+        return "getStartDevicePointForm";
     }
 
     @RequestMapping(value = "/devices/add", method = GET)

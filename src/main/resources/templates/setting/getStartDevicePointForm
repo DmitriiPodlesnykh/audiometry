@@ -1,0 +1,29 @@
+<#include "header.ftl">
+<script type="text/javascript" src="/assets/js/action/deviceAction.js" xmlns="http://www.w3.org/1999/html"></script>
+<div class="row">
+    <div>
+        <div>
+            <label>Аудиокарта:</label>
+            <input type="text" name="soundCard" id="soundCard">
+        </div>
+        <div>
+            <label>Наушники:</label>
+            <input type="text" name="headPhone" id="headPhone">
+        </div>
+    </div>
+    <div id="start-device-point-form" class="col-xs-9 bg-success">
+        <div>Уровень интенсивности: 0 Дб. Частота 1000 Гц</div>
+        <div>
+            <label for="amplitudeValue">Амплитуда</label>
+            <input type="text" id="amplitudeValue">
+            <button type="button" class="btn-play-sound">Прослушать</button>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="generate-points">Сгенерировать точки</button>
+    </div>
+    <div class="for-generated-points-result">
+
+        <button type="button" class="addDevice">Сохранить настройки устройства</button>
+    </div>
+</div>
