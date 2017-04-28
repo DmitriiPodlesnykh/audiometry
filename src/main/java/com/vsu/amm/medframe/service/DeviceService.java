@@ -27,6 +27,12 @@ public class DeviceService {
     @Autowired
     private SoundPointsGenerator soundPointsGenerator;
 
+    public DeviceDto createNew() {
+        Device device = new Device();
+        device = deviceRepository.saveAndFlush(device);
+        return mapper.mapToDto(device);
+    }
+
     public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
         device = deviceRepository.saveAndFlush(device);
