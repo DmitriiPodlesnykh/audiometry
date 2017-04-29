@@ -67,6 +67,12 @@ $(document).ready(function () {
             frequency = 1000;
             volume = document.getElementById('amplitudeValueId').value;
         }
+
+        if(document.getElementById('h-frequency') && document.getElementById('h-amplitude')) {
+            frequency = document.getElementById('h-frequency').value;
+            volume = document.getElementById('h-amplitude').value;
+        }
+
         if (volume && frequency) {
             playSound(frequency, volume);
         } else {
