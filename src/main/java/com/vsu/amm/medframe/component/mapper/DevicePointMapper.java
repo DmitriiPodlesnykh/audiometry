@@ -20,14 +20,16 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto>{
 
     @Override
     public DevicePoint mapToEntity(DevicePointDto pointDto) {
+        log.info("pointDto.toString() = " + pointDto.toString());
         DevicePoint point = new DevicePoint();
         point.setDevice(deviceRepository.getOne(pointDto.getDeviceId()));
         point.setFrequency(Frequency.parse(pointDto.getFrequency()));
         point.setIntensityLevel(pointDto.getIntensityLevel());
-        point.setVolumeValue(new BigDecimal(pointDto.getIntensityLevel()));
+        point.setVolumeValue(new BigDecimal(pointDto.getSoundValue()));
         if(pointDto.getId() != null){
             point.setId(pointDto.getId());
         }
+        log.info("point.toString() = " + point.toString());
         return point;
     }
 
@@ -35,12 +37,19 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto>{
     public DevicePointDto mapToDto(DevicePoint devicePoint) {
         DevicePointDto dto = new DevicePointDto();
 
-        dto.setId(devicePoint.getId());
-        dto.setDeviceId(devicePoint.getDevice().getId());
+        if(devicePoint.getId() != null) {
+            dto.setId(devicePoint.getId());
+        }
+        if(devicePoint.getDevice() != null ) {
+            dto.setDeviceId(devicePoint.getDevice().getId());
+        }
         dto.setFrequency(devicePoint.getFrequency().getValue());
-        dto.setIntensityLevel(devicePoint.getIntensityLevel());
-        dto.setSoundValue(devicePoint.getVolumeValue().doubleValue());
-
+        if(devicePoint.getIntensityLevel() != null) {
+            dto.setIntensityLevel(devicePoint.getIntensityLevel());
+        }
+        if (devicePoint.getVolumeValue() != null) {
+            dto.setSoundValue(devicePoint.getVolumeValue().doubleValue());
+        }
         return dto;
     }
 }

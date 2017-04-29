@@ -36,11 +36,11 @@ public class DevicePointService {
 
     public List<DevicePointDto> getDevicePoints(Long deviceId) {
         List<DevicePoint> points = (List<DevicePoint>) devicePointRepository.findByDeviceId(deviceId);
-        if(points==null || points.isEmpty()) {
+        if (points == null || points.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
         List<DevicePointDto> pointDtos = new ArrayList<DevicePointDto>();
-        for(DevicePoint point : points) {
+        for (DevicePoint point : points) {
             DevicePointDto pointDto = mapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
@@ -50,18 +50,17 @@ public class DevicePointService {
 
     public List<DevicePointDto> getZeroIntensityLevelDevicePoints(Long deviceId) {
         List<DevicePoint> devicePoints = (List<DevicePoint>) devicePointRepository.getZeroIntensityLevelDevicePointsByDeviceId(deviceId);
-        if(devicePoints==null || devicePoints.isEmpty()) {
+        if (devicePoints == null || devicePoints.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
         List<DevicePointDto> pointDtos = new ArrayList<DevicePointDto>();
-        for(DevicePoint point : devicePoints) {
+        for (DevicePoint point : devicePoints) {
             DevicePointDto pointDto = mapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
         log.info(pointDtos.toString());
         return pointDtos;
     }
-
 
 
 }

@@ -33,7 +33,7 @@ $(document).ready(function () {
     $(".add-device-point-btn").click(function (event) {
         var devicePoint = {};
 
-        if($(this).parent().hasClass("add-device-point-form")) {
+        if ($(this).parent().hasClass("add-device-point-form")) {
             var volume = $(this).parent().children().hasClass("sound-volume-field");
             var frequency = $(this).parent().children().hasClass("frequency-field");
             var soundValue = $(this).parent().children().hasClass("intensity-level-field");
@@ -56,7 +56,6 @@ $(document).ready(function () {
         }
 
         if ($(this).parent().parent().hasClass("device-point-record")) {
-
             var a = $(this).parent();
             var b = $(this).parent().parent();
 
@@ -64,13 +63,17 @@ $(document).ready(function () {
             frequency = $(this).parent().parent().children().hasClass("frequency-view");
         }
 
-        if($(this).parent().parent().hasClass("start-device-point-form")) {
+        if ($(this).parent().hasClass("start-device-point-form")) {
             frequency = 1000;
-            volume = $(this).parent().parent().children().hasClass("amplitudeValue");
+            volume = document.getElementById('amplitudeValueId').value;
         }
-
-        playSound(frequency, volume);
-
+        if (volume && frequency) {
+            playSound(frequency, volume);
+        } else {
+            alert("volume or frequency is empty");
+            var q = $(this).parent();
+            var w = $(this).parent().parent();
+        }
     });
 
     $("#cancelAddDevice").click(function (event) {
@@ -99,4 +102,14 @@ $(document).ready(function () {
         alert("тут пока ничего нет");
     });
 
+    $(".generate-device-points-by-the-point").click(function (event) {
+        var devicePoint = {};
+        devicePoint.frequency = 1000;
+        devicePoint.intensityLevel = 0;
+        devicePoint.soundValue = document.getElementById('amplitudeValueId').value;
+
+        var url = "/rest/configuration/devices/new";
+        var jsonObject = JSON.stringify(devicePoint);
+        var request = addObject(url, jsonObject, "POST");
+    });
 });

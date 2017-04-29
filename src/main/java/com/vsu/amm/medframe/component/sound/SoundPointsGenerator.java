@@ -8,6 +8,7 @@ import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,8 @@ import java.util.List;
 @Component
 public class SoundPointsGenerator {
 
+    private static final Logger log = Logger.getLogger(SoundPointsGenerator.class);
+
     @Autowired
     private DevicePointService devicePointService;
 
@@ -26,37 +29,36 @@ public class SoundPointsGenerator {
 
     public DeviceDto generateBasePoints(DevicePointDto devicePoint) {
         DeviceDto device = deviceService.createNew();
-
         double amplitudeAtZeroIntensityLevel =  devicePoint.getSoundValue();
-
-        Collection<DevicePointDto> devicePoints= new ArrayList<DevicePointDto>();
+        List<DevicePointDto> devicePoints= new ArrayList<DevicePointDto>();
 
         for(BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
             if(intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
                 generatePointsWithSomeAmplitude(devicePoints, amplitudeAtZeroIntensityLevel, intensityLevel, device.getId());
             } else {
-                double currentAmplitude = createAmplitude(intensityLevel, amplitudeAtZeroIntensityLevel);
+                double currentAmplitude = SoundUtils.createAmplitudeValue(intensityLevel, amplitudeAtZeroIntensityLevel);
                 generatePointsWithSomeAmplitude(devicePoints, currentAmplitude, intensityLevel, device.getId());
             }
         }
-        device.setPointList((List<DevicePointDto>) devicePoint);
+        log.info("point list size before add to device = " + devicePoints.size());
+        for(int i=0; i<devicePoints.size(); i++) {
+            log.info("device point #" + i+1 + " = " + devicePoints.get(i).toString());
+        }
+        device.setPointList(devicePoints);
         device = deviceService.save(device);
         return device;
     }
 
-
-    private double createAmplitude(BaseIntensityLevel intensityLevel, double amplitudeAtZeroIntensityLevel) {
-        return 0;
-    }
-
     private Collection<DevicePointDto> generatePointsWithSomeAmplitude(Collection<DevicePointDto> points, double amplitude, BaseIntensityLevel intensityLevel, Long deviceId) {
         for(Frequency frequency : Frequency.values()) {
-            DevicePointDto pointDto = new DevicePointDto();
-            pointDto.setIntensityLevel(intensityLevel.getValue());
-            pointDto.setDeviceId(deviceId);
-            pointDto.setFrequency(frequency.getValue());
-            pointDto.setSoundValue(amplitude);
-            points.add(pointDto);
+            if(!frequency.equals(Frequency.NULL_VALUE)) {
+                DevicePointDto pointDto = new DevicePointDto();
+                pointDto.setIntensityLevel(intensityLevel.getValue());
+                pointDto.setDeviceId(deviceId);
+                pointDto.setFrequency(frequency.getValue());
+                pointDto.setSoundValue(amplitude);
+                points.add(pointDto);
+            }
         }
         return points;
     }

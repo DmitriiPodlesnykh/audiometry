@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
 import com.vsu.amm.medframe.dto.DevicePointDto;
 
 @Component
@@ -25,6 +27,9 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
         device.setId(deviceDto.getId());
         device.setHeadphoneName(deviceDto.getHeadphoneName());
         device.setSoundCardName(deviceDto.getSoundCardName());
+
+        device.setDevicePoints(mapPointDtoCollectionToPoint(deviceDto.getPointList()));
+        log.info("device.getDevicePoints size = " + device.getDevicePoints().size());
         return device;
     }
 
@@ -35,17 +40,30 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
         dto.setId(device.getId());
         dto.setHeadphoneName(device.getHeadphoneName());
 
-        if(device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
-            List<DevicePointDto> points = new ArrayList<DevicePointDto>();
-            for (DevicePoint point : device.getDevicePoints()) {
-                DevicePointDto pointDto = devicePointMapper.mapToDto(point);
-                log.info(point);
-                points.add(pointDto);
-            }
-            dto.setPointList(points);
+        if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
+            dto.setPointList(mapPointCollectionToDto(device.getDevicePoints()));
+            log.info("dto.getPointList().size() = " + dto.getPointList().size());
         } else {
             log.info("device don't have points");
         }
         return dto;
+    }
+
+    private List<DevicePointDto> mapPointCollectionToDto(Collection<DevicePoint> points) {
+        List<DevicePointDto> pointDtos = new ArrayList<DevicePointDto>();
+        for (DevicePoint point : points) {
+            DevicePointDto pointDto = devicePointMapper.mapToDto(point);
+            pointDtos.add(pointDto);
+        }
+        return pointDtos;
+    }
+
+    private List<DevicePoint> mapPointDtoCollectionToPoint(Collection<DevicePointDto> pointDtos) {
+        List<DevicePoint> points = new ArrayList<DevicePoint>();
+        for (DevicePointDto pointDto : pointDtos) {
+            DevicePoint point = devicePointMapper.mapToEntity(pointDto);
+            points.add(point);
+        }
+        return points;
     }
 }

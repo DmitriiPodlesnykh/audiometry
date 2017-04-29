@@ -27,6 +27,10 @@ public class ConfigurationController {
     @Autowired
     private DevicePointService devicePointService;
 
+    @RequestMapping(value = "/devices/new", method = GET)
+    public String getAddDeviceForm(ModelMap modelMap) {
+        return "addDeviceByThePoint";
+    }
 
     @RequestMapping(value = "", method = GET)
     public String getConfiguration(ModelMap modelMap) {
@@ -67,7 +71,6 @@ public class ConfigurationController {
     public String getDevice(@PathVariable("deviceId") Long deviceId,
                             ModelMap modelMap) {
         DeviceDto deviceDto = deviceService.getOne(deviceId);
-        log.info(deviceDto.toString());
         modelMap.addAttribute("device", deviceDto);
         return "getDevice";
     }

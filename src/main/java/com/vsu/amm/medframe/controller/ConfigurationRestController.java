@@ -29,6 +29,12 @@ public class ConfigurationRestController {
     @Autowired
     private DevicePointService devicePointService;
 
+    @RequestMapping(value = "/devices/new", method = POST)
+    public DeviceDto getAddDeviceForm(@RequestBody DevicePointDto devicePointDto) {
+        log.info("getAddDeviceForm");
+        return deviceService.getWithGeneratedPoints(devicePointDto);
+    }
+
     @RequestMapping(value = "/devices", method = PUT)
     public DeviceDto create(@RequestBody DeviceDto deviceDto) {
         deviceDto = deviceService.save(deviceDto);

@@ -1,8 +1,7 @@
 function playSound(frequency, volume) {
-    var audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     var oscillator = audioCtx.createOscillator();
     var gainNode = audioCtx.createGain();
-
     oscillator.connect(gainNode);
     gainNode.connect(audioCtx.destination);
 

@@ -23,7 +23,6 @@
         <button type="button" class="generate-points">Сгенерировать точки</button>
     </div>
     <div class="for-generated-points-result">
-
         <button type="button" class="addDevice">Сохранить настройки устройства</button>
     </div>
 </div>

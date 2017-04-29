@@ -28,7 +28,7 @@ public enum Frequency {
     public static Frequency parse(Integer frequencyValue) {
         Frequency frequency = NULL_VALUE;
         for (Frequency item : Frequency.values()) {
-            if (item.getValue()==frequencyValue) {
+            if (frequencyValue != null && item.getValue()==frequencyValue) {
                 frequency = item;
                 break;
             }

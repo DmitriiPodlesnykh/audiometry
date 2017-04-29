@@ -3,7 +3,10 @@ package com.vsu.amm.medframe.service;
 import com.vsu.amm.medframe.component.mapper.DeviceMapper;
 import com.vsu.amm.medframe.component.sound.SoundPointsGenerator;
 import com.vsu.amm.medframe.dto.DeviceDto;
+import com.vsu.amm.medframe.dto.DevicePointDto;
 import com.vsu.amm.medframe.entity.Device;
+import com.vsu.amm.medframe.entity.DevicePoint;
+import com.vsu.amm.medframe.repository.DevicePointRepository;
 import com.vsu.amm.medframe.repository.DeviceRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +25,18 @@ public class DeviceService {
     private DeviceRepository deviceRepository;
 
     @Autowired
+    private DevicePointRepository devicePointRepository;
+
+    @Autowired
     private DeviceMapper mapper;
 
     @Autowired
     private SoundPointsGenerator soundPointsGenerator;
+
+    public DeviceDto getWithGeneratedPoints(DevicePointDto pointDto) {
+        log.info("pointDto.getSoundValue()" + pointDto.getSoundValue());
+        return soundPointsGenerator.generateBasePoints(pointDto);
+    }
 
     public DeviceDto createNew() {
         Device device = new Device();
@@ -35,7 +46,11 @@ public class DeviceService {
 
     public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
+        List<DevicePoint> points = device.getDevicePoints();
         device = deviceRepository.saveAndFlush(device);
+        for(int i=0; i<points.size();i++) {
+            points.set(i, devicePointRepository.saveAndFlush(points.get(i)));
+        }
         return mapper.mapToDto(device);
     }
 

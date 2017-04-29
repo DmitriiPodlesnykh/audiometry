@@ -51,4 +51,15 @@ public class DevicePointDto {
     public void setSoundValue(double soundLevel) {
         this.soundValue = soundLevel;
     }
+
+    @Override
+    public String toString() {
+        return "DevicePointDto{" +
+                "id=" + (id != null ? id : " is empty") +
+                ", deviceId=" + (deviceId != null ?  deviceId : " is empty") +
+                ", frequency=" + frequency +
+                ", intensityLevel=" + intensityLevel +
+                ", soundValue=" + soundValue +
+                '}';
+    }
 }
