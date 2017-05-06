@@ -2,15 +2,11 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.entity.TemplatePoint;
-import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
-import com.vsu.amm.medframe.service.TemplateServiceImpl;
+import com.vsu.amm.medframe.service.impl.TemplatePointServiceImpl;
+import com.vsu.amm.medframe.service.impl.TemplateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +18,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.apache.log4j.Logger;
 
 import javax.validation.Valid;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/templates")

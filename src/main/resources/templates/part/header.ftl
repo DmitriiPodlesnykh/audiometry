@@ -14,7 +14,6 @@
     <script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/assets/js/sound/initializeSoundSetting.js"></script>
     <script type="text/javascript" src="/assets/js/view/showDeviceObjects.js"></script>
-    <!--<script type="text/javascript" src="/assets/js/init/InitAudioContext.js"></script>-->
     <script type="text/javascript" src="/assets/js/sound/playSound.js"></script>
     <script type="text/javascript" src="/assets/js/action/deviceAction.js"></script>
     <script type="text/javascript" src="/assets/js/utils/getValueFromUrl.js"></script>

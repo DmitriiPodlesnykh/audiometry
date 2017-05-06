@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.service;
+package com.vsu.amm.medframe.service.impl;
 
 
 import com.vsu.amm.medframe.component.mapper.TemplatePointMapper;

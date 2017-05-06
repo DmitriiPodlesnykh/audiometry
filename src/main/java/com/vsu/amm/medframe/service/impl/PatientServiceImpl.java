@@ -1,15 +1,16 @@
-package com.vsu.amm.medframe.service;
+package com.vsu.amm.medframe.service.impl;
 
 import com.vsu.amm.medframe.dto.PatientDto;
 import com.vsu.amm.medframe.entity.Patient;
 import com.vsu.amm.medframe.repository.PatientRepository;
+import com.vsu.amm.medframe.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PatientServiceImpl {
+public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientRepository patientRepository;

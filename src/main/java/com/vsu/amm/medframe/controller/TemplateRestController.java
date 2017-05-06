@@ -2,9 +2,8 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
-import com.vsu.amm.medframe.service.TemplateServiceImpl;
+import com.vsu.amm.medframe.service.impl.TemplatePointServiceImpl;
+import com.vsu.amm.medframe.service.impl.TemplateServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

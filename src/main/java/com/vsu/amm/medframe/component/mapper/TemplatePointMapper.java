@@ -2,8 +2,7 @@ package com.vsu.amm.medframe.component.mapper;
 
 import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.TemplatePoint;
-import com.vsu.amm.medframe.service.TemplateServiceImpl;
-import com.vsu.amm.medframe.service.UserServiceImpl;
+import com.vsu.amm.medframe.service.impl.TemplateServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

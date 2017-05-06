@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.service;
+package com.vsu.amm.medframe.service.impl;
 
 import com.vsu.amm.medframe.dto.UserDto;
 import com.vsu.amm.medframe.entity.User;

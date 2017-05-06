@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.service;
+package com.vsu.amm.medframe.service.impl;
 
 
 import com.vsu.amm.medframe.component.mapper.TemplateMapper;
@@ -8,6 +8,7 @@ import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplateRepository;
+import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.*;
 import org.apache.log4j.Logger;
 
 @Service
-public class TemplateServiceImpl {
+public class TemplateServiceImpl implements TemplateService {
 
     private static final Logger log = Logger.getLogger(TemplateServiceImpl.class);
 
