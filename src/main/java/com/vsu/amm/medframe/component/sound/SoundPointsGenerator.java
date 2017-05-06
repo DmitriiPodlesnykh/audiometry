@@ -6,8 +6,8 @@ import com.vsu.amm.medframe.entity.Device;
 import com.vsu.amm.medframe.entity.DevicePoint;
 import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import com.vsu.amm.medframe.enums.Frequency;
-import com.vsu.amm.medframe.service.DevicePointService;
-import com.vsu.amm.medframe.service.DeviceService;
+import com.vsu.amm.medframe.service.impl.DevicePointServiceImpl;
+import com.vsu.amm.medframe.service.impl.DeviceServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,10 +22,10 @@ public class SoundPointsGenerator {
     private static final Logger log = Logger.getLogger(SoundPointsGenerator.class);
 
     @Autowired
-    private DevicePointService devicePointService;
+    private DevicePointServiceImpl devicePointService;
 
     @Autowired
-    private DeviceService deviceService;
+    private DeviceServiceImpl deviceService;
 
     public DeviceDto generateBasePoints(DevicePointDto devicePoint) {
         DeviceDto device = deviceService.createNew();
