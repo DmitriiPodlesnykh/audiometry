@@ -59,9 +59,9 @@ public class Device {
     public String toString() {
         return "Device{" +
                 "id=" + (id != null ? id : 0) +
-                ", soundCardName='" + (soundCardName != null ? soundCardName : "нет данных") + '\'' +
-                ", headphoneName='" + (headPhoneName != null ? headPhoneName : "нет данных") + '\'' +
-                ", devicePoints=" + devicePoints +
+                ", soundCardName='" + (soundCardName != null ? soundCardName : "is empty") + '\'' +
+                ", headphoneName='" + (headPhoneName != null ? headPhoneName : "is empty") + '\'' +
+                ", devicePoints=" + (devicePoints != null ? devicePoints : "is empty") +
                 '}';
     }
 }

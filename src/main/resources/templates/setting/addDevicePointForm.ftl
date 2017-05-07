@@ -1,3 +1,4 @@
+<#include "header.ftl">
 <div id="addDevicePointForm" xmlns:s="http://www.w3.org/1999/html">
     <div id="addDevicePointFormHeader">
         <h2>Добавить точку устройства</h2>

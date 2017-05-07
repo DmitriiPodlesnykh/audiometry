@@ -18,7 +18,9 @@
     <script type="text/javascript" src="/assets/js/action/deviceAction.js"></script>
     <script type="text/javascript" src="/assets/js/utils/getValueFromUrl.js"></script>
     <script type="text/javascript" src="/assets/js/request/addObject.js"></script>
+    <script type="text/javascript" src="/assets/js/action/actionController.js"></script>
 </head>
 <body>
-<h3>header</h3>
+<#include "mainMenu.ftl">
 <div class="container" role="main">
+    <h3>header</h3>

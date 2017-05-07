@@ -1,5 +1,4 @@
 <#include "header.ftl">
-<script type="text/javascript" src="/assets/js/action/deviceAction.js" xmlns="http://www.w3.org/1999/html"></script>
 <div class="row">
     <div>
         <div>

@@ -1,3 +1,4 @@
+<#include "header.ftl">
 <div id="addDeviceForm">
     <div id="addDeviceFormHeader">
         <h2>Добавить устройство</h2>

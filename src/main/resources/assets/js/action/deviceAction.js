@@ -105,7 +105,6 @@ $(document).ready(function () {
     $(".btn-device-point-open-form").click(function (event) {
         showAddDevicePointForm("show");
         showAddDevicePointFormBtns("hide");
-        alert("тут пока ничего нет");
     });
 
     $(".generate-device-points-by-the-point").click(function (event) {
