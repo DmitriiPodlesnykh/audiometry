@@ -65,6 +65,7 @@ public class ConfigurationController {
     @RequestMapping(value = "/devices/{deviceId}/points", method = GET)
     public String getDevicePoints(@PathVariable("deviceId") Long deviceId, ModelMap modelMap) {
         modelMap.addAttribute("devicePoints", devicePointService.getDevicePoints(deviceId));
+        log.info("devicePointService.getDevicePoints(deviceId) = " + devicePointService.getDevicePoints(deviceId).toString());
         return "getDevicePoints";
     }
 

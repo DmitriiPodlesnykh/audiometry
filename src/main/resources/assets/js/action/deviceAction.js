@@ -73,12 +73,15 @@ $(document).ready(function () {
             volume = document.getElementById('h-amplitude').value;
         }
 
+        if($(this).parent().parent().hasClass("device-point-table-record")) {
+            volume = $(this).parent().parent().find(".sound-volume-view").first().text();
+            frequency = $(this).parent().parent().find(".frequency-view").first().text();
+        }
+
         if (volume && frequency) {
             playSound(frequency, volume);
         } else {
             alert("volume or frequency is empty");
-            var q = $(this).parent();
-            var w = $(this).parent().parent();
         }
     });
 

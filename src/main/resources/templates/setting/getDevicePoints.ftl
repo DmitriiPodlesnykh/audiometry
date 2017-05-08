@@ -9,11 +9,11 @@
                 <th>Амплитуда</th>
             </tr>
         <#list devicePoints as devicePoint>
-            <tr class="device-point-record">
+            <tr class="device-point-table-record" id="device-point-table-record-${devicePoint.getId()}">
                 <td>
                     <a href="/config/devices/${devicePoint.getDeviceId()}/${devicePoint.getId()}">${devicePoint.getId()}</a>
                 </td>
-                <td class="frequency-view">${devicePoint.getFrequency()}</td>
+                <td class="frequency-view">${devicePoint.getFrequency()?c}</td>
                 <td class="intensity-level-view">${devicePoint.getIntensityLevel()}</td>
                 <td class="sound-volume-view"> ${devicePoint.getSoundValue()}</td>
                 <td>

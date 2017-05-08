@@ -23,4 +23,3 @@
 <body>
 <#include "mainMenu.ftl">
 <div class="container" role="main">
-    <h3>header</h3>
