@@ -19,6 +19,6 @@ public interface DeviceService {
 
     DeviceDto generateDevicePoints(Long deviceId);
 
-    DeviceDto getWithGeneratedPoints(DevicePointDto pointDto);
+    DeviceDto generatedPointsAndSave(DeviceDto deviceDto);
 
 }

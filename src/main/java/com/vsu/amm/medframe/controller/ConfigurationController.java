@@ -20,7 +20,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/config")
 public class ConfigurationController {
 
-    private static final Logger log = Logger.getLogger(ConfigurationRestController.class);
+    private static final Logger LOGGER = Logger.getLogger(ConfigurationRestController.class);
 
     @Autowired
     private DeviceService deviceService;
@@ -36,11 +36,6 @@ public class ConfigurationController {
     @RequestMapping(value = "", method = GET)
     public String getConfiguration(ModelMap modelMap) {
         return "/";
-    }
-
-    @RequestMapping(value = "/mainpoint", method = GET)
-    public String getStartSoundPointForm() {
-        return "getStartDevicePointForm";
     }
 
     @RequestMapping(value = "/devices/add", method = GET)
@@ -65,7 +60,6 @@ public class ConfigurationController {
     @RequestMapping(value = "/devices/{deviceId}/points", method = GET)
     public String getDevicePoints(@PathVariable("deviceId") Long deviceId, ModelMap modelMap) {
         modelMap.addAttribute("devicePoints", devicePointService.getDevicePoints(deviceId));
-        log.info("devicePointService.getDevicePoints(deviceId) = " + devicePointService.getDevicePoints(deviceId).toString());
         return "getDevicePoints";
     }
 

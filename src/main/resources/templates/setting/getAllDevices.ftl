@@ -19,7 +19,7 @@
         </table>
     </div>
     <div>
-        <a href="/config/devices/add">
+        <a href="/config/devices/new">
             <button id="goToAddDeviceForm">Добавить Устройство</button>
         </a>
     </div>

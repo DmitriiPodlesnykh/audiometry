@@ -21,7 +21,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 @RequestMapping("/rest/configuration")
 public class ConfigurationRestController {
 
-    private static final Logger log = Logger.getLogger(ConfigurationRestController.class);
+    private static final Logger LOGGER = Logger.getLogger(ConfigurationRestController.class);
 
     @Autowired
     private DeviceServiceImpl deviceService;
@@ -29,10 +29,10 @@ public class ConfigurationRestController {
     @Autowired
     private DevicePointServiceImpl devicePointService;
 
-    @RequestMapping(value = "/devices/new", method = POST)
-    public DeviceDto getAddDeviceForm(@RequestBody DevicePointDto devicePointDto) {
-        log.info("getAddDeviceForm");
-        return deviceService.getWithGeneratedPoints(devicePointDto);
+
+    @RequestMapping(value="/devices/new", method = PUT)
+    public DeviceDto getAddDeviceForm(@RequestBody DeviceDto deviceDto) {
+        return deviceService.generatedPointsAndSave(deviceDto);
     }
 
     @RequestMapping(value = "/devices", method = PUT)

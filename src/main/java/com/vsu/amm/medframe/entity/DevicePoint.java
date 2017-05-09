@@ -71,7 +71,7 @@ public class DevicePoint {
     public String toString() {
         return "DevicePoint{" +
                 "id=" + (id != null ? id : 0L) +
-                ", deviceId=" + device.getId() +
+                ", deviceId=" + (device != null ? device.getId() : "is empty") +
                 ", intensityLevel=" + intensityLevel +
                 ", frequency=" + frequency +
                 ", volumeValue=" + volumeValue +

@@ -16,7 +16,7 @@ import com.vsu.amm.medframe.dto.DevicePointDto;
 @Component
 public class DeviceMapper implements Mapper<Device, DeviceDto> {
 
-    private static final Logger log = Logger.getLogger(DeviceMapper.class);
+    private static final Logger LOGGER = Logger.getLogger(DeviceMapper.class);
 
     @Autowired
     private DevicePointMapper devicePointMapper;
@@ -29,7 +29,6 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
         device.setSoundCardName(deviceDto.getSoundCardName());
 
         device.setDevicePoints(mapPointDtoCollectionToPoint(deviceDto.getPointList()));
-        log.info("device.getDevicePoints size = " + device.getDevicePoints().size());
         return device;
     }
 
@@ -42,9 +41,8 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
 
         if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
             dto.setPointList(mapPointCollectionToDto(device.getDevicePoints()));
-            log.info("dto.getPointList().size() = " + dto.getPointList().size());
         } else {
-            log.info("device don't have points");
+            LOGGER.info("device don't have points");
         }
         return dto;
     }

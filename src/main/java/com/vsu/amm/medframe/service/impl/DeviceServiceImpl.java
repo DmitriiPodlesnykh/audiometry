@@ -14,11 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 @Service
-public class DeviceServiceImpl implements DeviceService{
+public class DeviceServiceImpl implements DeviceService {
 
     private static final Logger log = Logger.getLogger(DeviceServiceImpl.class);
 
@@ -34,9 +35,15 @@ public class DeviceServiceImpl implements DeviceService{
     @Autowired
     private SoundPointsGenerator soundPointsGenerator;
 
-    public DeviceDto getWithGeneratedPoints(DevicePointDto pointDto) {
-        log.info("pointDto.getSoundValue()" + pointDto.getSoundValue());
-        return soundPointsGenerator.generateBasePoints(pointDto);
+    private static final int ZERO_INTENSITY_1000HZ_POINT_NUMBER = 0;
+
+    public DeviceDto generatedPointsAndSave(DeviceDto deviceDto) {
+        deviceDto.setPointList(
+                (List<DevicePointDto>) soundPointsGenerator.generatePoints(
+                        deviceDto.getPointList().get(ZERO_INTENSITY_1000HZ_POINT_NUMBER)));
+        log.info(deviceDto.getPointList().toString());
+        deviceDto = save(deviceDto);
+        return deviceDto;
     }
 
     public DeviceDto createNew() {
@@ -47,27 +54,37 @@ public class DeviceServiceImpl implements DeviceService{
 
     public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
-        List<DevicePoint> points = device.getDevicePoints();
-        device = deviceRepository.saveAndFlush(device);
-        for(int i=0; i<points.size();i++) {
-            points.set(i, devicePointRepository.saveAndFlush(points.get(i)));
+        if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
+            // TODO to fix it on bulk case
+            List<DevicePoint> points = device.getDevicePoints();
+            device.setDevicePoints(Collections.EMPTY_LIST);
+            device = deviceRepository.saveAndFlush(device);
+            for (DevicePoint point : points) {
+                log.info("point before add device = " + point.toString());
+                point.setDevice(device);
+                point = devicePointRepository.saveAndFlush(point);
+                log.info("point = " + point.toString());
+            }
+            device.setDevicePoints(points);
+            device = deviceRepository.saveAndFlush(device);
+        } else {
+            device = deviceRepository.saveAndFlush(device);
         }
         return mapper.mapToDto(device);
     }
 
     public DeviceDto getOne(Long id) {
         Device device = deviceRepository.findDeviceWithPointsByIdQuery(id);
-        log.info("device = " + device.toString());
         return mapper.mapToDto(device);
     }
 
-    public List<DeviceDto> getAll(){
+    public List<DeviceDto> getAll() {
         List<Device> devices = deviceRepository.findAll();
-        if(devices == null || devices.isEmpty()) {
+        if (devices == null || devices.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
         List<DeviceDto> deviceDos = new ArrayList<DeviceDto>();
-        for(Device device : devices) {
+        for (Device device : devices) {
             DeviceDto deviceDto = mapper.mapToDto(device);
             deviceDos.add(deviceDto);
         }
@@ -76,10 +93,10 @@ public class DeviceServiceImpl implements DeviceService{
 
     public DeviceDto updateDevice(DeviceDto deviceDto) {
         Device device = deviceRepository.getOne(deviceDto.getId());
-        if(!device.getHeadphoneName().equals(deviceDto.getHeadphoneName())) {
+        if (!device.getHeadphoneName().equals(deviceDto.getHeadphoneName())) {
             device.setHeadphoneName(deviceDto.getHeadphoneName());
         }
-        if(!device.getSoundCardName().equals(deviceDto.getSoundCardName())) {
+        if (!device.getSoundCardName().equals(deviceDto.getSoundCardName())) {
             device.setSoundCardName(deviceDto.getSoundCardName());
         }
         device = deviceRepository.saveAndFlush(device);

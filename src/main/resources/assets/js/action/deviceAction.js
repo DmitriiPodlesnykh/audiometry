@@ -110,14 +110,25 @@ $(document).ready(function () {
         showAddDevicePointFormBtns("hide");
     });
 
-    $(".generate-device-points-by-the-point").click(function (event) {
+    $(".create-device-with-generated-points").click(function (event) {
+        var device = {};
+        device.headphoneName = document.getElementById('headPhone').value;
+        device.soundCardName = document.getElementById('soundCard').value;
+
         var devicePoint = {};
         devicePoint.frequency = 1000;
         devicePoint.intensityLevel = 0;
         devicePoint.soundValue = document.getElementById('amplitudeValueId').value;
 
+        device.pointList = new Array(devicePoint);
+
+
         var url = "/rest/configuration/devices/new";
-        var jsonObject = JSON.stringify(devicePoint);
-        var request = addObject(url, jsonObject, "POST");
-    });
+        var jsonObject = JSON.stringify(device);
+        var response = addObject(url, jsonObject, "PUT");
+
+        if (response) {
+            window.location.replace("http://localhost:8080/config/devices/" + response.id);
+        }
+    })
 });

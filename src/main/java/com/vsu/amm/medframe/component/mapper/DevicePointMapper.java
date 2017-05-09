@@ -11,25 +11,25 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto>{
+public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto> {
 
-    private static final Logger log = Logger.getLogger(DevicePointMapper.class);
+    private static final Logger LOGGER = Logger.getLogger(DevicePointMapper.class);
 
     @Autowired
     DeviceRepository deviceRepository;
 
     @Override
     public DevicePoint mapToEntity(DevicePointDto pointDto) {
-        log.info("pointDto.toString() = " + pointDto.toString());
         DevicePoint point = new DevicePoint();
-        point.setDevice(deviceRepository.getOne(pointDto.getDeviceId()));
+        if (pointDto.getDeviceId() != null) {
+            point.setDevice(deviceRepository.getOne(pointDto.getDeviceId()));
+        }
         point.setFrequency(Frequency.parse(pointDto.getFrequency()));
         point.setIntensityLevel(pointDto.getIntensityLevel());
         point.setVolumeValue(new BigDecimal(pointDto.getSoundValue()));
-        if(pointDto.getId() != null){
+        if (pointDto.getId() != null) {
             point.setId(pointDto.getId());
         }
-        log.info("point.toString() = " + point.toString());
         return point;
     }
 
@@ -37,14 +37,14 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto>{
     public DevicePointDto mapToDto(DevicePoint devicePoint) {
         DevicePointDto dto = new DevicePointDto();
 
-        if(devicePoint.getId() != null) {
+        if (devicePoint.getId() != null) {
             dto.setId(devicePoint.getId());
         }
-        if(devicePoint.getDevice() != null ) {
+        if (devicePoint.getDevice() != null) {
             dto.setDeviceId(devicePoint.getDevice().getId());
         }
         dto.setFrequency(devicePoint.getFrequency().getValue());
-        if(devicePoint.getIntensityLevel() != null) {
+        if (devicePoint.getIntensityLevel() != null) {
             dto.setIntensityLevel(devicePoint.getIntensityLevel());
         }
         if (devicePoint.getVolumeValue() != null) {
