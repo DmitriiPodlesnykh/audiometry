@@ -72,7 +72,7 @@ public class Template {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", author=" + author.toString() +
+                ", author=" + (author != null ? author.toString() : "is empty") +
                 ", templatePoints=" + templatePoints.toString() +
                 //", tests=" + tests.toString() +
                 '}';

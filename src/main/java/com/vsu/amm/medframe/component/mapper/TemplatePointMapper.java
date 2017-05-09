@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointDto>{
 
-    private static final Logger log = Logger.getLogger(TemplatePointMapper.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplatePointMapper.class);
 
     @Autowired
     private TemplateService templateService;
@@ -22,7 +22,9 @@ public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointD
         pointDto.setId(point.getId());
         pointDto.setFrequency(point.getFrequency());
         pointDto.setIntensityValue(point.getInrensityValue());
-        pointDto.setTemplateId(point.getTemplate().getId());
+        if(point.getTemplate() != null) {
+            pointDto.setTemplateId(point.getTemplate().getId());
+        }
         return pointDto;
     }
 

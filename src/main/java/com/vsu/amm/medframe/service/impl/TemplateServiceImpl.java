@@ -2,13 +2,11 @@ package com.vsu.amm.medframe.service.impl;
 
 
 import com.vsu.amm.medframe.component.mapper.TemplateMapper;
-import com.vsu.amm.medframe.component.mapper.TemplatePointMapper;
 import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
+import com.vsu.amm.medframe.repository.TemplatePointRepository;
 import com.vsu.amm.medframe.repository.TemplateRepository;
-import com.vsu.amm.medframe.service.TemplatePointService;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,42 +18,35 @@ import org.apache.log4j.Logger;
 @Service
 public class TemplateServiceImpl implements TemplateService {
 
-    private static final Logger log = Logger.getLogger(TemplateServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplateServiceImpl.class);
 
     @Autowired
     private TemplateMapper templateMapper;
 
     @Autowired
-    private TemplatePointMapper pointMapper;
-
-    @Autowired
     private TemplateRepository templateRepository;
 
     @Autowired
-    private TemplatePointService templatePointService;
+    private TemplatePointRepository pointRepository;
 
     @Override
     public TemplateDto save(TemplateDto templateDto) {
         Template template = templateMapper.mapToEntity(templateDto);
-        template = templateRepository.saveAndFlush(template);
-        if(templateDto.getPoints() != null && !templateDto.getPoints().isEmpty()){
-            Set<TemplatePoint> points = new TreeSet<TemplatePoint>();
-            for (TemplatePointDto pointDto : templateDto.getPoints()) {
-                pointDto.setTemplateId(template.getId());
-                log.info(pointDto.toString());
-                pointDto = templatePointService.save(pointDto);
-                TemplatePoint point = pointMapper.mapToEntity(pointDto);
-                points.add(point);
-            }
-            template.setTemplatePoints(points);
-            log.info("template.getTemplatePoints() = " + template.getTemplatePoints());
+        if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
+            // TODO to fix it on bulk case
+            Set<TemplatePoint> templatePoints = template.getTemplatePoints();
+            template.setTemplatePoints(Collections.EMPTY_SET);
             template = templateRepository.saveAndFlush(template);
-            log.info(template.toString());
+            for (TemplatePoint point : templatePoints) {
+                if (point.getTemplate() == null) {
+                    point.setTemplate(template);
+                    pointRepository.saveAndFlush(point);
+                }
+            }
+            template.setTemplatePoints(templatePoints);
         }
-        TemplateDto newTemplateDto = templateMapper.mapToDto(template);
-        log.info(newTemplateDto.toString());
-        log.info("template saved");
-        return newTemplateDto;
+        template = templateRepository.saveAndFlush(template);
+        return templateMapper.mapToDto(template);
     }
 
     private List<TemplateDto> convertToListTemplateDtos(List<Template> templates) {

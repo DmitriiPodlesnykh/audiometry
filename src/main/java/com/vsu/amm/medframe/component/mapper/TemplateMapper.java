@@ -64,12 +64,14 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
     }
 
     private Set<TemplatePoint> toTemplatePoint(Set<TemplatePointDto> pointsDto) {
-        if (pointsDto != null && pointsDto.isEmpty()) {
+        if (pointsDto != null && !pointsDto.isEmpty()) {
             Set points = new TreeSet();
             for (TemplatePointDto pointDto : pointsDto) {
+                LOGGER.info(pointDto.toString());
                 TemplatePoint point = pointMapper.mapToEntity(pointDto);
                 points.add(point);
             }
+            LOGGER.info(points.toString());
             return points;
         } else {
             return Collections.emptySet();
