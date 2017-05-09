@@ -53,7 +53,7 @@ public class UserServiceImpl {
     }
 
     public User getUser(Long id){
-        return userRepository.findOne(id);
+        return userRepository.findById(id);
     }
 
     public List<User> getAll() {

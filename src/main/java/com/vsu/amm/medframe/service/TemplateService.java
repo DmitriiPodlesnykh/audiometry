@@ -13,5 +13,5 @@ public interface TemplateService {
 
     void delete(Long id);
 
-    Template getOne(Long id);
+    TemplateDto getOne(Long id);
 }

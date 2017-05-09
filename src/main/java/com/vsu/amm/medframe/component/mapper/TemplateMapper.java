@@ -28,7 +28,10 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
     public TemplateDto mapToDto(Template template) {
         TemplateDto templateDto = new TemplateDto();
         templateDto.setId(template.getId());
-        templateDto.setAuthorId(template.getAuthor().getId());
+        if(template.getAuthor() != null) {
+            LOGGER.info("Template was added with out user");
+            templateDto.setAuthorId(template.getAuthor().getId());
+        }
         templateDto.setName(template.getName());
         templateDto.setDescription(template.getDescription());
         if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {

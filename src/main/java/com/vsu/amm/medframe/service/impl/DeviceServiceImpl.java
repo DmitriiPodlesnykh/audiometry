@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,6 +36,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     private static final int ZERO_INTENSITY_1000HZ_POINT_NUMBER = 0;
 
+    @Override
     public DeviceDto generatedPointsAndSave(DeviceDto deviceDto) {
         deviceDto.setPointList(
                 (List<DevicePointDto>) soundPointsGenerator.generatePoints(
@@ -46,12 +46,14 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceDto;
     }
 
+    @Override
     public DeviceDto createNew() {
         Device device = new Device();
         device = deviceRepository.saveAndFlush(device);
         return mapper.mapToDto(device);
     }
 
+    @Override
     public DeviceDto save(DeviceDto dto) {
         Device device = mapper.mapToEntity(dto);
         if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
@@ -73,11 +75,13 @@ public class DeviceServiceImpl implements DeviceService {
         return mapper.mapToDto(device);
     }
 
+    @Override
     public DeviceDto getOne(Long id) {
         Device device = deviceRepository.findDeviceWithPointsByIdQuery(id);
         return mapper.mapToDto(device);
     }
 
+    @Override
     public List<DeviceDto> getAll() {
         List<Device> devices = deviceRepository.findAll();
         if (devices == null || devices.isEmpty()) {
@@ -91,6 +95,7 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceDos;
     }
 
+    @Override
     public DeviceDto updateDevice(DeviceDto deviceDto) {
         Device device = deviceRepository.getOne(deviceDto.getId());
         if (!device.getHeadphoneName().equals(deviceDto.getHeadphoneName())) {
@@ -103,6 +108,7 @@ public class DeviceServiceImpl implements DeviceService {
         return mapper.mapToDto(device);
     }
 
+    @Override
     public DeviceDto generateDevicePoints(Long deviceId) {
         Device device = deviceRepository.findOne(deviceId);
         device = soundPointsGenerator.generateBasePoints(device);

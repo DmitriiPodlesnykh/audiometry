@@ -2,8 +2,8 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.service.impl.TemplatePointServiceImpl;
-import com.vsu.amm.medframe.service.impl.TemplateServiceImpl;
+import com.vsu.amm.medframe.service.TemplatePointService;
+import com.vsu.amm.medframe.service.TemplateService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,10 +23,10 @@ public class TemplateRestController {
     private static final Logger LOGGER = Logger.getLogger(TemplateRestController.class);
 
     @Autowired
-    private TemplateServiceImpl templateService;
+    private TemplateService templateService;
 
     @Autowired
-    private TemplatePointServiceImpl templatePointService;
+    private TemplatePointService templatePointService;
 
     @RequestMapping(value = "", method = POST)
     public TemplateDto create(@RequestBody TemplateDto jsonTemplateDto) {

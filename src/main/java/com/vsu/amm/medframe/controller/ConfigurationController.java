@@ -2,9 +2,8 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.DeviceDto;
 import com.vsu.amm.medframe.enums.Frequency;
+import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
-import com.vsu.amm.medframe.service.impl.DevicePointServiceImpl;
-import com.vsu.amm.medframe.service.impl.DeviceServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class ConfigurationController {
     private DeviceService deviceService;
 
     @Autowired
-    private DevicePointServiceImpl devicePointService;
+    private DevicePointService devicePointService;
 
     @RequestMapping(value = "/devices/new", method = GET)
     public String getAddDeviceForm(ModelMap modelMap) {

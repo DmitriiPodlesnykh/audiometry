@@ -52,7 +52,7 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        addUserForTest();
+        addTestUser();
 
         List<Device> devices = addTestDevices(4);
         addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_40_HZ, 0, 0.5);
@@ -134,7 +134,7 @@ public class DBinit {
         return user;
     }
 
-    private User addUserForTest() {
+    private User addTestUser() {
         User user = new User();
         user.setFirstName("Pop");
         user.setLastName("qwerty");

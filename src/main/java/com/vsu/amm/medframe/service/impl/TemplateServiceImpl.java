@@ -8,6 +8,7 @@ import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplateRepository;
+import com.vsu.amm.medframe.service.TemplatePointService;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,11 @@ public class TemplateServiceImpl implements TemplateService {
     private TemplateRepository templateRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private TemplatePointService templatePointService;
 
-    @Autowired
-    private TemplatePointServiceImpl templatePointService;
-
+    @Override
     public TemplateDto save(TemplateDto templateDto) {
         Template template = templateMapper.mapToEntity(templateDto);
-
-        //Template template = convertToTemplate(templateDto);
         template = templateRepository.saveAndFlush(template);
         if(templateDto.getPoints() != null && !templateDto.getPoints().isEmpty()){
             Set<TemplatePoint> points = new TreeSet<TemplatePoint>();
@@ -61,59 +58,6 @@ public class TemplateServiceImpl implements TemplateService {
         return newTemplateDto;
     }
 
-    private Template convertToTemplate(TemplateDto dto) {
-        Template template = new Template();
-        template.setAuthor(userService.getUser(dto.getAuthorId()));
-        template.setDescription(dto.getDescription());
-        template.setName(dto.getName());
-        return template;
-    }
-
-    private List<Template> convertToListTemplates(List<TemplateDto> dtos) {
-        List<Template> templates = new ArrayList<Template>();
-
-        for (TemplateDto dto : dtos) {
-            Template template = convertToTemplate(dto);
-            templates.add(template);
-        }
-
-        return templates;
-    }
-
-    private TemplatePointDto convertToTemplatePointDto(TemplatePoint templatePoint) {
-
-        TemplatePointDto dto = new TemplatePointDto();
-
-        //dto.setId(templatePoint.getId());
-        dto.setFrequency(templatePoint.getFrequency());
-        dto.setIntensityValue(templatePoint.getInrensityValue());
-
-        return dto;
-    }
-
-    private TemplateDto convertToTemplateDto(Template template) {
-
-        TemplateDto dto = new TemplateDto();
-        dto.setName(template.getName());
-        dto.setId(template.getId());
-        if(template.getAuthor() != null) {
-            dto.setAuthorId(template.getAuthor().getId());
-        }
-        dto.setDescription(template.getDescription());
-
-        Set<TemplatePoint> points = template.getTemplatePoints();
-        Set<TemplatePointDto> pointDtos = new TreeSet<TemplatePointDto>();
-        //List<TemplatePoint> points = template.getTemplatePoints();
-        //List<TemplatePointDto> pointDtos = new ArrayList<TemplatePointDto>();
-        for (TemplatePoint point : points) {
-            TemplatePointDto templatePointDto = convertToTemplatePointDto(point);
-            pointDtos.add(templatePointDto);
-        }
-        dto.setPoints(pointDtos);
-
-        return dto;
-    }
-
     private List<TemplateDto> convertToListTemplateDtos(List<Template> templates) {
         if (templates == null || templates.isEmpty()) {
             List<TemplateDto> dtos = Collections.EMPTY_LIST;
@@ -122,12 +66,13 @@ public class TemplateServiceImpl implements TemplateService {
         List<TemplateDto> dtos = new ArrayList<TemplateDto>();
 
         for (Template t : templates) {
-            TemplateDto templateDto = convertToTemplateDto(t);
+            TemplateDto templateDto = templateMapper.mapToDto(t);
             dtos.add(templateDto);
         }
         return dtos;
     }
 
+    @Override
     public List<TemplateDto> getAll() {
         List<Template> templates = templateRepository.findAll();
         List<TemplateDto> templateDtos = convertToListTemplateDtos(templates);
@@ -135,11 +80,12 @@ public class TemplateServiceImpl implements TemplateService {
         return templateDtos;
     }
 
-
-    public Template getOne(Long id) {
-        return templateRepository.findOne(id);
+    @Override
+    public TemplateDto getOne(Long id) {
+        return templateMapper.mapToDto(templateRepository.findOne(id));
     }
 
+    @Override
     public void delete(Long id) {
         templateRepository.delete(id);
     }

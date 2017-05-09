@@ -11,4 +11,6 @@ public interface DevicePointService {
     DevicePointDto getOne(Long id);
 
     List<DevicePointDto> getDevicePoints(Long deviceId);
+
+    List<DevicePointDto> getZeroIntensityLevelDevicePoints(Long deviceId);
 }

@@ -2,8 +2,8 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.dto.DeviceDto;
 import com.vsu.amm.medframe.dto.DevicePointDto;
-import com.vsu.amm.medframe.service.impl.DevicePointServiceImpl;
-import com.vsu.amm.medframe.service.impl.DeviceServiceImpl;
+import com.vsu.amm.medframe.service.DevicePointService;
+import com.vsu.amm.medframe.service.DeviceService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,10 +24,10 @@ public class ConfigurationRestController {
     private static final Logger LOGGER = Logger.getLogger(ConfigurationRestController.class);
 
     @Autowired
-    private DeviceServiceImpl deviceService;
+    private DeviceService deviceService;
 
     @Autowired
-    private DevicePointServiceImpl devicePointService;
+    private DevicePointService devicePointService;
 
 
     @RequestMapping(value="/devices/new", method = PUT)

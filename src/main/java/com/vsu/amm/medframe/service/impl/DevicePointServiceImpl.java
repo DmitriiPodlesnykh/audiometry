@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class DevicePointServiceImpl implements DevicePointService{
 
-    private static final Logger log = Logger.getLogger(DevicePointServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(DevicePointServiceImpl.class);
 
     @Autowired
     DevicePointRepository devicePointRepository;
@@ -24,17 +24,20 @@ public class DevicePointServiceImpl implements DevicePointService{
     @Autowired
     DevicePointMapper mapper;
 
+    @Override
     public DevicePointDto save(DevicePointDto pointDto) {
         DevicePoint point = mapper.mapToEntity(pointDto);
         point = devicePointRepository.saveAndFlush(point);
         return mapper.mapToDto(point);
     }
 
+    @Override
     public DevicePointDto getOne(Long id) {
         DevicePoint point = devicePointRepository.getOne(id);
         return mapper.mapToDto(point);
     }
 
+    @Override
     public List<DevicePointDto> getDevicePoints(Long deviceId) {
         List<DevicePoint> points = (List<DevicePoint>) devicePointRepository.findByDeviceId(deviceId);
         if (points == null || points.isEmpty()) {
@@ -45,10 +48,11 @@ public class DevicePointServiceImpl implements DevicePointService{
             DevicePointDto pointDto = mapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
-        log.info(pointDtos.toString());
+        LOGGER.info(pointDtos.toString());
         return pointDtos;
     }
 
+    @Override
     public List<DevicePointDto> getZeroIntensityLevelDevicePoints(Long deviceId) {
         List<DevicePoint> devicePoints = (List<DevicePoint>) devicePointRepository.getZeroIntensityLevelDevicePointsByDeviceId(deviceId);
         if (devicePoints == null || devicePoints.isEmpty()) {
@@ -59,7 +63,7 @@ public class DevicePointServiceImpl implements DevicePointService{
             DevicePointDto pointDto = mapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
-        log.info(pointDtos.toString());
+        LOGGER.info(pointDtos.toString());
         return pointDtos;
     }
 
