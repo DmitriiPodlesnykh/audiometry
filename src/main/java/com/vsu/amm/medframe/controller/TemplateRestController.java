@@ -20,7 +20,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 @RequestMapping("/rest/templates")
 public class TemplateRestController {
 
-    private static final Logger log = Logger.getLogger(TemplateRestController.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplateRestController.class);
 
     @Autowired
     private TemplateServiceImpl templateService;
@@ -31,7 +31,7 @@ public class TemplateRestController {
     @RequestMapping(value = "", method = POST)
     public TemplateDto create(@RequestBody TemplateDto jsonTemplateDto) {
         TemplateDto templateDto = templateService.save(jsonTemplateDto);
-        log.info(templateDto.toString());
+        LOGGER.info(templateDto.toString());
         return templateDto;
     }
 

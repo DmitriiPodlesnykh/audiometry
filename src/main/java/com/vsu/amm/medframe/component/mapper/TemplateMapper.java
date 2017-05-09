@@ -16,7 +16,7 @@ import java.util.TreeSet;
 @Component
 public class TemplateMapper implements Mapper<Template, TemplateDto> {
 
-    private static final Logger log = Logger.getLogger(TemplateMapper.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplateMapper.class);
 
     @Autowired
     private UserServiceImpl userService;
@@ -34,9 +34,9 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
         if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
             Set<TemplatePointDto> pointsDto = new TreeSet();
             for (TemplatePoint point : template.getTemplatePoints()) {
-                log.info(point.toString());
+                LOGGER.info(point.toString());
                 TemplatePointDto pointDto = pointMapper.mapToDto(point);
-                log.info(pointDto.toString());
+                LOGGER.info(pointDto.toString());
                 pointsDto.add(pointDto);
             }
             templateDto.setPoints(pointsDto);
@@ -47,7 +47,10 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
     @Override
     public Template mapToEntity(TemplateDto templateDto) {
         Template template = new Template();
-        template.setAuthor(userService.getUser(templateDto.getId()));
+        if(templateDto.getAuthorId() != null) {
+            LOGGER.info("templateDto.getAuthorId() = " + templateDto.getAuthorId());
+            template.setAuthor(userService.getUser(templateDto.getId()));
+        }
         template.setDescription(templateDto.getDescription());
         template.setName(templateDto.getName());
         if (templateDto.getId() != null) {

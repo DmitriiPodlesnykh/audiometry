@@ -37,7 +37,9 @@ public class TemplateServiceImpl implements TemplateService {
     private TemplatePointServiceImpl templatePointService;
 
     public TemplateDto save(TemplateDto templateDto) {
-        Template template = convertToTemplate(templateDto);
+        Template template = templateMapper.mapToEntity(templateDto);
+
+        //Template template = convertToTemplate(templateDto);
         template = templateRepository.saveAndFlush(template);
         if(templateDto.getPoints() != null && !templateDto.getPoints().isEmpty()){
             Set<TemplatePoint> points = new TreeSet<TemplatePoint>();
@@ -94,7 +96,9 @@ public class TemplateServiceImpl implements TemplateService {
         TemplateDto dto = new TemplateDto();
         dto.setName(template.getName());
         dto.setId(template.getId());
-        dto.setAuthorId(template.getAuthor().getId());
+        if(template.getAuthor() != null) {
+            dto.setAuthorId(template.getAuthor().getId());
+        }
         dto.setDescription(template.getDescription());
 
         Set<TemplatePoint> points = template.getTemplatePoints();

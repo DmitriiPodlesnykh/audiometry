@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DBinit {
@@ -50,45 +52,58 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        addTestDevices(4);
-        addDevicePoint(1L, Frequency.FREQUENCY_40_HZ, 0, 0.5);
-        addDevicePoint(1L, Frequency.FREQUENCY_100_HZ, 0, 0.4);
-        addDevicePoint(1L, Frequency.FREQUENCY_250_HZ, 0, 0.3);
+        addUserForTest();
+
+        List<Device> devices = addTestDevices(4);
+        addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_40_HZ, 0, 0.5);
+        addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_100_HZ, 0, 0.4);
+        addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_250_HZ, 0, 0.3);
+
+        List<Template> templates = addTemplateForTest(5);
+        addTemplatePointForTest(templates.get(0), Frequency.FREQUENCY_40_HZ, 0);
     }
 
-    private void addDevicePoint(Long deviceId, Frequency frequency, Integer IntensityLevel, Double volumeValue) {
+    private void addDevicePoint(Long deviceId, Frequency frequency, Integer intensityLevel, Double volumeValue) {
         DevicePoint point = new DevicePoint();
         point.setDevice(deviceRepository.getOne(deviceId));
         point.setVolumeValue(new BigDecimal(volumeValue));
-        point.setIntensityLevel(IntensityLevel);
+        point.setIntensityLevel(intensityLevel);
         point.setFrequency(frequency);
         devicePointRepository.saveAndFlush(point);
     }
 
-    private void addTestDevices(int count) {
+    private List<Device> addTestDevices(int count) {
+        List<Device> devices = new ArrayList<Device>();
         for (int i = 0; i < count; i++) {
             Device device = new Device();
             device.setSoundCardName("Аудиокарта" + i);
             device.setHeadphoneName("Наушники" + i);
             deviceRepository.saveAndFlush(device);
+            devices.add(device);
         }
+        return devices;
     }
 
-    private void addTemplatePointForTest() {
+    private void addTemplatePointForTest(Template template, Frequency frequency, Integer intensityLevel) {
         TemplatePoint templatePoint = new TemplatePoint();
-        templatePoint.setTemplate(templateRepository.findOne(411L));
-        templatePoint.setFrequency(4000);
-        templatePoint.setInrensityValue(10);
+        templatePoint.setTemplate(template);
+        templatePoint.setFrequency(frequency.getValue());
+        templatePoint.setInrensityValue(intensityLevel);
         templatePointRepository.save(templatePoint);
         System.out.println("Template point added");
     }
 
-    private void addTemplateForTest() {
-        Template template = new Template();
-        template.setName("First template");
-        template.setAuthor(userRepository.findOne(1L));
-        templateRepository.save(template);
-        System.out.println("Template added");
+    private List<Template> addTemplateForTest(int count) {
+        List<Template> templates = new ArrayList<Template>();
+        for (int i = 0; i < count; i++) {
+            Template template = new Template();
+            template.setName("First template");
+            template.setAuthor(userRepository.findOne(1L));
+            templateRepository.save(template);
+            System.out.println("Template added");
+            templates.add(template);
+        }
+        return templates;
     }
 
     private void addPatientForTest() {
@@ -119,7 +134,7 @@ public class DBinit {
         return user;
     }
 
-    private void addUserForTest() {
+    private User addUserForTest() {
         User user = new User();
         user.setFirstName("Pop");
         user.setLastName("qwerty");
@@ -131,6 +146,7 @@ public class DBinit {
         userRepository.save(user);
 
         System.out.println("User added");
+        return user;
     }
 
 }
