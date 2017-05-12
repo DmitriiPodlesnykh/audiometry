@@ -1,14 +1,6 @@
 package com.vsu.amm.medframe.dto;
 
-public class TemplatePointDto implements Comparable<TemplatePointDto> {
-    /*
-    only in dto intensityLevel, frequency, soundValue, id
-     */
-    private Long id;
-
-    private Integer intensityValue;
-
-    private Integer frequency;
+public class TemplatePointDto extends AbstractPointDto implements Comparable<TemplatePointDto> {
 
     private Long templateId;
 
@@ -16,11 +8,13 @@ public class TemplatePointDto implements Comparable<TemplatePointDto> {
         return templateId;
     }
 
+
+
     public void setTemplateId(Long templateId) {
         this.templateId = templateId;
     }
 
-    public Long getId(){
+    /*public Long getId(){
         return id;
     }
 
@@ -43,12 +37,12 @@ public class TemplatePointDto implements Comparable<TemplatePointDto> {
     public void setFrequency(Integer frequency) {
         this.frequency = frequency;
     }
-
+*/
     @Override
     public String toString() {
         return "TemplatePointDto{" +
                 "id=" + id +
-                ", intensityValue=" + intensityValue +
+                ", intensityValue=" + intensityLevel +
                 ", frequency=" + frequency +
                 ", templateId=" + templateId +
                 '}';
@@ -67,10 +61,10 @@ public class TemplatePointDto implements Comparable<TemplatePointDto> {
             return BEFORE;
         }
 
-        if (this.getFrequency().equals(o.getFrequency()) && this.getIntensityValue() > o.getIntensityValue()) {
+        if (this.getFrequency()==o.getFrequency() && super.intensityLevel > o.getIntensityLevel()) {
             return AFTER;
         }
-        if (this.getFrequency().equals(o.getFrequency()) && this.getIntensityValue() < o.getIntensityValue()) {
+        if (this.getFrequency() == o.getFrequency() && super.intensityLevel < o.getIntensityLevel()) {
             return BEFORE;
         }
 

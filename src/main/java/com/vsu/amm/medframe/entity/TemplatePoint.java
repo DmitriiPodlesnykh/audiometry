@@ -6,9 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "MED_TEMPLATE_POINTS")
+//will be view
 public class TemplatePoint implements Comparable<TemplatePoint> {
 
-    private static final Logger log = Logger.getLogger(TemplatePoint.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplatePoint.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,8 +61,8 @@ public class TemplatePoint implements Comparable<TemplatePoint> {
     @Override
     public String toString() {
         return "TemplatePoint{" +
-                "id=" + id +
-                //", template=" + template.toString() +
+                "id=" + (id != null ? id : "is empty") +
+                ", template=" + (template != null ? template.toString() : "is empty") +
                 ", intensityValue=" + intensityValue +
                 ", frequency=" + frequency +
                 '}';
@@ -96,17 +97,6 @@ public class TemplatePoint implements Comparable<TemplatePoint> {
         final int BEFORE = -1;
         final int EQUAL = 0;
         final int AFTER = 1;
-
-        if (this.getFrequency() != null) {
-            log.info("this.getFrequency() = " + this.getFrequency());
-        } else {
-            log.info("this.getFrequency() = null");
-        }
-        if (o.getFrequency() != null) {
-            log.info("o.getFrequency() = " + o.getFrequency());
-        } else {
-            log.info("o.getFrequency() = null");
-        }
 
         if (this.getFrequency() > o.getFrequency()) {
             return AFTER;

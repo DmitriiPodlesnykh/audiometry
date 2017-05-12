@@ -1,24 +1,10 @@
 package com.vsu.amm.medframe.dto;
 
-public class DevicePointDto {
-
-    private Long id;
+public class DevicePointDto extends AbstractPointDto{
 
     private Long deviceId;
 
-    private int frequency;
-
-    private int intensityLevel;
-
     private double soundValue;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getDeviceId() {
         return deviceId;
@@ -26,22 +12,6 @@ public class DevicePointDto {
 
     public void setDeviceId(Long deviceId) {
         this.deviceId = deviceId;
-    }
-
-    public int getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
-    }
-
-    public int getIntensityLevel() {
-        return intensityLevel;
-    }
-
-    public void setIntensityLevel(int intensityLevel) {
-        this.intensityLevel = intensityLevel;
     }
 
     public double getSoundValue() {
@@ -57,8 +27,8 @@ public class DevicePointDto {
         return "DevicePointDto{" +
                 "id=" + (id != null ? id : " is empty") +
                 ", deviceId=" + (deviceId != null ?  deviceId : " is empty") +
-                ", frequency=" + frequency +
-                ", intensityLevel=" + intensityLevel +
+                ", frequency=" + super.frequency +
+                ", intensityLevel=" + super.intensityLevel +
                 ", soundValue=" + soundValue +
                 '}';
     }

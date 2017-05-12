@@ -73,11 +73,11 @@ public class Test {
     @Override
     public String toString() {
         return "Test{" +
-                "id=" + id +
-                ", patient=" + patient.toString() +
-                ", template=" + template.toString() +
+                "id=" + (id != null ? id : "is empty") +
+                ", patient=" + (patient != null ? patient.toString() : "is empty") +
+                ", template=" + (template != null ? template.toString() : "is empty") +
                 ", date=" + date +
-                ", testPoints=" + testPoints.toString() +
+                ", testPoints=" + (testPoints != null ? testPoints.toString() : "is empty") +
                 '}';
     }
 

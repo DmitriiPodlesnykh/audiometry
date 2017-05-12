@@ -21,7 +21,7 @@ public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointD
 
         pointDto.setId(point.getId());
         pointDto.setFrequency(point.getFrequency());
-        pointDto.setIntensityValue(point.getInrensityValue());
+        pointDto.setIntensityLevel(point.getInrensityValue());
         if(point.getTemplate() != null) {
             pointDto.setTemplateId(point.getTemplate().getId());
         }
@@ -35,7 +35,7 @@ public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointD
             point.setId(pointDto.getId());
         }
         point.setFrequency(pointDto.getFrequency());
-        point.setInrensityValue(pointDto.getIntensityValue());
+        point.setInrensityValue(pointDto.getIntensityLevel());
         //point.setTemplate(templateService.getOne(pointDto.getTemplateId()));
         return point;
     }
