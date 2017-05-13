@@ -19,7 +19,7 @@ public class TestPoint {
     private Integer frequency;
 
     @Column(name = "INTENSITY_VALUE")
-    private Long intensityValue;
+    private int intensityValue;
 
     @Column(name = "STATUS")
     private String status;
@@ -40,11 +40,11 @@ public class TestPoint {
         this.frequency = frequency;
     }
 
-    public Long getIntensityValue() {
+    public int getIntensityValue() {
         return intensityValue;
     }
 
-    public void setIntensityValue(Long intensityValue) {
+    public void setIntensityValue(int intensityValue) {
         this.intensityValue = intensityValue;
     }
 
@@ -85,8 +85,8 @@ public class TestPoint {
         if (id != null ? !id.equals(testPoint.id) : testPoint.id != null) return false;
         if (test != null ? !test.equals(testPoint.test) : testPoint.test != null) return false;
         if (frequency != null ? !frequency.equals(testPoint.frequency) : testPoint.frequency != null) return false;
-        if (intensityValue != null ? !intensityValue.equals(testPoint.intensityValue) : testPoint.intensityValue != null)
-            return false;
+       // if (intensityValue != null ? !intensityValue.equals(testPoint.intensityValue) : testPoint.intensityValue != null)
+         //   return false;
         return status != null ? status.equals(testPoint.status) : testPoint.status == null;
     }
 
@@ -95,7 +95,7 @@ public class TestPoint {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (test != null ? test.hashCode() : 0);
         result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
-        result = 31 * result + (intensityValue != null ? intensityValue.hashCode() : 0);
+        result = 31 * result + intensityValue;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }

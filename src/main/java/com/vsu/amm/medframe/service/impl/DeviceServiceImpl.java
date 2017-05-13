@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.service.impl;
 
-import com.vsu.amm.medframe.component.mapper.DeviceMapper;
+import com.vsu.amm.medframe.component.mapper.impl.DeviceMapper;
 import com.vsu.amm.medframe.component.sound.SoundPointsGenerator;
 import com.vsu.amm.medframe.dto.DeviceDto;
 import com.vsu.amm.medframe.dto.DevicePointDto;

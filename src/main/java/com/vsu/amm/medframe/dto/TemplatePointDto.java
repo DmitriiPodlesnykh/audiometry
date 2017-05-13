@@ -8,36 +8,10 @@ public class TemplatePointDto extends AbstractPointDto implements Comparable<Tem
         return templateId;
     }
 
-
-
     public void setTemplateId(Long templateId) {
         this.templateId = templateId;
     }
 
-    /*public Long getId(){
-        return id;
-    }
-
-    public void setId(Long id){
-        this.id = id;
-    }
-
-    public Integer getIntensityValue() {
-        return intensityValue;
-    }
-
-    public void setIntensityValue(Integer intensityValue) {
-        this.intensityValue = intensityValue;
-    }
-
-    public Integer getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Integer frequency) {
-        this.frequency = frequency;
-    }
-*/
     @Override
     public String toString() {
         return "TemplatePointDto{" +
@@ -61,7 +35,7 @@ public class TemplatePointDto extends AbstractPointDto implements Comparable<Tem
             return BEFORE;
         }
 
-        if (this.getFrequency()==o.getFrequency() && super.intensityLevel > o.getIntensityLevel()) {
+        if (this.getFrequency() == o.getFrequency() && super.intensityLevel > o.getIntensityLevel()) {
             return AFTER;
         }
         if (this.getFrequency() == o.getFrequency() && super.intensityLevel < o.getIntensityLevel()) {

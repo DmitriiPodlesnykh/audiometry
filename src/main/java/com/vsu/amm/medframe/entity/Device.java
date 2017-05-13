@@ -22,7 +22,6 @@ public class Device {
     @OneToMany(mappedBy = "device")
     private List<DevicePoint> devicePoints = new ArrayList<DevicePoint>();
 
-
     public Long getId() {
         return id;
     }

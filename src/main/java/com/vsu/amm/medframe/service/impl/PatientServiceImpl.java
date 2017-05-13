@@ -1,5 +1,6 @@
 package com.vsu.amm.medframe.service.impl;
 
+import com.vsu.amm.medframe.component.mapper.impl.PatientMapper;
 import com.vsu.amm.medframe.dto.PatientDto;
 import com.vsu.amm.medframe.entity.Patient;
 import com.vsu.amm.medframe.repository.PatientRepository;
@@ -18,7 +19,10 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private UserServiceImpl userService;
 
-    public Patient save(PatientDto patientDto) {
+    @Autowired
+    private PatientMapper patientMapper;
+
+    public PatientDto save(PatientDto patientDto) {
         Patient patient = new Patient();
         patient.setFirstName(patientDto.getFirstName());
         patient.setLastName(patientDto.getLastName());
@@ -26,7 +30,8 @@ public class PatientServiceImpl implements PatientService {
         patient.setSex(patientDto.getSex());
         patient.setDescription(patientDto.getDescription());
         //patient.setDoctor(userService.getOne(patientDto.getDoctorId()));
-        return patientRepository.save(patient);
+        patient = patientRepository.save(patient);
+        return patientMapper.mapToDto(patient);
     }
 
     public Patient editPatient(Patient patient) {

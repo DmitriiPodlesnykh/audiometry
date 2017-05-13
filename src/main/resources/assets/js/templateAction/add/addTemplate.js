@@ -42,10 +42,10 @@ $(document).ready(function () {
 
         var pointDto = new Object();
         pointDto.frequency = document.getElementById('frequencyLocal').value;
-        pointDto.intensityValue = document.getElementById('intensityValueLocal').value;
+        pointDto.intensityLevel = document.getElementById('intensityLevelLocal').value;
         points.push(pointDto);
 
-        $( "#pointsTemplateLocalDiv" ).append( "<div class='templatePointLocal'><div>"+ pointDto.frequency + "</div><div>"+ pointDto.intensityValue +"</div></div>" );
+        $( "#pointsTemplateLocalDiv" ).append( "<div class='templatePointLocal'><div>"+ pointDto.frequency + "</div><div>"+ pointDto.intensityLevel +"</div></div>" );
     });
 
     $("#listenPoint").click(function (event) {

@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.service.impl;
 
-import com.vsu.amm.medframe.component.mapper.DevicePointMapper;
+import com.vsu.amm.medframe.component.mapper.impl.DevicePointMapper;
 import com.vsu.amm.medframe.dto.DevicePointDto;
 import com.vsu.amm.medframe.entity.DevicePoint;
 import com.vsu.amm.medframe.repository.DevicePointRepository;

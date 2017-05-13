@@ -37,18 +37,24 @@ public class User {
     @OneToMany(mappedBy = "author")
     private List<Template> templates = new ArrayList<Template>();
 
+    @OneToMany(mappedBy = "doctor")
+    private List<Patient> patients = new ArrayList<Patient>();
 
-    /*@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
-    //@JoinColumn(name = "DOCTOR_ID")
-    private Set<Patient> patients = new TreeSet<Patient>();
-
-    public void setPatients(Set<Patient> patients) {
-        this.patients = patients;
+    public List<Template> getTemplates() {
+        return templates;
     }
 
-    public Set<Patient> getPatients() {
+    public void setTemplates(List<Template> templates) {
+        this.templates = templates;
+    }
+
+    public List<Patient> getPatients() {
         return patients;
-    }*/
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
+    }
 
     public Long getId() {
         return id;
@@ -120,7 +126,7 @@ public class User {
         if (userType != null ? !userType.equals(user.userType) : user.userType != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-       // if (patients != null ? !patients.equals(user.patients) : user.patients != null) return false;
+        // if (patients != null ? !patients.equals(user.patients) : user.patients != null) return false;
         return templates != null ? templates.equals(user.templates) : user.templates == null;
     }
 

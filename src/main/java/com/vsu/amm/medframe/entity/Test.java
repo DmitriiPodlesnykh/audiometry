@@ -27,7 +27,6 @@ public class Test {
     private Date date;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "test")
-    //@JoinColumn(name = "TEST_ID")
     private Set<TestPoint> testPoints = new TreeSet<TestPoint>();
 
     public Date getDate() {

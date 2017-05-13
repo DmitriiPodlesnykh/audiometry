@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.service.impl;
 
 
-import com.vsu.amm.medframe.component.mapper.TemplateMapper;
+import com.vsu.amm.medframe.component.mapper.impl.TemplateMapper;
 import com.vsu.amm.medframe.dto.TemplateDto;
 import com.vsu.amm.medframe.entity.Template;
 import com.vsu.amm.medframe.entity.TemplatePoint;

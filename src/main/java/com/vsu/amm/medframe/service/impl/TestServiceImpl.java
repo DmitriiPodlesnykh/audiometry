@@ -1,28 +1,73 @@
 package com.vsu.amm.medframe.service.impl;
 
+import com.vsu.amm.medframe.component.mapper.impl.TestMapper;
+import com.vsu.amm.medframe.component.mapper.impl.TestPointMapper;
+import com.vsu.amm.medframe.dto.PatientDto;
+import com.vsu.amm.medframe.dto.TestDto;
+import com.vsu.amm.medframe.dto.TestPointDto;
 import com.vsu.amm.medframe.entity.Test;
+import com.vsu.amm.medframe.repository.TestPointRepository;
+import com.vsu.amm.medframe.repository.TestRepository;
+import com.vsu.amm.medframe.service.TestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class TestServiceImpl {
+public class TestServiceImpl implements TestService {
 
-    public Test addTest(Test test) {
+    @Autowired
+    private TestRepository testRepository;
+
+    @Autowired
+    private TestPointRepository testPointRepository;
+
+    @Autowired
+    private TestMapper testMapper;
+
+    @Autowired
+    private TestPointMapper testPointMapper;
+
+    @Override
+    public TestDto save(TestDto testDto) {
+        Test test = testMapper.mapToEntity(testDto);
+        test = testRepository.save(test);
+        return testMapper.mapToDto(test);
+    }
+
+    @Override
+    public TestDto getTestById(Long id) {
         return null;
     }
 
-    public Test saveTest(Test test) {
+    @Override
+    public void deleteTest(Long id) {
+
+    }
+
+    @Override
+    public List<TestDto> getAllPatientsTests(PatientDto patient) {
         return null;
     }
 
-    public Test editTest(Test test) {
+    @Override
+    public List<TestDto> getAll() {
         return null;
     }
 
-    public Test getById(Long id) {
+    @Override
+    public TestPointDto save(TestPointDto testPointDto) {
         return null;
     }
 
-    public void deleteTest(Test test) {
+    @Override
+    public TestPointDto getTestPointById(Long id) {
+        return null;
+    }
+
+    @Override
+    public void deletePoint(Long id) {
 
     }
 }

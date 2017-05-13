@@ -1,5 +1,6 @@
-package com.vsu.amm.medframe.component.mapper;
+package com.vsu.amm.medframe.component.mapper.impl;
 
+import com.vsu.amm.medframe.component.mapper.Mapper;
 import com.vsu.amm.medframe.dto.TemplatePointDto;
 import com.vsu.amm.medframe.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.TemplateService;
@@ -8,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointDto>{
+public class TemplatePointMapper implements Mapper<TemplatePoint, TemplatePointDto> {
 
     private static final Logger LOGGER = Logger.getLogger(TemplatePointMapper.class);
 

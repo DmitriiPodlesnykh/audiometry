@@ -1,5 +1,6 @@
-package com.vsu.amm.medframe.component.mapper;
+package com.vsu.amm.medframe.component.mapper.impl;
 
+import com.vsu.amm.medframe.component.mapper.Mapper;
 import com.vsu.amm.medframe.dto.DevicePointDto;
 import com.vsu.amm.medframe.entity.DevicePoint;
 import com.vsu.amm.medframe.enums.Frequency;

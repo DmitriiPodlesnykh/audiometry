@@ -62,7 +62,7 @@ public class TemplatePoint implements Comparable<TemplatePoint> {
     public String toString() {
         return "TemplatePoint{" +
                 "id=" + (id != null ? id : "is empty") +
-                ", template=" + (template != null ? template.toString() : "is empty") +
+                ", template=" + (template != null ? template.getId(): "is empty") +
                 ", intensityValue=" + intensityValue +
                 ", frequency=" + frequency +
                 '}';

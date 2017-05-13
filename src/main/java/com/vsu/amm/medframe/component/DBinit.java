@@ -3,17 +3,23 @@ package com.vsu.amm.medframe.component;
 import com.vsu.amm.medframe.entity.*;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.repository.*;
+import com.vsu.amm.medframe.service.TestService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class DBinit {
+
+    private static final Logger LOGGER = Logger.getLogger(DBinit.class);
+
 
     @Autowired
     private final UserRepository userRepository;
@@ -34,17 +40,22 @@ public class DBinit {
     private final DevicePointRepository devicePointRepository;
 
     @Autowired
+    private final TestRepository testRepository;
+
+    @Autowired
     public DBinit(PatientRepository patientRepository,
                   UserRepository userRepository1, TemplateRepository templateRepository,
                   TemplatePointRepository templatePointRepository,
                   DeviceRepository deviceRepository,
-                  DevicePointRepository devicePointRepository) {
+                  DevicePointRepository devicePointRepository,
+                  TestRepository testRepository) {
         this.userRepository = userRepository1;
         this.patientRepository = patientRepository;
         this.templateRepository = templateRepository;
         this.templatePointRepository = templatePointRepository;
         this.deviceRepository = deviceRepository;
         this.devicePointRepository = devicePointRepository;
+        this.testRepository = testRepository;
     }
 
     @PostConstruct
@@ -52,7 +63,7 @@ public class DBinit {
     public void init() {
         System.out.println("DBinit init() start");
 
-        addTestUser();
+        User user = addTestUser();
 
         List<Device> devices = addTestDevices(4);
         addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_40_HZ, 0, 0.5);
@@ -61,6 +72,28 @@ public class DBinit {
 
         List<Template> templates = addTemplateForTest(5);
         addTemplatePointForTest(templates.get(0), Frequency.FREQUENCY_40_HZ, 0);
+        Patient patient = addPatient(user);
+        addTest(templates.get(0), patient);
+    }
+
+    private Patient addPatient(User user) {
+        Patient patient = new Patient();
+        patient.setBirthday(new Date(100L));
+        patient.setDescription("deded");
+        patient.setDoctor(user);
+        patient.setFirstName("wswsws");
+        patient.setLastName("deded");
+        patient.setMiddleName("eded");
+        patient = patientRepository.saveAndFlush(patient);
+        return patient;
+    }
+
+    private Test addTest(Template template, Patient patient) {
+        Test test = new Test();
+        test.setDate(new Date(9999L));
+        test.setPatient(patient);
+        test.setTemplate(template);
+        return testRepository.saveAndFlush(test);
     }
 
     private void addDevicePoint(Long deviceId, Frequency frequency, Integer intensityLevel, Double volumeValue) {

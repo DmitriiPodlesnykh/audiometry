@@ -32,12 +32,11 @@ public class Patient {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DOCTOR_ID")
     private User doctor;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "template")
-    //@JoinColumn(name = "PATIENT_ID")
+    @OneToMany(mappedBy = "patient")
     private List<Test> tests = new ArrayList<Test>();
 
     public User getDoctor() {

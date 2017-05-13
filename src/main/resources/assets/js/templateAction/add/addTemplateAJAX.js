@@ -1,5 +1,5 @@
 function addTemplateAJAX() {
-    var testString = '{"points": [{"frequency":"11","intensityValue":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
+    var testString = '{"points": [{"frequency":"11","intensityLevel":"111"}],"authorId": 1,"name": "testajax","description": "description for ajax"}';
     $.ajax({
         url: "/rest/templates/",
         type: "POST",
