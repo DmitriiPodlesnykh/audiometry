@@ -9,6 +9,7 @@ import com.vsu.amm.medframe.entity.Test;
 import com.vsu.amm.medframe.repository.TestPointRepository;
 import com.vsu.amm.medframe.repository.TestRepository;
 import com.vsu.amm.medframe.service.TestService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import java.util.List;
 
 @Service
 public class TestServiceImpl implements TestService {
+
+    private static final Logger LOGGER = Logger.getLogger(TestServiceImpl.class);
 
     @Autowired
     private TestRepository testRepository;
@@ -38,7 +41,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public TestDto getTestById(Long id) {
-        return null;
+        LOGGER.info("id = " + id.toString());
+        return testMapper.mapToDto(testRepository.findOne(id));
     }
 
     @Override
@@ -53,7 +57,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<TestDto> getAll() {
-        return null;
+        List<Test> tests = testRepository.findAll();
+        return testMapper.mapToDto(tests);
     }
 
     @Override

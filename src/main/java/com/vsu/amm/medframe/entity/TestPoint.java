@@ -93,7 +93,7 @@ public class TestPoint {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (test != null ? test.hashCode() : 0);
+        result = 31 * result + (test != null ? test.getId().hashCode() : 0);
         result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
         result = 31 * result + intensityValue;
         result = 31 * result + (status != null ? status.hashCode() : 0);

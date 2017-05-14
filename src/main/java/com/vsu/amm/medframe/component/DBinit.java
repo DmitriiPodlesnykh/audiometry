@@ -43,12 +43,16 @@ public class DBinit {
     private final TestRepository testRepository;
 
     @Autowired
+    private final TestPointRepository testPointRepository;
+
+    @Autowired
     public DBinit(PatientRepository patientRepository,
                   UserRepository userRepository1, TemplateRepository templateRepository,
                   TemplatePointRepository templatePointRepository,
                   DeviceRepository deviceRepository,
                   DevicePointRepository devicePointRepository,
-                  TestRepository testRepository) {
+                  TestRepository testRepository,
+                  TestPointRepository testPointRepository) {
         this.userRepository = userRepository1;
         this.patientRepository = patientRepository;
         this.templateRepository = templateRepository;
@@ -56,6 +60,7 @@ public class DBinit {
         this.deviceRepository = deviceRepository;
         this.devicePointRepository = devicePointRepository;
         this.testRepository = testRepository;
+        this.testPointRepository = testPointRepository;
     }
 
     @PostConstruct
@@ -73,7 +78,8 @@ public class DBinit {
         List<Template> templates = addTemplateForTest(5);
         addTemplatePointForTest(templates.get(0), Frequency.FREQUENCY_40_HZ, 0);
         Patient patient = addPatient(user);
-        addTest(templates.get(0), patient);
+        Test test = addTest(templates.get(0), patient);
+        addTestPoint(test);
     }
 
     private Patient addPatient(User user) {
@@ -86,6 +92,15 @@ public class DBinit {
         patient.setMiddleName("eded");
         patient = patientRepository.saveAndFlush(patient);
         return patient;
+    }
+
+    private TestPoint addTestPoint(Test test) {
+        TestPoint point = new TestPoint();
+        point.setTest(test);
+        point.setStatus("deded");
+        point.setFrequency(11);
+        point.setIntensityValue(12);
+        return testPointRepository.saveAndFlush(point);
     }
 
     private Test addTest(Template template, Patient patient) {

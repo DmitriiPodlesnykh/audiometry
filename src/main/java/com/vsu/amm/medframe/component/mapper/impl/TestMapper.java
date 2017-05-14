@@ -9,7 +9,9 @@ import com.vsu.amm.medframe.entity.TestPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
@@ -71,5 +73,14 @@ public class TestMapper implements Mapper<Test, TestDto> {
             testDto.setPoints(pointDtos);
         }
         return testDto;
+    }
+
+    public List<TestDto> mapToDto(List<Test> tests) {
+        List<TestDto> testDtos = new ArrayList<TestDto>();
+        for(Test test : tests) {
+            TestDto testDto = mapToDto(test);
+            testDtos.add(testDto);
+        }
+        return testDtos;
     }
 }
