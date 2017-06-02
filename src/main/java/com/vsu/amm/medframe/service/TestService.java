@@ -1,8 +1,8 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.dto.PatientDto;
-import com.vsu.amm.medframe.dto.TestDto;
-import com.vsu.amm.medframe.dto.TestPointDto;
+import com.vsu.amm.medframe.model.dto.PatientDto;
+import com.vsu.amm.medframe.model.dto.TestDto;
+import com.vsu.amm.medframe.model.dto.TestPointDto;
 
 import java.util.List;
 

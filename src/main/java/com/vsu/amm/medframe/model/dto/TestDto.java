@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.dto;
+package com.vsu.amm.medframe.model.dto;
 
 import java.sql.Date;
 import java.util.Set;

@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.dto.TemplatePointDto;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
 
 import java.util.List;
 

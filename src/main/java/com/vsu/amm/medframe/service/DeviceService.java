@@ -1,7 +1,6 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.dto.DeviceDto;
-import com.vsu.amm.medframe.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DeviceDto;
 
 import java.util.List;
 

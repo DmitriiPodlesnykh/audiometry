@@ -1,7 +1,6 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.entity.Template;
+import com.vsu.amm.medframe.model.dto.TemplateDto;
 
 import java.util.List;
 

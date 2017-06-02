@@ -1,8 +1,8 @@
 package com.vsu.amm.medframe.service.impl;
 
 import com.vsu.amm.medframe.component.mapper.impl.DevicePointMapper;
-import com.vsu.amm.medframe.dto.DevicePointDto;
-import com.vsu.amm.medframe.entity.DevicePoint;
+import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.entity.DevicePoint;
 import com.vsu.amm.medframe.repository.DevicePointRepository;
 import com.vsu.amm.medframe.service.DevicePointService;
 import org.apache.log4j.Logger;

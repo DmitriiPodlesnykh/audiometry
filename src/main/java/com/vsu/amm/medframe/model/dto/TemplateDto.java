@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.dto;
+package com.vsu.amm.medframe.model.dto;
 
 import java.util.Set;
 import java.util.TreeSet;

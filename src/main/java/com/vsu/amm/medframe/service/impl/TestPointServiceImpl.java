@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.service.impl;
 
 
-import com.vsu.amm.medframe.entity.TestPoint;
+import com.vsu.amm.medframe.model.entity.TestPoint;
 import org.springframework.stereotype.Service;
 
 @Service

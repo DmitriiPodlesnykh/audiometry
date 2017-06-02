@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.entity;
+package com.vsu.amm.medframe.model.entity;
 
 
 import javax.persistence.*;
@@ -122,7 +122,7 @@ public class Patient {
                 ", sex='" + sex + '\'' +
                 ", description='" + description + '\'' +
                 ", doctor=" + doctor.toString() +
-                ", tests=" + tests.toString() +
+                //", tests=" + (tests != null ? for(Test test : tests) test.getId() : "is empty") +
                 '}';
     }
 

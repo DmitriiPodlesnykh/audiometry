@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
+import com.vsu.amm.medframe.model.dto.TemplateDto;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
 import com.vsu.amm.medframe.service.TemplatePointService;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.DeviceDto;
+import com.vsu.amm.medframe.model.dto.DeviceDto;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;

@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.repository;
 
-import com.vsu.amm.medframe.entity.Device;
-import com.vsu.amm.medframe.entity.DevicePoint;
+import com.vsu.amm.medframe.model.entity.Device;
+import com.vsu.amm.medframe.model.entity.DevicePoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

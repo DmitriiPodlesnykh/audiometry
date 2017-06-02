@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
+import com.vsu.amm.medframe.model.dto.TemplateDto;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
 import com.vsu.amm.medframe.service.TemplatePointService;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.apache.log4j.Logger;
@@ -30,9 +30,9 @@ public class TemplateRestController {
 
     @RequestMapping(value = "", method = POST)
     public TemplateDto create(@RequestBody TemplateDto jsonTemplateDto) {
-        TemplateDto templateDto = templateService.save(jsonTemplateDto);
-        LOGGER.info(templateDto.toString());
-        return templateDto;
+        jsonTemplateDto = templateService.save(jsonTemplateDto);
+        LOGGER.info(jsonTemplateDto.toString());
+        return jsonTemplateDto;
     }
 
     @RequestMapping(value = "/{id}", method = PUT)

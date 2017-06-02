@@ -2,10 +2,10 @@ package com.vsu.amm.medframe.service.impl;
 
 import com.vsu.amm.medframe.component.mapper.impl.TestMapper;
 import com.vsu.amm.medframe.component.mapper.impl.TestPointMapper;
-import com.vsu.amm.medframe.dto.PatientDto;
-import com.vsu.amm.medframe.dto.TestDto;
-import com.vsu.amm.medframe.dto.TestPointDto;
-import com.vsu.amm.medframe.entity.Test;
+import com.vsu.amm.medframe.model.dto.PatientDto;
+import com.vsu.amm.medframe.model.dto.TestDto;
+import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.entity.Test;
 import com.vsu.amm.medframe.repository.TestPointRepository;
 import com.vsu.amm.medframe.repository.TestRepository;
 import com.vsu.amm.medframe.service.TestService;

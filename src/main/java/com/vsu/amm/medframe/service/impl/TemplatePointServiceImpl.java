@@ -2,8 +2,8 @@ package com.vsu.amm.medframe.service.impl;
 
 
 import com.vsu.amm.medframe.component.mapper.impl.TemplatePointMapper;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.TemplatePoint;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
+import com.vsu.amm.medframe.model.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplatePointRepository;
 import com.vsu.amm.medframe.service.TemplatePointService;
 import org.springframework.beans.factory.annotation.Autowired;

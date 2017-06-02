@@ -1,9 +1,9 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.dto.DeviceDto;
-import com.vsu.amm.medframe.entity.Device;
-import com.vsu.amm.medframe.entity.DevicePoint;
+import com.vsu.amm.medframe.model.dto.DeviceDto;
+import com.vsu.amm.medframe.model.entity.Device;
+import com.vsu.amm.medframe.model.entity.DevicePoint;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.vsu.amm.medframe.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DevicePointDto;
 
 @Component
 public class DeviceMapper implements Mapper<Device, DeviceDto> {

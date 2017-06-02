@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.dto;
+package com.vsu.amm.medframe.model.dto;
 
 class AbstractPointDto {
 

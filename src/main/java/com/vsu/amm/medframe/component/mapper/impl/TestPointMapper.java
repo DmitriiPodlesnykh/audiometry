@@ -1,10 +1,9 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.dto.TestPointDto;
-import com.vsu.amm.medframe.entity.TestPoint;
+import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.entity.TestPoint;
 import com.vsu.amm.medframe.repository.TestRepository;
-import com.vsu.amm.medframe.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

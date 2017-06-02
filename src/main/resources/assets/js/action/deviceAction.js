@@ -131,4 +131,10 @@ $(document).ready(function () {
             window.location.replace("http://localhost:8080/config/devices/" + response.id);
         }
     })
+
+    $(".create-test").click(function (event) {
+        var test = {};
+        test.template = document.getElementById("template-selector-id").value;
+        test.patient = document.getElementById("patient-selector-id").value;
+    })
 });

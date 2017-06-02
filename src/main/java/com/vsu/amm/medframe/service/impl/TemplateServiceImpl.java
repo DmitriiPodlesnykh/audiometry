@@ -2,9 +2,9 @@ package com.vsu.amm.medframe.service.impl;
 
 
 import com.vsu.amm.medframe.component.mapper.impl.TemplateMapper;
-import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.entity.TemplatePoint;
+import com.vsu.amm.medframe.model.dto.TemplateDto;
+import com.vsu.amm.medframe.model.entity.Template;
+import com.vsu.amm.medframe.model.entity.TemplatePoint;
 import com.vsu.amm.medframe.repository.TemplatePointRepository;
 import com.vsu.amm.medframe.repository.TemplateRepository;
 import com.vsu.amm.medframe.service.TemplateService;
@@ -66,9 +66,7 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public List<TemplateDto> getAll() {
         List<Template> templates = templateRepository.findAll();
-        List<TemplateDto> templateDtos = convertToListTemplateDtos(templates);
-
-        return templateDtos;
+        return convertToListTemplateDtos(templates);
     }
 
     @Override

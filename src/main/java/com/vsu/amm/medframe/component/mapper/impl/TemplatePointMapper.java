@@ -1,8 +1,8 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.TemplatePoint;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
+import com.vsu.amm.medframe.model.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

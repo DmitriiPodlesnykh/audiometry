@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.DeviceDto;
-import com.vsu.amm.medframe.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DeviceDto;
+import com.vsu.amm.medframe.model.dto.DevicePointDto;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
 import org.apache.log4j.Logger;

@@ -1,8 +1,8 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.dto.DevicePointDto;
-import com.vsu.amm.medframe.entity.DevicePoint;
+import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.entity.DevicePoint;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.repository.DeviceRepository;
 import org.apache.log4j.Logger;

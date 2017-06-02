@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.component.sound;
 
-import com.vsu.amm.medframe.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DevicePointDto;
 import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import org.apache.log4j.Logger;
 

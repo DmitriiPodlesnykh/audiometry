@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.entity.User;
+import com.vsu.amm.medframe.model.entity.User;
 import com.vsu.amm.medframe.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

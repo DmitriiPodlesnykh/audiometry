@@ -4,7 +4,7 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>Шаблон</th>
+                <th>тест</th>
                 <th>Дата</th>
             </tr>
         <#list tests as test>
@@ -19,5 +19,10 @@
             </tr>
         </#list>
         </table>
+    </div>
+    <div>
+        <a href="/tests/add">
+            <button id="openAddForm">Начать тест</button>
+        </a>
     </div>
 </div>

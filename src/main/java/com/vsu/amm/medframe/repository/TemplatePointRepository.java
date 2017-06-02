@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.repository;
 
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.entity.TemplatePoint;
+import com.vsu.amm.medframe.model.entity.Template;
+import com.vsu.amm.medframe.model.entity.TemplatePoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;

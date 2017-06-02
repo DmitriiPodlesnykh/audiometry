@@ -1,6 +1,5 @@
-package com.vsu.amm.medframe.entity;
+package com.vsu.amm.medframe.model.entity;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 
 @Entity

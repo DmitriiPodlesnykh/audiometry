@@ -1,4 +1,4 @@
-package com.vsu.amm.medframe.entity;
+package com.vsu.amm.medframe.model.entity;
 
 import org.apache.log4j.Logger;
 

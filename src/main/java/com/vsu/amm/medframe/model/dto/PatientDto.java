@@ -1,8 +1,10 @@
-package com.vsu.amm.medframe.dto;
+package com.vsu.amm.medframe.model.dto;
 
 import java.sql.Date;
 
 public class PatientDto {
+
+    private Long id;
 
     private String firstName;
 
@@ -17,6 +19,14 @@ public class PatientDto {
     private String description;
 
     private Long doctorId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -72,5 +82,18 @@ public class PatientDto {
 
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
+    }
+
+    @Override
+    public String toString() {
+        return "PatientDto{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", birthday=" + birthday +
+                ", sex='" + sex  + '\'' +
+                ", description='" + description + '\'' +
+                ", doctorId=" + doctorId +
+                '}';
     }
 }

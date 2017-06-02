@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.component.sound;
 
-import com.vsu.amm.medframe.dto.DevicePointDto;
-import com.vsu.amm.medframe.entity.Device;
+import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.entity.Device;
 import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.service.DevicePointService;

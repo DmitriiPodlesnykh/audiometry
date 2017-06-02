@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.PatientDto;
+import com.vsu.amm.medframe.model.dto.PatientDto;
 import com.vsu.amm.medframe.service.impl.PatientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

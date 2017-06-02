@@ -1,9 +1,8 @@
 package com.vsu.amm.medframe.component;
 
-import com.vsu.amm.medframe.entity.*;
+import com.vsu.amm.medframe.model.entity.*;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.repository.*;
-import com.vsu.amm.medframe.service.TestService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

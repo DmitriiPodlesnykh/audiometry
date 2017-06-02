@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.service.impl;
 
-import com.vsu.amm.medframe.dto.UserDto;
-import com.vsu.amm.medframe.entity.User;
+import com.vsu.amm.medframe.model.dto.UserDto;
+import com.vsu.amm.medframe.model.entity.User;
 import com.vsu.amm.medframe.repository.UserRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
