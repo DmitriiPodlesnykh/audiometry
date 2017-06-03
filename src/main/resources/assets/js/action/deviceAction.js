@@ -136,5 +136,14 @@ $(document).ready(function () {
         var test = {};
         test.template = document.getElementById("template-selector-id").value;
         test.patient = document.getElementById("patient-selector-id").value;
+
+
+        var url = "/rest/tests";
+        var jsonObject = JSON.stringify(test);
+        var response = addObject(url, jsonObject, "PUT");
+
+        if (response) {
+            window.location.replace("http://localhost:8080/tests/" + response.id);
+        }
     })
 });

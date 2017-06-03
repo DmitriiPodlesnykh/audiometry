@@ -13,7 +13,7 @@ $(document).ready(function () {
     });
 
     $(".med-test").click(function (event) {
-        window.location.replace("http://localhost:8080/config/devices/");
+        window.location.replace("http://localhost:8080/tests");
     });
 
 });
