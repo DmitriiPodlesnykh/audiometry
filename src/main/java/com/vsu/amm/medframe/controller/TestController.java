@@ -21,13 +21,8 @@ public class TestController {
 
     private static final Logger LOGGER = Logger.getLogger(TestController.class);
 
-    @Autowired
     private final TestService testService;
-
-    @Autowired
     private final TemplateService templateService;
-
-    @Autowired
     private final PatientService patientService;
 
     @RequestMapping(value = "", method = GET)
@@ -45,16 +40,15 @@ public class TestController {
 
     @RequestMapping(value = "/add", method = GET)
     public String addTestForm(ModelMap modelMap) {
-        LOGGER.info("in addTestForm");
         Map<String, Object> attributeMap = new HashMap<String, Object>();
         attributeMap.put("patientList", patientService.getAll());
         attributeMap.put("templateList", templateService.getAll());
-        LOGGER.info("attributeMap size = " + attributeMap.size());
 
         modelMap.addAllAttributes(attributeMap);
         return "createTestForm";
     }
 
+    @Autowired
     TestController(TestService testService, TemplateService templateService, PatientService patientService) {
         this.testService = testService;
         this.templateService = templateService;

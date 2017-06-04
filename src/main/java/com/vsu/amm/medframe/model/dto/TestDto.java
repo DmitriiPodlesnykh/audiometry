@@ -54,4 +54,15 @@ public class TestDto {
     public void setPoints(Set<TestPointDto> points) {
         this.points = points;
     }
+
+    @Override
+    public String toString() {
+        return "TestDto{" +
+                "id=" + (id != null ? id : "is empty") +
+                ", patient=" + (patient != null ? patient.getId() : "is empty") +
+                ", template=" + (template != null ? template.getId() : "is empty") +
+                ", date=" + date +
+                ", points=" + (points != null ? points.toString() : "is empty") +
+                '}';
+    }
 }

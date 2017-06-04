@@ -123,7 +123,7 @@ $(document).ready(function () {
         device.pointList = new Array(devicePoint);
 
 
-        var url = "/rest/configuration/devices/new";
+        var url = "/rest/configuration/devices";
         var jsonObject = JSON.stringify(device);
         var response = addObject(url, jsonObject, "PUT");
 
@@ -136,7 +136,9 @@ $(document).ready(function () {
         var test = {};
         test.template = document.getElementById("template-selector-id").value;
         test.patient = document.getElementById("patient-selector-id").value;
-
+        test.date = null;
+        test.points = null;
+        test.id = null;
 
         var url = "/rest/tests";
         var jsonObject = JSON.stringify(test);

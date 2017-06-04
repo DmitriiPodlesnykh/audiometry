@@ -19,7 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/config")
 public class ConfigurationController {
 
-    private static final Logger LOGGER = Logger.getLogger(ConfigurationRestController.class);
+    private static final Logger LOGGER = Logger.getLogger(ConfigurationController.class);
 
     @Autowired
     private DeviceService deviceService;

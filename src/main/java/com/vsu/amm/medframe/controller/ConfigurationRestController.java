@@ -30,7 +30,7 @@ public class ConfigurationRestController {
     private DevicePointService devicePointService;
 
 
-    @RequestMapping(value="/devices/new", method = PUT)
+    @RequestMapping(value="/devices/new", method = GET)
     public DeviceDto getAddDeviceForm(@RequestBody DeviceDto deviceDto) {
         return deviceService.generatedPointsAndSave(deviceDto);
     }
