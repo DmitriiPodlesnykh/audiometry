@@ -4,6 +4,8 @@ import com.vsu.amm.medframe.enums.Frequency;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "MED_DEVICE_POINTS")
@@ -26,6 +28,9 @@ public class DevicePoint {
 
     @Column(name = "VOLUME_VALUE")
     private BigDecimal volumeValue;
+
+    @ManyToMany(mappedBy = "devicePoints")
+    private List<TestPoint> testPoints = new ArrayList<TestPoint>();
 
     public Long getId() {
         return id;
@@ -67,6 +72,14 @@ public class DevicePoint {
         this.frequency = frequency.getValue();
     }
 
+    public List<TestPoint> getTestPoints() {
+        return testPoints;
+    }
+
+    public void setTestPoints(List<TestPoint> testPoints) {
+        this.testPoints = testPoints;
+    }
+
     @Override
     public String toString() {
         return "DevicePoint{" +
@@ -75,6 +88,7 @@ public class DevicePoint {
                 ", intensityLevel=" + intensityLevel +
                 ", frequency=" + frequency +
                 ", volumeValue=" + volumeValue +
+                ", testPoints=" + testPoints.toString() +
                 '}';
     }
 }

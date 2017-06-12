@@ -1,6 +1,8 @@
 package com.vsu.amm.medframe.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "MED_TEST_POINTS")
@@ -22,6 +24,13 @@ public class TestPoint {
 
     @Column(name = "STATUS")
     private String status;
+
+    @ManyToMany
+    @JoinTable(name = "MED_TEST_POINTS_DEVICE_POINTS",
+            joinColumns = @JoinColumn(name = "TEST_POINT_ID", referencedColumnName = "POINT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "DEVICE_POINT_ID", referencedColumnName = "DEVICE_POINT_ID")
+    )
+    private List<DevicePoint> devicePoints = new ArrayList<DevicePoint>();
 
     public Long getId() {
         return id;
@@ -63,6 +72,14 @@ public class TestPoint {
         this.status = status;
     }
 
+    public List<DevicePoint> getDevicePoint() {
+        return devicePoints;
+    }
+
+    public void setDevicePoint(List<DevicePoint> devicePoint) {
+        this.devicePoints = devicePoint;
+    }
+
     @Override
     public String toString() {
         return "TestPoint{" +
@@ -71,6 +88,7 @@ public class TestPoint {
                 ", frequency=" + frequency +
                 ", intensityValue=" + intensityValue +
                 ", status='" + status + '\'' +
+                ", devicePoints='" + devicePoints.toString() + '\'' +
                 '}';
     }
 
@@ -84,8 +102,8 @@ public class TestPoint {
         if (id != null ? !id.equals(testPoint.id) : testPoint.id != null) return false;
         if (test != null ? !test.equals(testPoint.test) : testPoint.test != null) return false;
         if (frequency != null ? !frequency.equals(testPoint.frequency) : testPoint.frequency != null) return false;
-       // if (intensityValue != null ? !intensityValue.equals(testPoint.intensityValue) : testPoint.intensityValue != null)
-         //   return false;
+        // if (intensityValue != null ? !intensityValue.equals(testPoint.intensityValue) : testPoint.intensityValue != null)
+        //   return false;
         return status != null ? status.equals(testPoint.status) : testPoint.status == null;
     }
 

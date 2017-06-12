@@ -17,15 +17,9 @@ import java.util.Set;
 @Component
 public class TestMapper implements Mapper<Test, TestDto> {
 
-    @Autowired
-    private PatientMapper patientMapper;
-
-    @Autowired
-    private TemplateMapper templateMapper;
-
-    @Autowired
-    private TestPointMapper testPointMapper;
-
+    private final PatientMapper patientMapper;
+    private final TemplateMapper templateMapper;
+    private final TestPointMapper testPointMapper;
 
     @Override
     public Test mapToEntity(TestDto testDto) {
@@ -82,5 +76,12 @@ public class TestMapper implements Mapper<Test, TestDto> {
             testDtos.add(testDto);
         }
         return testDtos;
+    }
+
+    @Autowired
+    public TestMapper(PatientMapper patientMapper, TemplateMapper templateMapper, TestPointMapper testPointMapper) {
+        this.patientMapper = patientMapper;
+        this.templateMapper = templateMapper;
+        this.testPointMapper = testPointMapper;
     }
 }
