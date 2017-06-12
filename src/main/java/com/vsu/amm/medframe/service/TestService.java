@@ -1,5 +1,6 @@
 package com.vsu.amm.medframe.service;
 
+import com.vsu.amm.medframe.model.dto.CreateTestDto;
 import com.vsu.amm.medframe.model.dto.PatientDto;
 import com.vsu.amm.medframe.model.dto.TestDto;
 import com.vsu.amm.medframe.model.dto.TestPointDto;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface TestService {
 
-    TestDto save(TestDto test);
+    CreateTestDto save(CreateTestDto test);
 
     TestDto getTestById(Long id);
 

@@ -16,7 +16,9 @@
     <script type="text/javascript" src="/assets/js/view/showDeviceObjects.js"></script>
     <script type="text/javascript" src="/assets/js/sound/playSound.js"></script>
     <script type="text/javascript" src="/assets/js/action/deviceAction.js"></script>
+    <script type="text/javascript" src="/assets/js/action/testAction.js"></script>
     <script type="text/javascript" src="/assets/js/utils/getValueFromUrl.js"></script>
+    <script type="text/javascript" src="/assets/js/utils/dtoUtils.js"></script>
     <script type="text/javascript" src="/assets/js/request/addObject.js"></script>
     <script type="text/javascript" src="/assets/js/action/actionController.js"></script>
 </head>

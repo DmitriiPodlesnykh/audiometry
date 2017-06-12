@@ -98,7 +98,6 @@ $(document).ready(function () {
     });
 
     $(".btn-generate-device-points").click(function (event) {
-        alert("пытаемся нагененрировать");
         var deviceId = getValueFromUrl(3);
         var url = "/rest/configuration/devices/" + deviceId + "/generate/allpoints";
         var jsonObject = JSON.stringify(deviceId);
@@ -129,23 +128,6 @@ $(document).ready(function () {
 
         if (response) {
             window.location.replace("http://localhost:8080/config/devices/" + response.id);
-        }
-    })
-
-    $(".create-test").click(function (event) {
-        var test = {};
-        test.template = document.getElementById("template-selector-id").value;
-        test.patient = document.getElementById("patient-selector-id").value;
-        test.date = null;
-        test.points = null;
-        test.id = null;
-
-        var url = "/rest/tests";
-        var jsonObject = JSON.stringify(test);
-        var response = addObject(url, jsonObject, "PUT");
-
-        if (response) {
-            window.location.replace("http://localhost:8080/tests/" + response.id);
         }
     })
 });

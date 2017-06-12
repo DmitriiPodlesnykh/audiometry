@@ -87,7 +87,8 @@ public class PatientDto {
     @Override
     public String toString() {
         return "PatientDto{" +
-                "firstName='" + firstName + '\'' +
+                "id='" + (id!=null?id.toString():"is empty") + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", birthday=" + birthday +

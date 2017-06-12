@@ -5,7 +5,7 @@
             <label>Пациент: </label>
             <select class="patient-selector" id="patient-selector-id" name="patient-selector">
             <#list patientList as patient>
-                <option value="${patient}">${patient.getFirstName()}</option>
+                <option value="${patient.getId()}">${patient.getFirstName()}</option>
             </#list>
             </select>
         </div>
@@ -13,7 +13,7 @@
             <label>Шаблон: </label>
             <select class="template-selector" id="template-selector-id" name="template-selector">
             <#list templateList as template>
-                <option value="${template}">${template.getName()}</option>
+                <option value="${template.getId()}">${template.getName()}</option>
             </#list>
             </select>
         </div>

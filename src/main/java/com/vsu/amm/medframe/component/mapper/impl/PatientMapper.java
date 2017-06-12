@@ -4,15 +4,16 @@ import com.vsu.amm.medframe.component.mapper.Mapper;
 import com.vsu.amm.medframe.model.dto.PatientDto;
 import com.vsu.amm.medframe.model.entity.Patient;
 import com.vsu.amm.medframe.repository.UserRepository;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PatientMapper implements Mapper<Patient, PatientDto> {
 
-    @Autowired
-    private final UserRepository userRepository;
+    private static final Logger LOGGER = Logger.getLogger(PatientMapper.class);
 
+    private final UserRepository userRepository;
 
     @Override
     public Patient mapToEntity(PatientDto patientDto) {
@@ -23,7 +24,6 @@ public class PatientMapper implements Mapper<Patient, PatientDto> {
         patient.setLastName(patientDto.getLastName());
         patient.setMiddleName(patientDto.getMiddleName());
         patient.setSex(patient.getSex());
-        //patient.setTests();
         if (patientDto.getDoctorId() != null) {
             patient.setDoctor(userRepository.findById(patientDto.getDoctorId()));
         }
@@ -46,12 +46,12 @@ public class PatientMapper implements Mapper<Patient, PatientDto> {
             patientDto.setDoctorId(patient.getDoctor().getId());
         }
         if(patient.getId() != null) {
-            patientDto.setId(patientDto.getId());
+            patientDto.setId(patient.getId());
         }
-        //patientDto.tests
         return patientDto;
     }
 
+    @Autowired
     public PatientMapper(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

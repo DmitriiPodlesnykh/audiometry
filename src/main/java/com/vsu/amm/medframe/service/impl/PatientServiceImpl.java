@@ -17,14 +17,9 @@ public class PatientServiceImpl implements PatientService {
 
     private static final Logger LOGGER = Logger.getLogger(PatientServiceImpl.class);
 
-    @Autowired
-    private PatientRepository patientRepository;
-
-    @Autowired
-    private UserServiceImpl userService;
-
-    @Autowired
-    private PatientMapper patientMapper;
+    private final PatientRepository patientRepository;
+    private final UserServiceImpl userService;
+    private final PatientMapper patientMapper;
 
     @Override
     public PatientDto save(PatientDto patientDto) {
@@ -66,7 +61,10 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findByDoctorId(doctorId);
     }
 
-    PatientServiceImpl(PatientRepository patientRepository) {
+    @Autowired
+    PatientServiceImpl(PatientRepository patientRepository, UserServiceImpl userService, PatientMapper patientMapper) {
         this.patientRepository = patientRepository;
+        this.userService = userService;
+        this.patientMapper = patientMapper;
     }
 }

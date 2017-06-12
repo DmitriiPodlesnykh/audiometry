@@ -1,9 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.model.dto.PatientDto;
-import com.vsu.amm.medframe.model.dto.TemplateDto;
-import com.vsu.amm.medframe.model.dto.TestDto;
-import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.dto.*;
 import com.vsu.amm.medframe.service.TestService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,7 @@ public class TestRestController {
     }
 
     @RequestMapping(value = "", method = PUT)
-    public TestDto create(@RequestBody TestDto testDto) {
+    public CreateTestDto create(@RequestBody CreateTestDto testDto) {
         testDto = testService.save(testDto);
         return testDto;
     }

@@ -1,7 +1,9 @@
 package com.vsu.amm.medframe.service.impl;
 
+import com.vsu.amm.medframe.component.mapper.impl.CreateTestDtoMapper;
 import com.vsu.amm.medframe.component.mapper.impl.TestMapper;
 import com.vsu.amm.medframe.component.mapper.impl.TestPointMapper;
+import com.vsu.amm.medframe.model.dto.CreateTestDto;
 import com.vsu.amm.medframe.model.dto.PatientDto;
 import com.vsu.amm.medframe.model.dto.TestDto;
 import com.vsu.amm.medframe.model.dto.TestPointDto;
@@ -31,12 +33,13 @@ public class TestServiceImpl implements TestService {
 
     @Autowired
     private TestPointMapper testPointMapper;
+    private final CreateTestDtoMapper createTestDtoMapper;
 
     @Override
-    public TestDto save(TestDto testDto) {
-        Test test = testMapper.mapToEntity(testDto);
+    public CreateTestDto save(CreateTestDto testDto) {
+        Test test = createTestDtoMapper.mapToEntity(testDto);
         test = testRepository.save(test);
-        return testMapper.mapToDto(test);
+        return createTestDtoMapper.mapToDto(test);
     }
 
     @Override
@@ -74,5 +77,10 @@ public class TestServiceImpl implements TestService {
     @Override
     public void deletePoint(Long id) {
 
+    }
+
+    @Autowired
+    public TestServiceImpl(CreateTestDtoMapper createTestDtoMapper) {
+        this.createTestDtoMapper = createTestDtoMapper;
     }
 }
