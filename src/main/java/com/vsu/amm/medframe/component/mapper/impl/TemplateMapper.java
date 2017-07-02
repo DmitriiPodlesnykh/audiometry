@@ -2,9 +2,7 @@ package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
 import com.vsu.amm.medframe.model.dto.TemplateDto;
-import com.vsu.amm.medframe.model.dto.TemplatePointDto;
 import com.vsu.amm.medframe.model.entity.Template;
-import com.vsu.amm.medframe.model.entity.TemplatePoint;
 import com.vsu.amm.medframe.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +20,6 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    private TemplatePointMapper pointMapper;
-
     @Override
     public TemplateDto mapToDto(Template template) {
         TemplateDto templateDto = new TemplateDto();
@@ -35,6 +30,9 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
         }
         templateDto.setName(template.getName());
         templateDto.setDescription(template.getDescription());
+
+        //TODO fix it
+        /*
         if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
             Set<TemplatePointDto> pointsDto = new TreeSet();
             for (TemplatePoint point : template.getTemplatePoints()) {
@@ -44,7 +42,7 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
                 pointsDto.add(pointDto);
             }
             templateDto.setPoints(pointsDto);
-        }
+        }*/
         return templateDto;
     }
 
@@ -60,11 +58,13 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
         if (templateDto.getId() != null) {
             template.setId(templateDto.getId());
         }
-        template.setTemplatePoints(toTemplatePoint(templateDto.getPoints()));
+        //TODO fix it
+        //template.setTemplatePoints(toTemplatePoint(templateDto.getPoints()));
         return template;
     }
 
-    private Set<TemplatePoint> toTemplatePoint(Set<TemplatePointDto> pointsDto) {
+    //TODO fix it
+    /*private Set<TemplatePoint> toTemplatePoint(Set<TemplatePointDto> pointsDto) {
         if (pointsDto != null && !pointsDto.isEmpty()) {
             Set points = new TreeSet();
             for (TemplatePointDto pointDto : pointsDto) {
@@ -77,7 +77,7 @@ public class TemplateMapper implements Mapper<Template, TemplateDto> {
         } else {
             return Collections.emptySet();
         }
-    }
+    }*/
 
 
 }

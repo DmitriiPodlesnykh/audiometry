@@ -1,8 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.model.dto.TemplateDto;
-import com.vsu.amm.medframe.model.dto.TemplatePointDto;
-import com.vsu.amm.medframe.service.TemplatePointService;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,9 +26,6 @@ public class TemplateController {
     @Autowired
     private TemplateService templateService;
 
-    @Autowired
-    private TemplatePointService templatePointService;
-
     @RequestMapping(value = "", method = GET)
     public String getAll(ModelMap modelMap) {
         modelMap.addAttribute("templates", templateService.getAll());
@@ -55,26 +50,19 @@ public class TemplateController {
         return "/addTemplatePoint";
     }
 
-    @RequestMapping(value = "/{templateId}/add", method = POST)
-    public String createTemplatePoint(@PathVariable Long templateId, @RequestBody @Valid TemplatePointDto jsonPointDto) {
-        LOGGER.info("createTemplatePoint");
-        LOGGER.info("templateId = " + templateId.toString());
-        LOGGER.info("dto = " + jsonPointDto.toString());
-        templatePointService.save(jsonPointDto);
-        return "templateList";
-    }
-
     @RequestMapping(value = "/{templateId}/points", method = GET)
     public String getTemplatePoints(@PathVariable Long templateId, ModelMap modelMap) {
         LOGGER.info("getTemplatePoints");
-        modelMap.addAttribute("templatePoints", templatePointService.getPointsByTemplateId(templateId));
+        //TODO fix it
+        //modelMap.addAttribute("templatePoints", templatePointService.getPointsByTemplateId(templateId));
         return "templatePointsForTemplate";
     }
 
     @RequestMapping(value = "/{templateId}/{pointId}", method = GET)
     public String getTemplatePoint(@PathVariable Long templateId, @PathVariable Long pointId, ModelMap modelMap) {
         LOGGER.info("getTemplatePoint");
-        modelMap.addAttribute("templatePoint", templatePointService.getPointById(pointId));
+        //TODO fix it
+        //modelMap.addAttribute("templatePoint", templatePointService.getPointById(pointId));
         return "templatePoint";
     }
 

@@ -6,8 +6,8 @@ import java.util.*;
 @Entity
 @Table(name = "MED_TEMPLATES")
 public class Template {
+
     @Id
-    //@Column(name = "TEMPLATE_ID", columnDefinition = "serial")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TEMPLATE_ID")
     private Long id;
@@ -23,14 +23,14 @@ public class Template {
     private User author;
 
     @OneToMany(mappedBy = "template")
-    private Set<TemplatePoint> templatePoints = new TreeSet<TemplatePoint>();
+    private Set<TemplateFrequency> frequencies = new HashSet<TemplateFrequency>();
 
-    public Set<TemplatePoint> getTemplatePoints() {
-        return templatePoints;
+    public Set<TemplateFrequency> getFrequencies() {
+        return frequencies;
     }
 
-    public void setTemplatePoints(Set<TemplatePoint> templatePoints) {
-        this.templatePoints = templatePoints;
+    public void setFrequencies(Set<TemplateFrequency> frequencies) {
+        this.frequencies = frequencies;
     }
 
     public User getAuthor() {
@@ -73,7 +73,7 @@ public class Template {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", author=" + (author != null ? author.toString() : "is empty") +
-                ", templatePoints=" + templatePoints.toString() +
+                ", templatePoints=" + frequencies.toString() +
                 //", tests=" + tests.toString() +
                 '}';
     }

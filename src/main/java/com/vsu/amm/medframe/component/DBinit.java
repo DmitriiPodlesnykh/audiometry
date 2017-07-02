@@ -30,9 +30,6 @@ public class DBinit {
     private final TemplateRepository templateRepository;
 
     @Autowired
-    private final TemplatePointRepository templatePointRepository;
-
-    @Autowired
     private final DeviceRepository deviceRepository;
 
     @Autowired
@@ -47,7 +44,6 @@ public class DBinit {
     @Autowired
     public DBinit(PatientRepository patientRepository,
                   UserRepository userRepository1, TemplateRepository templateRepository,
-                  TemplatePointRepository templatePointRepository,
                   DeviceRepository deviceRepository,
                   DevicePointRepository devicePointRepository,
                   TestRepository testRepository,
@@ -55,7 +51,6 @@ public class DBinit {
         this.userRepository = userRepository1;
         this.patientRepository = patientRepository;
         this.templateRepository = templateRepository;
-        this.templatePointRepository = templatePointRepository;
         this.deviceRepository = deviceRepository;
         this.devicePointRepository = devicePointRepository;
         this.testRepository = testRepository;
@@ -132,12 +127,13 @@ public class DBinit {
     }
 
     private void addTemplatePointForTest(Template template, Frequency frequency, Integer intensityLevel) {
-        TemplatePoint templatePoint = new TemplatePoint();
+        //TODO fix it
+        /*TemplatePoint templatePoint = new TemplatePoint();
         templatePoint.setTemplate(template);
         templatePoint.setFrequency(frequency.getValue());
         templatePoint.setInrensityValue(intensityLevel);
         templatePointRepository.save(templatePoint);
-        System.out.println("Template point added");
+        System.out.println("Template point added");*/
     }
 
     private List<Template> addTemplateForTest(int count) {

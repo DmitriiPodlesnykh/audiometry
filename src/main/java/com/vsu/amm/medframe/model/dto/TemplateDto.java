@@ -13,14 +13,14 @@ public class TemplateDto {
 
     private Long authorId;
 
-    private Set<TemplatePointDto> points = new TreeSet<TemplatePointDto>();
+    private Set<Integer> frequencies = new TreeSet<Integer>();
 
-    public Set<TemplatePointDto> getPoints() {
-        return points;
+    public Set<Integer> getFrequencies() {
+        return frequencies;
     }
 
-    public void setPoints(Set<TemplatePointDto> points) {
-        this.points = points;
+    public void setFrequencies(Set<Integer> frequencies) {
+        this.frequencies = frequencies;
     }
 
     public Long getId() {
@@ -62,7 +62,7 @@ public class TemplateDto {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", authorId=" + authorId +
-                ", points=" + points.toString() +
+                ", points=" + frequencies.toString() +
                 '}';
     }
 }

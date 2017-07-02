@@ -1,8 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.model.dto.TemplateDto;
-import com.vsu.amm.medframe.model.dto.TemplatePointDto;
-import com.vsu.amm.medframe.service.TemplatePointService;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,6 @@ public class TemplateRestController {
     @Autowired
     private TemplateService templateService;
 
-    @Autowired
-    private TemplatePointService templatePointService;
 
     @RequestMapping(value = "", method = POST)
     public TemplateDto create(@RequestBody TemplateDto jsonTemplateDto) {
@@ -39,10 +35,11 @@ public class TemplateRestController {
     public TemplateDto update(@PathVariable Long id, @RequestBody @Valid TemplateDto templateDto){
         return new TemplateDto();
     }
-
+    //TODO fix it
+    /*
     @RequestMapping(value = "/{templateId}", method = POST)
     public TemplatePointDto createTemplatePoint(@PathVariable Long templateId, @RequestBody @Valid TemplatePointDto jsonPointDto) {
         TemplatePointDto pointDto = templatePointService.save(jsonPointDto);
         return pointDto;
-    }
+    }*/
 }

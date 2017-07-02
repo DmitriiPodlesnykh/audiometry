@@ -4,8 +4,6 @@ package com.vsu.amm.medframe.service.impl;
 import com.vsu.amm.medframe.component.mapper.impl.TemplateMapper;
 import com.vsu.amm.medframe.model.dto.TemplateDto;
 import com.vsu.amm.medframe.model.entity.Template;
-import com.vsu.amm.medframe.model.entity.TemplatePoint;
-import com.vsu.amm.medframe.repository.TemplatePointRepository;
 import com.vsu.amm.medframe.repository.TemplateRepository;
 import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +24,12 @@ public class TemplateServiceImpl implements TemplateService {
     @Autowired
     private TemplateRepository templateRepository;
 
-    @Autowired
-    private TemplatePointRepository pointRepository;
 
     @Override
     public TemplateDto save(TemplateDto templateDto) {
         Template template = templateMapper.mapToEntity(templateDto);
-        if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
+        //TODO fix it
+        /*if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
             // TODO to fix it on bulk case
             Set<TemplatePoint> templatePoints = template.getTemplatePoints();
             template.setTemplatePoints(Collections.EMPTY_SET);
@@ -44,7 +41,7 @@ public class TemplateServiceImpl implements TemplateService {
                 }
             }
             template.setTemplatePoints(templatePoints);
-        }
+        }*/
         template = templateRepository.saveAndFlush(template);
         return templateMapper.mapToDto(template);
     }
