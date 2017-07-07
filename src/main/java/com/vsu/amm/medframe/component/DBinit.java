@@ -1,5 +1,6 @@
 package com.vsu.amm.medframe.component;
 
+import com.vsu.amm.medframe.enums.TestPointStatus;
 import com.vsu.amm.medframe.model.entity.*;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.repository.*;
@@ -91,9 +92,7 @@ public class DBinit {
     private TestPoint addTestPoint(Test test) {
         TestPoint point = new TestPoint();
         point.setTest(test);
-        point.setStatus("deded");
-        point.setFrequency(11);
-        point.setIntensityValue(12);
+        point.setPointStatus(TestPointStatus.NOT_TESTED);
         return testPointRepository.saveAndFlush(point);
     }
 

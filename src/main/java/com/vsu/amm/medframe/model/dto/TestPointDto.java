@@ -1,6 +1,8 @@
 package com.vsu.amm.medframe.model.dto;
 
-public class TestPointDto extends AbstractPointDto {
+public class TestPointDto{
+
+    private Long id;
 
     private Long testId;
 
@@ -8,6 +10,14 @@ public class TestPointDto extends AbstractPointDto {
 
     public Long getTestId() {
         return testId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setTestId(Long testId) {
@@ -44,9 +54,7 @@ public class TestPointDto extends AbstractPointDto {
     public String toString() {
         return "TestPointDto{" +
                 "id=" + (id != null ? id : "is empty") +
-                ", frequency=" + frequency +
                 ", test=" + (testId != null ? testId : "is empty") +
-                ", intensityLevel=" + intensityLevel +
                 ", status='" + status + '\'' +
                 '}';
     }

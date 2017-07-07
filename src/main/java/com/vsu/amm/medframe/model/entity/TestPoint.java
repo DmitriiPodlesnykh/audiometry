@@ -1,5 +1,7 @@
 package com.vsu.amm.medframe.model.entity;
 
+import com.vsu.amm.medframe.enums.TestPointStatus;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +18,9 @@ public class TestPoint {
     @JoinColumn(name = "TEST_ID")
     private Test test;
 
-    @Column(name = "FREQUENCY")
-    private Integer frequency;
-
-    @Column(name = "INTENSITY_VALUE")
-    private int intensityValue;
-
     @Column(name = "STATUS")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private TestPointStatus pointStatus;
 
     @ManyToMany
     @JoinTable(name = "MED_TEST_POINTS_DEVICE_POINTS",
@@ -40,36 +37,12 @@ public class TestPoint {
         this.id = id;
     }
 
-    public Integer getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Integer frequency) {
-        this.frequency = frequency;
-    }
-
-    public int getIntensityValue() {
-        return intensityValue;
-    }
-
-    public void setIntensityValue(int intensityValue) {
-        this.intensityValue = intensityValue;
-    }
-
     public Test getTest() {
         return test;
     }
 
     public void setTest(Test test) {
         this.test = test;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public List<DevicePoint> getDevicePoint() {
@@ -80,14 +53,28 @@ public class TestPoint {
         this.devicePoints = devicePoint;
     }
 
+    public TestPointStatus getPointStatus() {
+        return pointStatus;
+    }
+
+    public void setPointStatus(TestPointStatus pointStatus) {
+        this.pointStatus = pointStatus;
+    }
+
+    public List<DevicePoint> getDevicePoints() {
+        return devicePoints;
+    }
+
+    public void setDevicePoints(List<DevicePoint> devicePoints) {
+        this.devicePoints = devicePoints;
+    }
+
     @Override
     public String toString() {
         return "TestPoint{" +
                 "id=" + id +
                 ", test=" + test.toString() +
-                ", frequency=" + frequency +
-                ", intensityValue=" + intensityValue +
-                ", status='" + status + '\'' +
+                ", status='" + pointStatus.name() + '\'' +
                 ", devicePoints='" + devicePoints.toString() + '\'' +
                 '}';
     }
@@ -101,19 +88,14 @@ public class TestPoint {
 
         if (id != null ? !id.equals(testPoint.id) : testPoint.id != null) return false;
         if (test != null ? !test.equals(testPoint.test) : testPoint.test != null) return false;
-        if (frequency != null ? !frequency.equals(testPoint.frequency) : testPoint.frequency != null) return false;
-        // if (intensityValue != null ? !intensityValue.equals(testPoint.intensityValue) : testPoint.intensityValue != null)
-        //   return false;
-        return status != null ? status.equals(testPoint.status) : testPoint.status == null;
+        return pointStatus != null ? pointStatus.equals(testPoint.pointStatus) : testPoint.pointStatus == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (test != null ? test.getId().hashCode() : 0);
-        result = 31 * result + (frequency != null ? frequency.hashCode() : 0);
-        result = 31 * result + intensityValue;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (pointStatus != null ? pointStatus.hashCode() : 0);
         return result;
     }
 }
