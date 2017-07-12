@@ -8,7 +8,7 @@
             var templateUrl = getTemplateIdByUrl();
             pointDto = new Object();
             pointDto.frequency = document.getElementById('frequency').value;
-            pointDto.intensityValue = document.getElementById('intensityValue').value;
+            pointDto.intensityLevel = document.getElementById('intensityLevel').value;
             pointDto.templateId = templateUrl;
             addTemplatePointAJAX(pointDto);
         });
@@ -21,7 +21,7 @@
     </div>
     <div>
         <label>Интенсивность:</label>
-        <input type="text" name="intensityValue" id="intensityValue">
+        <input type="text" name="intensityLevel" id="intensityLevel">
     </div>
     <div>
         <button type="button" id="add-template-point">Добавить точку</button>

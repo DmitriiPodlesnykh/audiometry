@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.repository;
 
 
-import com.vsu.amm.medframe.entity.TestPoint;
+import com.vsu.amm.medframe.model.entity.TestPoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

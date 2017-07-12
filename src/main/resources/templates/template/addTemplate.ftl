@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <label>Интенсивность:</label>
-                    <input type="text" name="intensityValue" id="intensityValueLocal">
+                    <input type="text" name="intensityLevel" id="intensityLevelLocal">
                 </div>
             </div>
             <button type="button" id="listenPoint">Прослушать</button>

@@ -1,16 +1,12 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.entity.TemplatePoint;
-import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
-import com.vsu.amm.medframe.service.TemplateServiceImpl;
+import com.vsu.amm.medframe.model.dto.TemplateDto;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
+import com.vsu.amm.medframe.service.TemplatePointService;
+import com.vsu.amm.medframe.service.TemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,26 +18,24 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import org.apache.log4j.Logger;
 
 import javax.validation.Valid;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/templates")
 public class TemplateController {
 
-    private static final Logger log = Logger.getLogger(TemplateController.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplateController.class);
 
     @Autowired
-    private TemplateServiceImpl templateService;
+    private TemplateService templateService;
 
     @Autowired
-    private TemplatePointServiceImpl templatePointService;
+    private TemplatePointService templatePointService;
 
     @RequestMapping(value = "", method = GET)
     public String getAll(ModelMap modelMap) {
-        log.info("RUN getAll(ModelMap modelMap)");
         modelMap.addAttribute("templates", templateService.getAll());
 
-        log.info("Before retutn: modelMap = " + modelMap.toString());
+        LOGGER.info("Before retutn: modelMap = " + modelMap.toString());
         return "templateList";
     }
 
@@ -63,23 +57,23 @@ public class TemplateController {
 
     @RequestMapping(value = "/{templateId}/add", method = POST)
     public String createTemplatePoint(@PathVariable Long templateId, @RequestBody @Valid TemplatePointDto jsonPointDto) {
-        log.info("createTemplatePoint");
-        log.info("templateId = " + templateId.toString());
-        log.info("dto = " + jsonPointDto.toString());
+        LOGGER.info("createTemplatePoint");
+        LOGGER.info("templateId = " + templateId.toString());
+        LOGGER.info("dto = " + jsonPointDto.toString());
         templatePointService.save(jsonPointDto);
         return "templateList";
     }
 
     @RequestMapping(value = "/{templateId}/points", method = GET)
     public String getTemplatePoints(@PathVariable Long templateId, ModelMap modelMap) {
-        log.info("getTemplatePoints");
+        LOGGER.info("getTemplatePoints");
         modelMap.addAttribute("templatePoints", templatePointService.getPointsByTemplateId(templateId));
         return "templatePointsForTemplate";
     }
 
     @RequestMapping(value = "/{templateId}/{pointId}", method = GET)
     public String getTemplatePoint(@PathVariable Long templateId, @PathVariable Long pointId, ModelMap modelMap) {
-        log.info("getTemplatePoint");
+        LOGGER.info("getTemplatePoint");
         modelMap.addAttribute("templatePoint", templatePointService.getPointById(pointId));
         return "templatePoint";
     }

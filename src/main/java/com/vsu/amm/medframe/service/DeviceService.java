@@ -1,26 +1,23 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.component.mapper.DeviceMapper;
-import com.vsu.amm.medframe.dto.DeviceDto;
-import com.vsu.amm.medframe.entity.Device;
-import com.vsu.amm.medframe.repository.DeviceRepository;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.vsu.amm.medframe.model.dto.DeviceDto;
 
-@Service
-public class DeviceService {
+import java.util.List;
 
-    private static final Logger log = Logger.getLogger(DeviceService.class);
+public interface DeviceService {
 
-    @Autowired
-    private DeviceRepository deviceRepository;
+    DeviceDto save(DeviceDto dto);
 
-    @Autowired
-    private DeviceMapper mapper;
+    DeviceDto createNew();
 
-    public void save(DeviceDto dto) {
-        Device device = mapper.mapToEntity(dto);
-        deviceRepository.saveAndFlush(device);
-    }
+    DeviceDto getOne(Long id);
+
+    DeviceDto updateDevice(DeviceDto deviceDto);
+
+    List<DeviceDto> getAll();
+
+    DeviceDto generateDevicePoints(Long deviceId);
+
+    DeviceDto generatedPointsAndSave(DeviceDto deviceDto);
+
 }

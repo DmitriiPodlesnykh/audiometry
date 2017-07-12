@@ -1,10 +1,9 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.dto.TemplateDto;
-import com.vsu.amm.medframe.dto.TemplatePointDto;
-import com.vsu.amm.medframe.entity.Template;
-import com.vsu.amm.medframe.service.TemplatePointServiceImpl;
-import com.vsu.amm.medframe.service.TemplateServiceImpl;
+import com.vsu.amm.medframe.model.dto.TemplateDto;
+import com.vsu.amm.medframe.model.dto.TemplatePointDto;
+import com.vsu.amm.medframe.service.TemplatePointService;
+import com.vsu.amm.medframe.service.TemplateService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,19 +20,19 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 @RequestMapping("/rest/templates")
 public class TemplateRestController {
 
-    private static final Logger log = Logger.getLogger(TemplateRestController.class);
+    private static final Logger LOGGER = Logger.getLogger(TemplateRestController.class);
 
     @Autowired
-    private TemplateServiceImpl templateService;
+    private TemplateService templateService;
 
     @Autowired
-    private TemplatePointServiceImpl templatePointService;
+    private TemplatePointService templatePointService;
 
     @RequestMapping(value = "", method = POST)
     public TemplateDto create(@RequestBody TemplateDto jsonTemplateDto) {
-        TemplateDto templateDto = templateService.save(jsonTemplateDto);
-        log.info(templateDto.toString());
-        return templateDto;
+        jsonTemplateDto = templateService.save(jsonTemplateDto);
+        LOGGER.info(jsonTemplateDto.toString());
+        return jsonTemplateDto;
     }
 
     @RequestMapping(value = "/{id}", method = PUT)
