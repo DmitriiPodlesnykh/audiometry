@@ -3,7 +3,7 @@ package com.vsu.amm.medframe.model.dto;
 import java.sql.Date;
 import java.util.Set;
 
-public class TestDto {
+public class TestResponse {
 
     private Long id;
 
@@ -13,7 +13,7 @@ public class TestDto {
 
     private Date date;
 
-    private Set<TestPointDto> points;
+    private Set<TestPointResponse> points;
 
     public Long getId() {
         return id;
@@ -47,17 +47,17 @@ public class TestDto {
         this.date = date;
     }
 
-    public Set<TestPointDto> getPoints() {
+    public Set<TestPointResponse> getPoints() {
         return points;
     }
 
-    public void setPoints(Set<TestPointDto> points) {
+    public void setPoints(Set<TestPointResponse> points) {
         this.points = points;
     }
 
     @Override
     public String toString() {
-        return "TestDto{" +
+        return "TestResponse{" +
                 "id=" + (id != null ? id : "is empty") +
                 ", patient=" + (patient != null ? patient.getId() : "is empty") +
                 ", template=" + (template != null ? template.getId() : "is empty") +

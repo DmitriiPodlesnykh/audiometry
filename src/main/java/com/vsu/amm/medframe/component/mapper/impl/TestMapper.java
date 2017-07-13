@@ -2,8 +2,8 @@ package com.vsu.amm.medframe.component.mapper.impl;
 
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.model.dto.TestDto;
-import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.dto.TestPointResponse;
+import com.vsu.amm.medframe.model.dto.TestResponse;
 import com.vsu.amm.medframe.model.entity.Test;
 import com.vsu.amm.medframe.model.entity.TestPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,28 +15,28 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class TestMapper implements Mapper<Test, TestDto> {
+public class TestMapper implements Mapper<Test, TestResponse> {
 
     private final PatientMapper patientMapper;
     private final TemplateMapper templateMapper;
     private final TestPointMapper testPointMapper;
 
     @Override
-    public Test mapToEntity(TestDto testDto) {
+    public Test mapToEntity(TestResponse testResponse) {
         Test test = new Test();
-        if (testDto.getId() != null) {
-            test.setId(testDto.getId());
+        if (testResponse.getId() != null) {
+            test.setId(testResponse.getId());
         }
-        test.setDate(testDto.getDate());
-        if (testDto.getPatient() != null) {
-            test.setPatient(patientMapper.mapToEntity(testDto.getPatient()));
+        test.setDate(testResponse.getDate());
+        if (testResponse.getPatient() != null) {
+            test.setPatient(patientMapper.mapToEntity(testResponse.getPatient()));
         }
-        if (testDto.getTemplate() != null) {
-            test.setTemplate(templateMapper.mapToEntity(testDto.getTemplate()));
+        if (testResponse.getTemplate() != null) {
+            test.setTemplate(templateMapper.mapToEntity(testResponse.getTemplate()));
         }
-        if (testDto.getPoints() != null && !testDto.getPoints().isEmpty()) {
+        if (testResponse.getPoints() != null && !testResponse.getPoints().isEmpty()) {
             Set<TestPoint> testPoints = new HashSet<TestPoint>();
-            for (TestPointDto pointDto : testDto.getPoints()) {
+            for (TestPointResponse pointDto : testResponse.getPoints()) {
                 TestPoint testPoint = testPointMapper.mapToEntity(pointDto);
                 testPoints.add(testPoint);
             }
@@ -46,36 +46,36 @@ public class TestMapper implements Mapper<Test, TestDto> {
     }
 
     @Override
-    public TestDto mapToDto(Test test) {
-        TestDto testDto = new TestDto();
+    public TestResponse mapToDto(Test test) {
+        TestResponse testResponse = new TestResponse();
         if (test.getId() != null) {
-            testDto.setId(test.getId());
+            testResponse.setId(test.getId());
         }
         if (test.getPatient() != null) {
-            testDto.setPatient(patientMapper.mapToDto(test.getPatient()));
+            testResponse.setPatient(patientMapper.mapToDto(test.getPatient()));
         }
         if (test.getTemplate() != null) {
-            testDto.setTemplate(templateMapper.mapToDto(test.getTemplate()));
+            testResponse.setTemplate(templateMapper.mapToDto(test.getTemplate()));
         }
-        testDto.setDate(test.getDate());
+        testResponse.setDate(test.getDate());
         if (test.getTestPoints() != null && !test.getTestPoints().isEmpty()) {
-            Set<TestPointDto> pointDtos = new HashSet<TestPointDto>();
+            Set<TestPointResponse> pointDtos = new HashSet<TestPointResponse>();
             for (TestPoint point : test.getTestPoints()) {
-                TestPointDto pointDto = testPointMapper.mapToDto(point);
+                TestPointResponse pointDto = testPointMapper.mapToDto(point);
                 pointDtos.add(pointDto);
             }
-            testDto.setPoints(pointDtos);
+            testResponse.setPoints(pointDtos);
         }
-        return testDto;
+        return testResponse;
     }
 
-    public List<TestDto> mapToDto(List<Test> tests) {
-        List<TestDto> testDtos = new ArrayList<TestDto>();
+    public List<TestResponse> mapToDto(List<Test> tests) {
+        List<TestResponse> testResponses = new ArrayList<TestResponse>();
         for(Test test : tests) {
-            TestDto testDto = mapToDto(test);
-            testDtos.add(testDto);
+            TestResponse testResponse = mapToDto(test);
+            testResponses.add(testResponse);
         }
-        return testDtos;
+        return testResponses;
     }
 
     @Autowired

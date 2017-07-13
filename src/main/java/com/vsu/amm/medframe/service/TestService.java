@@ -1,28 +1,23 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.model.dto.CreateTestDto;
+import com.vsu.amm.medframe.model.dto.CreateTestRequest;
 import com.vsu.amm.medframe.model.dto.PatientDto;
-import com.vsu.amm.medframe.model.dto.TestDto;
-import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.dto.TestResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service(value = "testService")
 public interface TestService {
 
-    CreateTestDto save(CreateTestDto test);
+    TestResponse save(CreateTestRequest test);
 
-    TestDto getTestById(Long id);
+    TestResponse getTestById(Long id);
 
     void deleteTest(Long id);
 
-    List<TestDto> getAllPatientsTests(PatientDto patient);
+    List<TestResponse> getAllPatientsTests(PatientDto patient);
 
-    List<TestDto> getAll();
-
-    TestPointDto save(TestPointDto testPointDto);
-
-    TestPointDto getTestPointById(Long id);
-
-    void deletePoint(Long id);
+    List<TestResponse> getAll();
 
 }

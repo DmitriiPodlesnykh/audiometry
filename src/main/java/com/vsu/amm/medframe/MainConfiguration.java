@@ -1,7 +1,9 @@
 package com.vsu.amm.medframe;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.EmbeddedValueResolverAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -31,5 +33,10 @@ public class MainConfiguration extends WebMvcConfigurerAdapter implements Embedd
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

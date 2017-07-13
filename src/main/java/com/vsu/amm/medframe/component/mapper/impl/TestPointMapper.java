@@ -1,37 +1,37 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.dto.TestPointResponse;
 import com.vsu.amm.medframe.model.entity.TestPoint;
 import com.vsu.amm.medframe.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestPointMapper implements Mapper<TestPoint, TestPointDto> {
+public class TestPointMapper implements Mapper<TestPoint, TestPointResponse> {
 
     @Autowired
     private TestRepository testRepository;
 
     @Override
-    public TestPoint mapToEntity(TestPointDto testPointDto) {
+    public TestPoint mapToEntity(TestPointResponse testPointResponse) {
         TestPoint point = new TestPoint();
         //TODO fix it
-        //point.setFrequency(testPointDto.getFrequency());
-        //point.setIntensityValue(testPointDto.getIntensityLevel());
-        //point.setStatus(testPointDto.getStatus());
-        if (testPointDto.getTestId() != null) {
-            point.setTest(testRepository.getOne(testPointDto.getTestId()));
+        //point.setFrequency(testPointResponse.getFrequency());
+        //point.setIntensityValue(testPointResponse.getIntensityLevel());
+        //point.setStatus(testPointResponse.getStatus());
+        if (testPointResponse.getTestId() != null) {
+            point.setTest(testRepository.getOne(testPointResponse.getTestId()));
         }
-        if (testPointDto.getId() != null) {
-            point.setId(testPointDto.getId());
+        if (testPointResponse.getId() != null) {
+            point.setId(testPointResponse.getId());
         }
         return point;
     }
 
     @Override
-    public TestPointDto mapToDto(TestPoint testPoint) {
-        TestPointDto pointDto = new TestPointDto();
+    public TestPointResponse mapToDto(TestPoint testPoint) {
+        TestPointResponse pointDto = new TestPointResponse();
         //TODO fix it
         //pointDto.setStatus(testPoint.getStatus());
         if (testPoint.getId() != null) {

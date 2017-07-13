@@ -1,8 +1,8 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.model.dto.CreateTestDto;
-import com.vsu.amm.medframe.model.dto.TestPointDto;
+import com.vsu.amm.medframe.model.dto.CreateTestRequest;
+import com.vsu.amm.medframe.model.dto.TestPointResponse;
 import com.vsu.amm.medframe.model.entity.Test;
 import com.vsu.amm.medframe.model.entity.TestPoint;
 import com.vsu.amm.medframe.repository.PatientRepository;
@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 @Component
-public class CreateTestDtoMapper implements Mapper<Test, CreateTestDto> {
+public class CreateTestDtoMapper implements Mapper<Test, CreateTestRequest> {
 
     private final TestRepository testRepository;
     private final PatientRepository patientRepository;
@@ -23,49 +23,50 @@ public class CreateTestDtoMapper implements Mapper<Test, CreateTestDto> {
     private final TestPointMapper testPointMapper;
 
     @Override
-    public Test mapToEntity(CreateTestDto createTestDto) {
+    public Test mapToEntity(CreateTestRequest createTestRequest) {
         Test test = new Test();
-
-        if (createTestDto.getTestId() != null) {
-            test.setId(createTestDto.getTestId());
+        /*TODO: fix it
+        if (createTestRequest.getTestId() != null) {
+            test.setId(createTestRequest.getTestId());
+        }*/
+        if (createTestRequest.getPatientId() != null) {
+            test.setPatient(patientRepository.findOne(createTestRequest.getPatientId()));
         }
-        if (createTestDto.getPatientId() != null) {
-            test.setPatient(patientRepository.findOne(createTestDto.getPatientId()));
+        if (createTestRequest.getTemplateId() != null) {
+            test.setTemplate(templateRepository.findOne(createTestRequest.getTemplateId()));
         }
-        if (createTestDto.getTemplateId() != null) {
-            test.setTemplate(templateRepository.findOne(createTestDto.getTemplateId()));
-        }
-        if (createTestDto.getTestPoins() != null) {
-            test.setTestPoints(mapDtoPointsToEntity((Set<TestPointDto>) createTestDto.getTestPoins()));
+        if (createTestRequest.getTestPoints() != null) {
+            test.setTestPoints(mapDtoPointsToEntity((Set<TestPointResponse>) createTestRequest.getTestPoints()));
         }
         return test;
     }
 
     @Override
-    public CreateTestDto mapToDto(Test test) {
-        CreateTestDto createTestDto = new CreateTestDto();
+    public CreateTestRequest mapToDto(Test test) {
+        CreateTestRequest createTestRequest = new CreateTestRequest();
         if (test.getPatient() != null) {
-            createTestDto.setPatientId(test.getPatient().getId());
+            createTestRequest.setPatientId(test.getPatient().getId());
         }
-        createTestDto.setTemplateId(test.getTemplate().getId());
-        createTestDto.setTestId(test.getId());
-        createTestDto.setUserId(test.getPatient().getDoctor().getId());
-        createTestDto.setTestPoins(mapToDtoPoints(test.getTestPoints()));
-        return createTestDto;
+        createTestRequest.setTemplateId(test.getTemplate().getId());
+        /*TODO: fix it
+        createTestRequest.setTestId(test.getId());*/
+        createTestRequest.setUserId(test.getPatient().getDoctor().getId());
+        createTestRequest.setTestPoints(mapToDtoPoints(test.getTestPoints()));
+        return createTestRequest;
     }
 
-    private Set<TestPointDto> mapToDtoPoints(Set<TestPoint> testPoints) {
-        Set<TestPointDto> testPointDtos = new TreeSet<TestPointDto>();
+    private Set<TestPointResponse> mapToDtoPoints(Set<TestPoint> testPoints) {
+        Set<TestPointResponse> testPointResponses = new TreeSet<TestPointResponse>();
         for (TestPoint point : testPoints) {
-            TestPointDto testPointDto = testPointMapper.mapToDto(point);
-            testPointDtos.add(testPointDto);
+            TestPointResponse testPointResponse = testPointMapper.mapToDto(point);
+            testPointResponses.add(testPointResponse);
         }
-        return testPointDtos;
+        return testPointResponses;
     }
 
-    private Set<TestPoint> mapDtoPointsToEntity(Set<TestPointDto> pointDtos) {
+    private Set<TestPoint> mapDtoPointsToEntity(Set<TestPointResponse> pointDtos) {
         Set<TestPoint> testPoints = new TreeSet<TestPoint>();
-        for (TestPointDto pointDto : pointDtos) {
+        for (TestPointResponse pointDto : pointDtos) {
             TestPoint point = testPointMapper.mapToEntity(pointDto);
             testPoints.add(point);
         }

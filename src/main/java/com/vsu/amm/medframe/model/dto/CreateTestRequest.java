@@ -3,9 +3,7 @@ package com.vsu.amm.medframe.model.dto;
 import java.util.Collection;
 import java.util.TreeSet;
 
-public class CreateTestDto {
-
-    private Long testId;
+public class CreateTestRequest {
 
     private Long templateId;
 
@@ -13,15 +11,7 @@ public class CreateTestDto {
 
     private Long userId;
 
-    private Collection<TestPointDto> testPoints = new TreeSet<TestPointDto>();
-
-    public Long getTestId() {
-        return testId;
-    }
-
-    public void setTestId(Long testId) {
-        this.testId = testId;
-    }
+    private Collection<TestPointResponse> testPoints = new TreeSet<TestPointResponse>();
 
     public Long getTemplateId() {
         return templateId;
@@ -47,11 +37,11 @@ public class CreateTestDto {
         this.userId = userId;
     }
 
-    public Collection<TestPointDto> getTestPoins() {
+    public Collection<TestPointResponse> getTestPoints() {
         return testPoints;
     }
 
-    public void setTestPoins(Collection<TestPointDto> testPoins) {
+    public void setTestPoints(Collection<TestPointResponse> testPoins) {
         this.testPoints = testPoins;
     }
 }

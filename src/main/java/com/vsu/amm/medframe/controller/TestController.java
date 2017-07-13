@@ -25,6 +25,13 @@ public class TestController {
     private final TemplateService templateService;
     private final PatientService patientService;
 
+    @Autowired
+    TestController(TestService testService, TemplateService templateService, PatientService patientService) {
+        this.testService = testService;
+        this.templateService = templateService;
+        this.patientService = patientService;
+    }
+
     @RequestMapping(value = "", method = GET)
     public String getAllTests(ModelMap modelMap) {
         modelMap.addAttribute("tests", testService.getAll());
@@ -46,12 +53,5 @@ public class TestController {
 
         modelMap.addAllAttributes(attributeMap);
         return "createTestForm";
-    }
-
-    @Autowired
-    TestController(TestService testService, TemplateService templateService, PatientService patientService) {
-        this.testService = testService;
-        this.templateService = templateService;
-        this.patientService = patientService;
     }
 }

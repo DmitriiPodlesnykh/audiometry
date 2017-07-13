@@ -20,27 +20,27 @@ public class TestRestController {
 
     private final TestService testService;
 
+    @Autowired
+    public TestRestController(TestService testService) {
+        this.testService = testService;
+    }
+
     @RequestMapping(value = "/generate", method = POST)
-    public TestPointDto generatePoint(@RequestBody TestPointDto pointDto) {
+    public TestPointResponse generatePoint(@RequestBody TestPointResponse pointDto) {
         return pointDto;
     }
 
     @RequestMapping(value = "", method = PUT)
-    public CreateTestDto create(@RequestBody CreateTestDto testDto) {
-        testDto = testService.save(testDto);
-        return testDto;
+    public TestResponse create(@RequestBody CreateTestRequest dto) {
+        LOGGER.info("create test");
+        return testService.save(dto);
     }
 
     @RequestMapping(value = "/t", method = GET)
-    public TestDto test() {
-        TestDto testDto = new TestDto();
-        testDto.setPatient(new PatientDto());
-        testDto.setTemplate(new TemplateDto());
-        return testDto;
-    }
-
-    @Autowired
-    public TestRestController(TestService testService) {
-        this.testService = testService;
+    public TestResponse test() {
+        TestResponse testResponse = new TestResponse();
+        testResponse.setPatient(new PatientDto());
+        testResponse.setTemplate(new TemplateDto());
+        return testResponse;
     }
 }
