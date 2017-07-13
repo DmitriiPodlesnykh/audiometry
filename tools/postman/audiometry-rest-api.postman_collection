@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "audiometry rest",
+		"_postman_id": "a343210e-b5f1-85c3-0a66-3eab6aba3751",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/rest/tests",
+			"request": {
+				"url": "http://localhost:8080/rest/tests",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"templateId\": 1,\n  \"patientId\": 1,\n  \"userId\": 1,\n  \"testPoints\": {}\n}"
+				},
+				"description": "add test"
+			},
+			"response": []
+		}
+	]
+}
