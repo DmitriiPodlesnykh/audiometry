@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DevicePointResponse;
 import com.vsu.amm.medframe.model.entity.DevicePoint;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.repository.DeviceRepository;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto> {
+public class DevicePointMapper implements Mapper<DevicePoint, DevicePointResponse> {
 
     private static final Logger LOGGER = Logger.getLogger(DevicePointMapper.class);
 
@@ -20,7 +20,7 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto> {
     DeviceRepository deviceRepository;
 
     @Override
-    public DevicePoint mapToEntity(DevicePointDto pointDto) {
+    public DevicePoint mapToEntity(DevicePointResponse pointDto) {
         DevicePoint point = new DevicePoint();
         if (pointDto.getDeviceId() != null) {
             point.setDevice(deviceRepository.getOne(pointDto.getDeviceId()));
@@ -35,8 +35,8 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointDto> {
     }
 
     @Override
-    public DevicePointDto mapToDto(DevicePoint devicePoint) {
-        DevicePointDto dto = new DevicePointDto();
+    public DevicePointResponse mapToDto(DevicePoint devicePoint) {
+        DevicePointResponse dto = new DevicePointResponse();
 
         if (devicePoint.getId() != null) {
             dto.setId(devicePoint.getId());

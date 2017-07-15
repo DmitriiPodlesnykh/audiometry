@@ -2,8 +2,9 @@ package com.vsu.amm.medframe.service.impl;
 
 import com.vsu.amm.medframe.component.mapper.impl.DeviceMapper;
 import com.vsu.amm.medframe.component.sound.SoundPointsGenerator;
-import com.vsu.amm.medframe.model.dto.DeviceDto;
-import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.CreateDeviceRequest;
+import com.vsu.amm.medframe.model.dto.DeviceResponse;
+import com.vsu.amm.medframe.model.dto.DevicePointResponse;
 import com.vsu.amm.medframe.model.entity.Device;
 import com.vsu.amm.medframe.model.entity.DevicePoint;
 import com.vsu.amm.medframe.repository.DevicePointRepository;
@@ -37,25 +38,28 @@ public class DeviceServiceImpl implements DeviceService {
     private static final int ZERO_INTENSITY_1000HZ_POINT_NUMBER = 0;
 
     @Override
-    public DeviceDto generatedPointsAndSave(DeviceDto deviceDto) {
-        deviceDto.setPointList(
-                (List<DevicePointDto>) soundPointsGenerator.generatePoints(
-                        deviceDto.getPointList().get(ZERO_INTENSITY_1000HZ_POINT_NUMBER)));
-        log.info(deviceDto.getPointList().toString());
-        deviceDto = save(deviceDto);
-        return deviceDto;
+    public DeviceResponse generatedPointsAndSave(DeviceResponse deviceResponse) {
+        //TODO fix it
+//        deviceResponse.setPoints(
+//                (List<DevicePointResponse>) soundPointsGenerator.generatePoints(
+//                        deviceResponse.setPoints().get(ZERO_INTENSITY_1000HZ_POINT_NUMBER)));
+//        log.info(deviceResponse.setPoints().toString());
+
+        // deviceResponse = save(deviceResponse);
+        return deviceResponse;
     }
 
     @Override
-    public DeviceDto createNew() {
+    public DeviceResponse createNew() {
         Device device = new Device();
         device = deviceRepository.saveAndFlush(device);
         return mapper.mapToDto(device);
     }
 
     @Override
-    public DeviceDto save(DeviceDto dto) {
-        Device device = mapper.mapToEntity(dto);
+    public DeviceResponse save(CreateDeviceRequest dto) {
+        Device device = new Device();//TODO fix it
+        // mapper.mapToEntity(dto);
         if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
             // TODO to fix it on bulk case
             List<DevicePoint> points = device.getDevicePoints();
@@ -76,40 +80,40 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DeviceDto getOne(Long id) {
+    public DeviceResponse getOne(Long id) {
         Device device = deviceRepository.findDeviceWithPointsByIdQuery(id);
         return mapper.mapToDto(device);
     }
 
     @Override
-    public List<DeviceDto> getAll() {
+    public List<DeviceResponse> getAll() {
         List<Device> devices = deviceRepository.findAll();
         if (devices == null || devices.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        List<DeviceDto> deviceDos = new ArrayList<DeviceDto>();
+        List<DeviceResponse> deviceDos = new ArrayList<DeviceResponse>();
         for (Device device : devices) {
-            DeviceDto deviceDto = mapper.mapToDto(device);
-            deviceDos.add(deviceDto);
+            DeviceResponse deviceResponse = mapper.mapToDto(device);
+            deviceDos.add(deviceResponse);
         }
         return deviceDos;
     }
 
     @Override
-    public DeviceDto updateDevice(DeviceDto deviceDto) {
-        Device device = deviceRepository.getOne(deviceDto.getId());
-        if (!device.getHeadphoneName().equals(deviceDto.getHeadphoneName())) {
-            device.setHeadphoneName(deviceDto.getHeadphoneName());
+    public DeviceResponse updateDevice(DeviceResponse deviceResponse) {
+        Device device = deviceRepository.getOne(deviceResponse.getId());
+        if (!device.getHeadphoneName().equals(deviceResponse.getHeadphoneName())) {
+            device.setHeadphoneName(deviceResponse.getHeadphoneName());
         }
-        if (!device.getSoundCardName().equals(deviceDto.getSoundCardName())) {
-            device.setSoundCardName(deviceDto.getSoundCardName());
+        if (!device.getSoundCardName().equals(deviceResponse.getSoundCardName())) {
+            device.setSoundCardName(deviceResponse.getSoundCardName());
         }
         device = deviceRepository.saveAndFlush(device);
         return mapper.mapToDto(device);
     }
 
     @Override
-    public DeviceDto generateDevicePoints(Long deviceId) {
+    public DeviceResponse generateDevicePoints(Long deviceId) {
         Device device = deviceRepository.findOne(deviceId);
         device = soundPointsGenerator.generateBasePoints(device);
         device = deviceRepository.saveAndFlush(device);

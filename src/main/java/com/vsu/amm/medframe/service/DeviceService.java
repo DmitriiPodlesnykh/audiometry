@@ -1,23 +1,24 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.model.dto.DeviceDto;
+import com.vsu.amm.medframe.model.dto.CreateDeviceRequest;
+import com.vsu.amm.medframe.model.dto.DeviceResponse;
 
 import java.util.List;
 
 public interface DeviceService {
 
-    DeviceDto save(DeviceDto dto);
+    DeviceResponse save(CreateDeviceRequest dto);
 
-    DeviceDto createNew();
+    DeviceResponse createNew();
 
-    DeviceDto getOne(Long id);
+    DeviceResponse getOne(Long id);
 
-    DeviceDto updateDevice(DeviceDto deviceDto);
+    DeviceResponse updateDevice(DeviceResponse deviceResponse);
 
-    List<DeviceDto> getAll();
+    List<DeviceResponse> getAll();
 
-    DeviceDto generateDevicePoints(Long deviceId);
+    DeviceResponse generateDevicePoints(Long deviceId);
 
-    DeviceDto generatedPointsAndSave(DeviceDto deviceDto);
+    DeviceResponse generatedPointsAndSave(DeviceResponse deviceResponse);
 
 }

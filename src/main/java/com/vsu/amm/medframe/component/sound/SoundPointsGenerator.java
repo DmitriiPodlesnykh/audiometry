@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.component.sound;
 
-import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DevicePointResponse;
 import com.vsu.amm.medframe.model.entity.Device;
 import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import com.vsu.amm.medframe.enums.Frequency;
@@ -21,8 +21,8 @@ public class SoundPointsGenerator {
     @Autowired
     private DevicePointService devicePointService;
 
-    public Collection<DevicePointDto> generatePoints(DevicePointDto startPoint) {
-        Collection<DevicePointDto> points = new ArrayList<DevicePointDto>();
+    public Collection<DevicePointResponse> generatePoints(DevicePointResponse startPoint) {
+        Collection<DevicePointResponse> points = new ArrayList<DevicePointResponse>();
 
         double amplitudeAtZeroIntensityLevel = startPoint.getSoundValue();
 
@@ -37,10 +37,10 @@ public class SoundPointsGenerator {
         return points;
     }
 
-    private Collection<DevicePointDto> generatePointsWithSomeAmplitude(Collection<DevicePointDto> points, double amplitude, BaseIntensityLevel intensityLevel) {
+    private Collection<DevicePointResponse> generatePointsWithSomeAmplitude(Collection<DevicePointResponse> points, double amplitude, BaseIntensityLevel intensityLevel) {
         for (Frequency frequency : Frequency.values()) {
             if (!frequency.equals(Frequency.NULL_VALUE)) {
-                DevicePointDto pointDto = new DevicePointDto();
+                DevicePointResponse pointDto = new DevicePointResponse();
                 pointDto.setIntensityLevel(intensityLevel.getValue());
                 pointDto.setFrequency(frequency.getValue());
                 pointDto.setSoundValue(amplitude);
@@ -51,25 +51,25 @@ public class SoundPointsGenerator {
     }
 
     public Device generateBasePoints(Device device) {
-        List<DevicePointDto> zeroIntensityLevelPoints = getZeroDevicePoints(device);
+        List<DevicePointResponse> zeroIntensityLevelPoints = getZeroDevicePoints(device);
 
-        for (DevicePointDto item : zeroIntensityLevelPoints) {
+        for (DevicePointResponse item : zeroIntensityLevelPoints) {
             generatePointForBaseIntensityLevelRange(item);
         }
         return device;
     }
 
-    private void generatePointForBaseIntensityLevelRange(DevicePointDto zeroPoint) {
+    private void generatePointForBaseIntensityLevelRange(DevicePointResponse zeroPoint) {
         for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
             if (!intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
-                DevicePointDto pointDto = generatePoint(intensityLevel.getValue(), zeroPoint);
+                DevicePointResponse pointDto = generatePoint(intensityLevel.getValue(), zeroPoint);
                 devicePointService.save(pointDto);
             }
         }
     }
 
-    private DevicePointDto generatePoint(int intensityLevel, DevicePointDto deviceZero) {
-        DevicePointDto pointDto = new DevicePointDto();
+    private DevicePointResponse generatePoint(int intensityLevel, DevicePointResponse deviceZero) {
+        DevicePointResponse pointDto = new DevicePointResponse();
         pointDto.setDeviceId(deviceZero.getDeviceId());
         pointDto.setFrequency(deviceZero.getFrequency());
         pointDto.setIntensityLevel(intensityLevel);
@@ -80,7 +80,7 @@ public class SoundPointsGenerator {
         return pointDto;
     }
 
-    private List<DevicePointDto> getZeroDevicePoints(Device device) {
+    private List<DevicePointResponse> getZeroDevicePoints(Device device) {
         return devicePointService.getZeroIntensityLevelDevicePoints(device.getId());
     }
 }

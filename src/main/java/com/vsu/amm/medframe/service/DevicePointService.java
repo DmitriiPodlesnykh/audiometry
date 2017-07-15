@@ -1,16 +1,16 @@
 package com.vsu.amm.medframe.service;
 
-import com.vsu.amm.medframe.model.dto.DevicePointDto;
+import com.vsu.amm.medframe.model.dto.DevicePointResponse;
 
 import java.util.List;
 
 public interface DevicePointService {
 
-    DevicePointDto save(DevicePointDto pointDto);
+    DevicePointResponse save(DevicePointResponse pointDto);
 
-    DevicePointDto getOne(Long id);
+    DevicePointResponse getOne(Long id);
 
-    List<DevicePointDto> getDevicePoints(Long deviceId);
+    List<DevicePointResponse> getDevicePoints(Long deviceId);
 
-    List<DevicePointDto> getZeroIntensityLevelDevicePoints(Long deviceId);
+    List<DevicePointResponse> getZeroIntensityLevelDevicePoints(Long deviceId);
 }

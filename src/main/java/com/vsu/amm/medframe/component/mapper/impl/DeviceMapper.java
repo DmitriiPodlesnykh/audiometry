@@ -1,7 +1,8 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.model.dto.DeviceDto;
+import com.vsu.amm.medframe.model.dto.DevicePointResponse;
+import com.vsu.amm.medframe.model.dto.DeviceResponse;
 import com.vsu.amm.medframe.model.entity.Device;
 import com.vsu.amm.medframe.model.entity.DevicePoint;
 import org.apache.log4j.Logger;
@@ -12,10 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.vsu.amm.medframe.model.dto.DevicePointDto;
-
 @Component
-public class DeviceMapper implements Mapper<Device, DeviceDto> {
+public class DeviceMapper implements Mapper<Device, DeviceResponse> {
 
     private static final Logger LOGGER = Logger.getLogger(DeviceMapper.class);
 
@@ -23,43 +22,44 @@ public class DeviceMapper implements Mapper<Device, DeviceDto> {
     private DevicePointMapper devicePointMapper;
 
     @Override
-    public Device mapToEntity(DeviceDto deviceDto) {
+    public Device mapToEntity(DeviceResponse deviceResponse) {
         Device device = new Device();
-        device.setId(deviceDto.getId());
-        device.setHeadphoneName(deviceDto.getHeadphoneName());
-        device.setSoundCardName(deviceDto.getSoundCardName());
-
-        device.setDevicePoints(mapPointDtoCollectionToPoint(deviceDto.getPointList()));
+        device.setId(deviceResponse.getId());
+        device.setHeadphoneName(deviceResponse.getHeadphoneName());
+        device.setSoundCardName(deviceResponse.getSoundCardName());
+//fix it
+        //device.setDevicePoints(mapPointDtoCollectionToPoint(deviceResponse.getPointList()));
         return device;
     }
 
     @Override
-    public DeviceDto mapToDto(Device device) {
-        DeviceDto dto = new DeviceDto();
+    public DeviceResponse mapToDto(Device device) {
+        DeviceResponse dto = new DeviceResponse();
         dto.setSoundCardName(device.getSoundCardName());
         dto.setId(device.getId());
         dto.setHeadphoneName(device.getHeadphoneName());
 
         if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
-            dto.setPointList(mapPointCollectionToDto(device.getDevicePoints()));
+            //fix it
+            //dto.setPointList(mapPointCollectionToDto(device.getDevicePoints()));
         } else {
             LOGGER.info("device don't have points");
         }
         return dto;
     }
 
-    private List<DevicePointDto> mapPointCollectionToDto(Collection<DevicePoint> points) {
-        List<DevicePointDto> pointDtos = new ArrayList<DevicePointDto>();
+    private List<DevicePointResponse> mapPointCollectionToDto(Collection<DevicePoint> points) {
+        List<DevicePointResponse> pointDtos = new ArrayList<DevicePointResponse>();
         for (DevicePoint point : points) {
-            DevicePointDto pointDto = devicePointMapper.mapToDto(point);
+            DevicePointResponse pointDto = devicePointMapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
         return pointDtos;
     }
 
-    private List<DevicePoint> mapPointDtoCollectionToPoint(Collection<DevicePointDto> pointDtos) {
+    private List<DevicePoint> mapPointDtoCollectionToPoint(Collection<DevicePointResponse> pointDtos) {
         List<DevicePoint> points = new ArrayList<DevicePoint>();
-        for (DevicePointDto pointDto : pointDtos) {
+        for (DevicePointResponse pointDto : pointDtos) {
             DevicePoint point = devicePointMapper.mapToEntity(pointDto);
             points.add(point);
         }

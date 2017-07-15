@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.model.dto.DeviceDto;
+import com.vsu.amm.medframe.model.dto.DeviceResponse;
 import com.vsu.amm.medframe.enums.Frequency;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
@@ -65,8 +65,8 @@ public class ConfigurationController {
     @RequestMapping(value = "/devices/{deviceId}", method = GET)
     public String getDevice(@PathVariable("deviceId") Long deviceId,
                             ModelMap modelMap) {
-        DeviceDto deviceDto = deviceService.getOne(deviceId);
-        modelMap.addAttribute("device", deviceDto);
+        DeviceResponse deviceResponse = deviceService.getOne(deviceId);
+        modelMap.addAttribute("device", deviceResponse);
         return "getDevice";
     }
 
@@ -77,8 +77,9 @@ public class ConfigurationController {
     }
 
     @RequestMapping(value = "/devices/add", method = POST)
-    public String addDevice(@RequestBody DeviceDto dto) {
-        deviceService.save(dto);
+    public String addDevice(@RequestBody DeviceResponse dto) {
+        //todo fix it
+        //deviceService.save(dto);
         return "redirect:/templates";
     }
 
