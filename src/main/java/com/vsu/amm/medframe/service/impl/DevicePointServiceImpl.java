@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.service.impl;
 
 import com.vsu.amm.medframe.component.mapper.impl.DevicePointMapper;
-import com.vsu.amm.medframe.model.dto.DevicePointResponse;
+import com.vsu.amm.medframe.model.dto.DevicePointElement;
 import com.vsu.amm.medframe.model.entity.DevicePoint;
 import com.vsu.amm.medframe.repository.DevicePointRepository;
 import com.vsu.amm.medframe.service.DevicePointService;
@@ -25,27 +25,27 @@ public class DevicePointServiceImpl implements DevicePointService{
     DevicePointMapper mapper;
 
     @Override
-    public DevicePointResponse save(DevicePointResponse pointDto) {
+    public DevicePointElement save(DevicePointElement pointDto) {
         DevicePoint point = mapper.mapToEntity(pointDto);
         point = devicePointRepository.saveAndFlush(point);
         return mapper.mapToDto(point);
     }
 
     @Override
-    public DevicePointResponse getOne(Long id) {
+    public DevicePointElement getOne(Long id) {
         DevicePoint point = devicePointRepository.getOne(id);
         return mapper.mapToDto(point);
     }
 
     @Override
-    public List<DevicePointResponse> getDevicePoints(Long deviceId) {
+    public List<DevicePointElement> getDevicePoints(Long deviceId) {
         List<DevicePoint> points = (List<DevicePoint>) devicePointRepository.findByDeviceId(deviceId);
         if (points == null || points.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        List<DevicePointResponse> pointDtos = new ArrayList<DevicePointResponse>();
+        List<DevicePointElement> pointDtos = new ArrayList<DevicePointElement>();
         for (DevicePoint point : points) {
-            DevicePointResponse pointDto = mapper.mapToDto(point);
+            DevicePointElement pointDto = mapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
         LOGGER.info(pointDtos.toString());
@@ -53,14 +53,14 @@ public class DevicePointServiceImpl implements DevicePointService{
     }
 
     @Override
-    public List<DevicePointResponse> getZeroIntensityLevelDevicePoints(Long deviceId) {
+    public List<DevicePointElement> getZeroIntensityLevelDevicePoints(Long deviceId) {
         List<DevicePoint> devicePoints = (List<DevicePoint>) devicePointRepository.getZeroIntensityLevelDevicePointsByDeviceId(deviceId);
         if (devicePoints == null || devicePoints.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-        List<DevicePointResponse> pointDtos = new ArrayList<DevicePointResponse>();
+        List<DevicePointElement> pointDtos = new ArrayList<DevicePointElement>();
         for (DevicePoint point : devicePoints) {
-            DevicePointResponse pointDto = mapper.mapToDto(point);
+            DevicePointElement pointDto = mapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
         LOGGER.info(pointDtos.toString());

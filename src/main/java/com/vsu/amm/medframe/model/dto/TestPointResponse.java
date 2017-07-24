@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.model.dto;
 
-public class TestPointResponse {
+public class TestPointResponse extends AbstractPointElement{
 
     private Long id;
 
@@ -39,22 +39,26 @@ public class TestPointResponse {
 
         TestPointResponse that = (TestPointResponse) o;
 
-        if (!getTestId().equals(that.getTestId())) return false;
-        return getStatus().equals(that.getStatus());
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getTestId() != null ? !getTestId().equals(that.getTestId()) : that.getTestId() != null) return false;
+        return getStatus() != null ? getStatus().equals(that.getStatus()) : that.getStatus() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getTestId().hashCode();
-        result = 31 * result + getStatus().hashCode();
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getTestId() != null ? getTestId().hashCode() : 0);
+        result = 31 * result + (getStatus() != null ? getStatus().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "TestPointResponse{" +
-                "id=" + (id != null ? id : "is empty") +
-                ", test=" + (testId != null ? testId : "is empty") +
+                "frequency=" + frequency +
+                ", id=" + id +
+                ", intensityLevel=" + intensityLevel +
+                ", testId=" + testId +
                 ", status='" + status + '\'' +
                 '}';
     }

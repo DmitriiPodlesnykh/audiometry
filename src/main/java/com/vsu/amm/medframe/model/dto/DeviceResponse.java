@@ -7,7 +7,7 @@ public class DeviceResponse extends AbstractDeviceDto{
 
     private Long id;
 
-    private Set<DevicePointResponse> points = new TreeSet<DevicePointResponse>();
+    private Set<DevicePointElement> points = new TreeSet<DevicePointElement>();
 
     public Long getId() {
         return id;
@@ -17,11 +17,11 @@ public class DeviceResponse extends AbstractDeviceDto{
         this.id = id;
     }
 
-    public Set<DevicePointResponse> getPoints() {
+    public Set<DevicePointElement> getPoints() {
         return points;
     }
 
-    public void setPoints(Set<DevicePointResponse> points) {
+    public void setPoints(Set<DevicePointElement> points) {
         this.points = points;
     }
 

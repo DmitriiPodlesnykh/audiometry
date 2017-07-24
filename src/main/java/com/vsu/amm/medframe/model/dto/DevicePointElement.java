@@ -1,10 +1,12 @@
 package com.vsu.amm.medframe.model.dto;
 
-public class DevicePointResponse extends AbstractDevicePointDto implements Comparable{
+public class DevicePointElement extends AbstractPointElement implements Comparable{
 
     private Long id;
 
     private Long deviceId;
+
+    private double soundValue;
 
     public Long getDeviceId() {
         return deviceId;
@@ -22,9 +24,17 @@ public class DevicePointResponse extends AbstractDevicePointDto implements Compa
         this.id = id;
     }
 
+    public double getSoundValue() {
+        return soundValue;
+    }
+
+    public void setSoundValue(double soundValue) {
+        this.soundValue = soundValue;
+    }
+
     @Override
     public String toString() {
-        return "DevicePointResponse{" +
+        return "DevicePointElement{" +
                 "frequency=" + frequency +
                 ", id=" + id +
                 ", intensityLevel=" + intensityLevel +
@@ -39,7 +49,7 @@ public class DevicePointResponse extends AbstractDevicePointDto implements Compa
         int LESS = -1;
         int EQUAL = 0;
 
-        DevicePointResponse response = (DevicePointResponse) o;
+        DevicePointElement response = (DevicePointElement) o;
 
         if(this.id.equals(response.deviceId)) {
             return EQUAL;

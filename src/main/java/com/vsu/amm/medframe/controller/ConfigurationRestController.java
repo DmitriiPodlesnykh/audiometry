@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.controller;
 
-import com.vsu.amm.medframe.model.dto.DevicePointResponse;
+import com.vsu.amm.medframe.model.dto.DevicePointElement;
 import com.vsu.amm.medframe.model.dto.DeviceResponse;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @RestController
 @RequestMapping("/rest/configuration")
@@ -36,8 +33,8 @@ public class ConfigurationRestController {
     }
 
     @RequestMapping(value = "/devices/{deviceId}/{devicePointId}", method = GET)
-    public DevicePointResponse getDevicePoint(@PathVariable("deviceId") Long deviceID,
-                                              @PathVariable("devicePointId") Long devicePointId) {
+    public DevicePointElement getDevicePoint(@PathVariable("deviceId") Long deviceID,
+                                             @PathVariable("devicePointId") Long devicePointId) {
         return devicePointService.getOne(devicePointId);
     }
 

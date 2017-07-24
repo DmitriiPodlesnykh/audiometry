@@ -1,6 +1,6 @@
 package com.vsu.amm.medframe.component.sound;
 
-import com.vsu.amm.medframe.model.dto.DevicePointResponse;
+import com.vsu.amm.medframe.model.dto.DevicePointElement;
 import com.vsu.amm.medframe.enums.BaseIntensityLevel;
 import org.apache.log4j.Logger;
 
@@ -29,7 +29,7 @@ class SoundUtils {
 
     //private static double
 
-    static Double calculateSoundVolume(Integer intensityLevel, DevicePointResponse intensityZero) {
+    static Double calculateSoundVolume(Integer intensityLevel, DevicePointElement intensityZero) {
 
         return calculateDeltaVolume(intensityLevel)*intensityZero.getSoundValue();
         //return 0.01;

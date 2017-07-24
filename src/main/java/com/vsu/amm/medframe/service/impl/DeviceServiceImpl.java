@@ -4,7 +4,6 @@ import com.vsu.amm.medframe.component.mapper.impl.DeviceMapper;
 import com.vsu.amm.medframe.component.sound.SoundPointsGenerator;
 import com.vsu.amm.medframe.model.dto.CreateDeviceRequest;
 import com.vsu.amm.medframe.model.dto.DeviceResponse;
-import com.vsu.amm.medframe.model.dto.DevicePointResponse;
 import com.vsu.amm.medframe.model.entity.Device;
 import com.vsu.amm.medframe.model.entity.DevicePoint;
 import com.vsu.amm.medframe.repository.DevicePointRepository;
@@ -41,7 +40,7 @@ public class DeviceServiceImpl implements DeviceService {
     public DeviceResponse generatedPointsAndSave(DeviceResponse deviceResponse) {
         //TODO fix it
 //        deviceResponse.setPoints(
-//                (List<DevicePointResponse>) soundPointsGenerator.generatePoints(
+//                (List<DevicePointElement>) soundPointsGenerator.generatePoints(
 //                        deviceResponse.setPoints().get(ZERO_INTENSITY_1000HZ_POINT_NUMBER)));
 //        log.info(deviceResponse.setPoints().toString());
 

@@ -2,7 +2,7 @@ var points = [];
 $(document).ready(function () {
 
     $("#addTemplate").click(function (event) {
-        var templateDto = new Object();
+        var templateDto = {};
         templateDto.authorId = "1";
         templateDto.name = document.getElementById('templateName').value;
         templateDto.description = document.getElementById('templateDescription').value;
@@ -40,7 +40,7 @@ $(document).ready(function () {
 
     $("#addTemplatePointLocal").click(function (event) {
 
-        var pointDto = new Object();
+        var pointDto = {};
         pointDto.frequency = document.getElementById('frequencyLocal').value;
         pointDto.intensityLevel = document.getElementById('intensityLevelLocal').value;
         points.push(pointDto);

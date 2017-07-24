@@ -6,7 +6,7 @@
 
         $("#add-template-point").click(function (event) {
             var templateUrl = getTemplateIdByUrl();
-            pointDto = new Object();
+            pointDto = {};
             pointDto.frequency = document.getElementById('frequency').value;
             pointDto.intensityLevel = document.getElementById('intensityLevel').value;
             pointDto.templateId = templateUrl;

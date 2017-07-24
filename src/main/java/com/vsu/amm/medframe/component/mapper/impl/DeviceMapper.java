@@ -1,7 +1,7 @@
 package com.vsu.amm.medframe.component.mapper.impl;
 
 import com.vsu.amm.medframe.component.mapper.Mapper;
-import com.vsu.amm.medframe.model.dto.DevicePointResponse;
+import com.vsu.amm.medframe.model.dto.DevicePointElement;
 import com.vsu.amm.medframe.model.dto.DeviceResponse;
 import com.vsu.amm.medframe.model.entity.Device;
 import com.vsu.amm.medframe.model.entity.DevicePoint;
@@ -48,18 +48,18 @@ public class DeviceMapper implements Mapper<Device, DeviceResponse> {
         return dto;
     }
 
-    private List<DevicePointResponse> mapPointCollectionToDto(Collection<DevicePoint> points) {
-        List<DevicePointResponse> pointDtos = new ArrayList<DevicePointResponse>();
+    private List<DevicePointElement> mapPointCollectionToDto(Collection<DevicePoint> points) {
+        List<DevicePointElement> pointDtos = new ArrayList<DevicePointElement>();
         for (DevicePoint point : points) {
-            DevicePointResponse pointDto = devicePointMapper.mapToDto(point);
+            DevicePointElement pointDto = devicePointMapper.mapToDto(point);
             pointDtos.add(pointDto);
         }
         return pointDtos;
     }
 
-    private List<DevicePoint> mapPointDtoCollectionToPoint(Collection<DevicePointResponse> pointDtos) {
+    private List<DevicePoint> mapPointDtoCollectionToPoint(Collection<DevicePointElement> pointDtos) {
         List<DevicePoint> points = new ArrayList<DevicePoint>();
-        for (DevicePointResponse pointDto : pointDtos) {
+        for (DevicePointElement pointDto : pointDtos) {
             DevicePoint point = devicePointMapper.mapToEntity(pointDto);
             points.add(point);
         }

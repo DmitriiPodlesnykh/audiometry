@@ -5,6 +5,6 @@ import java.util.Set;
 
 public class UpdateDeviceRequest extends AbstractDeviceDto{
 
-    private Set<Long> deletedPoint = new HashSet<Long>();
+    //private Set<Long> deletedPoints = new HashSet<Long>();
 
 }

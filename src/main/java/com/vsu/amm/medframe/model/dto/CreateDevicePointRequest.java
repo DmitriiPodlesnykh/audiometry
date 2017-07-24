@@ -1,6 +1,16 @@
 package com.vsu.amm.medframe.model.dto;
 
-public class CreateDevicePointRequest extends AbstractDevicePointDto {
+public class CreateDevicePointRequest extends AbstractPointElement {
+
+    protected double soundValue;
+
+    public double getSoundValue() {
+        return soundValue;
+    }
+
+    public void setSoundValue(double soundValue) {
+        this.soundValue = soundValue;
+    }
 
     @Override
     public int hashCode() {

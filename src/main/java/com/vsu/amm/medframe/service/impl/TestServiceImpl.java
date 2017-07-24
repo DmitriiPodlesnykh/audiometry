@@ -39,21 +39,21 @@ public class TestServiceImpl implements TestService {
     @Override
     public TestResponse save(CreateTestRequest requestDto) {
         Test test = modelMapper.map(requestDto, Test.class);
-        if(test!=null) {
+        if (test != null) {
             LOGGER.info(test);
-        }else {
+        } else {
             LOGGER.info("test is empty");
         }
         test = testRepository.save(test);
-        if(test!=null) {
+        if (test != null) {
             LOGGER.info(test);
-        }else {
+        } else {
             LOGGER.info("test is empty");
         }
         TestResponse testResponse = modelMapper.map(test, TestResponse.class);
-        if(testResponse!=null) {
+        if (testResponse != null) {
             LOGGER.info(testResponse);
-        }else {
+        } else {
             LOGGER.info("testResponse is empty");
         }
         return testResponse;

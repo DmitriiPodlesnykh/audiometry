@@ -2,7 +2,7 @@ package com.vsu.amm.medframe.controller;
 
 import com.vsu.amm.medframe.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.medframe.model.dto.CreateDeviceRequest;
-import com.vsu.amm.medframe.model.dto.DevicePointResponse;
+import com.vsu.amm.medframe.model.dto.DevicePointElement;
 import com.vsu.amm.medframe.model.dto.DeviceResponse;
 import com.vsu.amm.medframe.service.DevicePointService;
 import com.vsu.amm.medframe.service.DeviceService;
@@ -60,10 +60,10 @@ public class DeviceRestController {
 
 
     @RequestMapping(value = "/{deviceID}", method = PUT)
-    public DevicePointResponse createPoint(@PathVariable Long deviceID,
-                                           @RequestBody @Valid CreateDevicePointRequest pointDto) {
+    public DevicePointElement createPoint(@PathVariable Long deviceID,
+                                          @RequestBody @Valid CreateDevicePointRequest pointDto) {
         //todo fix it
         //return devicePointService.save(pointDto);
-        return new DevicePointResponse();
+        return new DevicePointElement();
     }
 }
