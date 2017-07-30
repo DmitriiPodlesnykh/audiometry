@@ -1,0 +1,51 @@
+package com.vsu.amm.audiometry.enums;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public enum Frequency {
+    FREQUENCY_40_HZ(40),
+    FREQUENCY_100_HZ(100),
+    FREQUENCY_250_HZ(250),
+    FREQUENCY_1000_HZ(1000),
+    FREQUENCY_2000_HZ(2000),
+    FREQUENCY_4000_HZ(4000),
+    FREQUENCY_8000_HZ(8000),
+    FREQUENCY_16000_HZ(16000),
+    NULL_VALUE(0);
+
+    private int value;
+
+    Frequency(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public static Frequency parse(Integer frequencyValue) {
+        Frequency frequency = NULL_VALUE;
+        for (Frequency item : Frequency.values()) {
+            if (frequencyValue != null && item.getValue()==frequencyValue) {
+                frequency = item;
+                break;
+            }
+        }
+        return frequency;
+    }
+
+    public static List<String> getAvailableValues() {
+        List<String> values = new ArrayList();
+        for(Frequency item : Frequency.values()) {
+            if(!item.equals(NULL_VALUE)) {
+                values.add(String.valueOf(item.getValue()));
+            }
+        }
+        return values;
+    }
+}
