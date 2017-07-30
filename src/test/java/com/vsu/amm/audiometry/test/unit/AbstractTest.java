@@ -1,4 +1,4 @@
-package com.vsu.amm.audiometry.test;
+package com.vsu.amm.audiometry.test.unit;
 
 import com.vsu.amm.audiometry.app.Application;
 import org.apache.log4j.Logger;

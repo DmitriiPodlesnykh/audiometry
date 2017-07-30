@@ -63,7 +63,8 @@ public class SoundPointsGenerator {
         for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
             if (!intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
                 DevicePointElement pointDto = generatePoint(intensityLevel.getValue(), zeroPoint);
-                devicePointService.save(pointDto);
+                //TODO fix it
+                //devicePointService.save(pointDto);
             }
         }
     }

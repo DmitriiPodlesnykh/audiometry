@@ -1,4 +1,4 @@
-package com.vsu.amm.audiometry.test.controller;
+package com.vsu.amm.audiometry.test.unit.controller;
 
 import com.vsu.amm.audiometry.service.PatientService;
 import com.vsu.amm.audiometry.service.TemplateService;

@@ -1,4 +1,4 @@
-package com.vsu.amm.audiometry.test.controller;
+package com.vsu.amm.audiometry.test.unit.controller;
 
 import com.vsu.amm.audiometry.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

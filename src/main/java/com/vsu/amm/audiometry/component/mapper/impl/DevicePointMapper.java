@@ -48,9 +48,10 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointElement
         if (devicePoint.getIntensityLevel() != null) {
             dto.setIntensityLevel(devicePoint.getIntensityLevel());
         }
+        /*TODO fix it
         if (devicePoint.getVolumeValue() != null) {
             dto.setSoundValue(devicePoint.getVolumeValue().doubleValue());
-        }
+        }*/
         return dto;
     }
 }

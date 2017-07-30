@@ -1,6 +1,6 @@
-package com.vsu.amm.audiometry.test.repository;
+package com.vsu.amm.audiometry.test.unit.repository;
 
-import com.vsu.amm.audiometry.test.AbstractTest;
+import com.vsu.amm.audiometry.test.unit.AbstractTest;
 import org.junit.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 

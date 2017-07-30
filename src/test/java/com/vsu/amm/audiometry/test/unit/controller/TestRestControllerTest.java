@@ -1,8 +1,8 @@
-package com.vsu.amm.audiometry.test.controller;
+package com.vsu.amm.audiometry.test.unit.controller;
 
 import com.vsu.amm.audiometry.model.dto.CreateTestRequest;
 import com.vsu.amm.audiometry.service.TestService;
-import com.vsu.amm.audiometry.test.AbstractTest;
+import com.vsu.amm.audiometry.test.unit.AbstractTest;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

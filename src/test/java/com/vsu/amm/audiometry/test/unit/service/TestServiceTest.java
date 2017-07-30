@@ -1,8 +1,8 @@
-package com.vsu.amm.audiometry.test.service;
+package com.vsu.amm.audiometry.test.unit.service;
 
 import com.vsu.amm.audiometry.model.dto.CreateTestRequest;
 import com.vsu.amm.audiometry.service.TestService;
-import com.vsu.amm.audiometry.test.AbstractTest;
+import com.vsu.amm.audiometry.test.unit.AbstractTest;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

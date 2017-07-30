@@ -1,6 +1,6 @@
-package com.vsu.amm.audiometry.test.service;
+package com.vsu.amm.audiometry.test.unit.service;
 
-import com.vsu.amm.audiometry.test.AbstractTest;
+import com.vsu.amm.audiometry.test.unit.AbstractTest;
 import org.junit.Test;
 
 import static junit.framework.Assert.*;

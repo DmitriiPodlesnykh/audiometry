@@ -1,6 +1,7 @@
 package com.vsu.amm.audiometry.service.impl;
 
 import com.vsu.amm.audiometry.component.mapper.impl.DevicePointMapper;
+import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
 import com.vsu.amm.audiometry.repository.DevicePointRepository;
@@ -24,8 +25,20 @@ public class DevicePointServiceImpl implements DevicePointService{
     @Autowired
     DevicePointMapper mapper;
 
+
     @Override
-    public DevicePointElement save(DevicePointElement pointDto) {
+    public DevicePointElement save(CreateDevicePointRequest pointRequest) {
+        DevicePointElement pointElement = new DevicePointElement();
+        pointElement.setSoundValue(pointRequest.getSoundValue());
+        pointElement.setIntensityLevel(pointRequest.getIntensityLevel());
+        pointElement.setFrequency(pointRequest.getFrequency());
+        pointElement.setDeviceId(999L);
+        pointElement.setId(9999L);
+        return pointElement;
+    }
+
+    @Override
+    public DevicePointElement update(DevicePointElement pointDto) {
         DevicePoint point = mapper.mapToEntity(pointDto);
         point = devicePointRepository.saveAndFlush(point);
         return mapper.mapToDto(point);
