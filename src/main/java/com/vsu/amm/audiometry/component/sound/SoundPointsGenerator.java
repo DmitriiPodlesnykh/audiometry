@@ -2,16 +2,12 @@ package com.vsu.amm.audiometry.component.sound;
 
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
 import com.vsu.amm.audiometry.model.entity.Device;
-import com.vsu.amm.audiometry.enums.BaseIntensityLevel;
-import com.vsu.amm.audiometry.enums.Frequency;
 import com.vsu.amm.audiometry.service.DevicePointService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class SoundPointsGenerator {
@@ -21,31 +17,31 @@ public class SoundPointsGenerator {
     @Autowired
     private DevicePointService devicePointService;
 
+    private Set<Integer> availableFrequencies = new TreeSet<Integer>();
+
     public Collection<DevicePointElement> generatePoints(DevicePointElement startPoint) {
         Collection<DevicePointElement> points = new ArrayList<DevicePointElement>();
 
         double amplitudeAtZeroIntensityLevel = startPoint.getSoundValue();
-
-        for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
-            if (intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
-                generatePointsWithSomeAmplitude(points, amplitudeAtZeroIntensityLevel, intensityLevel);
-            } else {
-                double currentAmplitude = SoundUtils.createAmplitudeValue(intensityLevel, amplitudeAtZeroIntensityLevel);
-                generatePointsWithSomeAmplitude(points, currentAmplitude, intensityLevel);
-            }
-        }
+//todo fix it
+//        for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
+//            if (intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
+//                generatePointsWithSomeAmplitude(points, amplitudeAtZeroIntensityLevel, intensityLevel);
+//            } else {
+//                double currentAmplitude = SoundUtils.createAmplitudeValue(intensityLevel, amplitudeAtZeroIntensityLevel);
+//                generatePointsWithSomeAmplitude(points, currentAmplitude, intensityLevel);
+//            }
+//        }
         return points;
     }
 
-    private Collection<DevicePointElement> generatePointsWithSomeAmplitude(Collection<DevicePointElement> points, double amplitude, BaseIntensityLevel intensityLevel) {
-        for (Frequency frequency : Frequency.values()) {
-            if (!frequency.equals(Frequency.NULL_VALUE)) {
+    private Collection<DevicePointElement> generatePointsWithSomeAmplitude(Collection<DevicePointElement> points, double amplitude, Integer intensityLevel) {
+        for(Integer frequency : availableFrequencies) {
                 DevicePointElement pointDto = new DevicePointElement();
-                pointDto.setIntensityLevel(intensityLevel.getValue());
-                pointDto.setFrequency(frequency.getValue());
+                pointDto.setIntensityLevel(intensityLevel);
+                pointDto.setFrequency(frequency);
                 pointDto.setSoundValue(amplitude);
                 points.add(pointDto);
-            }
         }
         return points;
     }
@@ -60,13 +56,13 @@ public class SoundPointsGenerator {
     }
 
     private void generatePointForBaseIntensityLevelRange(DevicePointElement zeroPoint) {
-        for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
-            if (!intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
-                DevicePointElement pointDto = generatePoint(intensityLevel.getValue(), zeroPoint);
-                //TODO fix it
-                //devicePointService.save(pointDto);
-            }
-        }
+// todo fix it
+// for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
+//            if (!intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
+//                DevicePointElement pointDto = generatePoint(intensityLevel.getValue(), zeroPoint);
+//                devicePointService.save(pointDto);
+//            }
+//        }
     }
 
     private DevicePointElement generatePoint(int intensityLevel, DevicePointElement deviceZero) {

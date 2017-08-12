@@ -1,8 +1,5 @@
 package com.vsu.amm.audiometry.model.entity;
 
-
-import com.vsu.amm.audiometry.enums.Frequency;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,9 +15,9 @@ public class TemplateFrequency {
     @JoinColumn(name = "TEMPLATE_ID")
     private Template template;
 
-    private Frequency value;
+    private Integer value;
 
-    public TemplateFrequency(Long id, Template template, Frequency value) {
+    public TemplateFrequency(Long id, Template template, Integer value) {
         this.id = id;
         this.template = template;
         this.value = value;
@@ -42,11 +39,11 @@ public class TemplateFrequency {
         this.template = template;
     }
 
-    public Frequency getValue() {
+    public Integer getValue() {
         return value;
     }
 
-    public void setValue(Frequency value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

@@ -3,7 +3,6 @@ package com.vsu.amm.audiometry.component.mapper.impl;
 import com.vsu.amm.audiometry.component.mapper.Mapper;
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
-import com.vsu.amm.audiometry.enums.Frequency;
 import com.vsu.amm.audiometry.repository.DeviceRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointElement
         if (pointDto.getDeviceId() != null) {
             point.setDevice(deviceRepository.getOne(pointDto.getDeviceId()));
         }
-        point.setFrequency(Frequency.parse(pointDto.getFrequency()));
+        //point.setFrequency(Frequency.parse(pointDto.getFrequency()));
         point.setIntensityLevel(pointDto.getIntensityLevel());
         point.setVolumeValue(new BigDecimal(pointDto.getSoundValue()));
         if (pointDto.getId() != null) {
@@ -44,7 +43,7 @@ public class DevicePointMapper implements Mapper<DevicePoint, DevicePointElement
         if (devicePoint.getDevice() != null) {
             dto.setDeviceId(devicePoint.getDevice().getId());
         }
-        dto.setFrequency(devicePoint.getFrequency().getValue());
+        //dto.setFrequency(devicePoint.getFrequency().getValue());
         if (devicePoint.getIntensityLevel() != null) {
             dto.setIntensityLevel(devicePoint.getIntensityLevel());
         }

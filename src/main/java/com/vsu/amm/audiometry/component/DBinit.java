@@ -2,7 +2,6 @@ package com.vsu.amm.audiometry.component;
 
 import com.vsu.amm.audiometry.enums.TestPointStatus;
 import com.vsu.amm.audiometry.model.entity.*;
-import com.vsu.amm.audiometry.enums.Frequency;
 import com.vsu.amm.audiometry.repository.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,26 +19,12 @@ public class DBinit {
 
     private static final Logger LOGGER = Logger.getLogger(DBinit.class);
 
-
-    @Autowired
     private final UserRepository userRepository;
-
-    @Autowired
     private final PatientRepository patientRepository;
-
-    @Autowired
     private final TemplateRepository templateRepository;
-
-    @Autowired
     private final DeviceRepository deviceRepository;
-
-    @Autowired
     private final DevicePointRepository devicePointRepository;
-
-    @Autowired
     private final TestRepository testRepository;
-
-    @Autowired
     private final TestPointRepository testPointRepository;
 
     @Autowired
@@ -66,12 +51,13 @@ public class DBinit {
         User user = addTestUser();
 
         List<Device> devices = addTestDevices(4);
-        addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_40_HZ, 0, 0.5);
-        addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_100_HZ, 0, 0.4);
-        addDevicePoint(devices.get(0).getId(), Frequency.FREQUENCY_250_HZ, 0, 0.3);
+        //friquencies.
+        addDevicePoint(devices.get(0).getId(), 40, 0, 0.5);
+        addDevicePoint(devices.get(0).getId(), 100, 0, 0.4);
+        addDevicePoint(devices.get(0).getId(), 250, 0, 0.3);
 
         List<Template> templates = addTemplateForTest(5);
-        addTemplatePointForTest(templates.get(0), Frequency.FREQUENCY_40_HZ, 0);
+        addTemplatePointForTest(templates.get(0), 40, 0);
         Patient patient = addPatient(user);
         Test test = addTest(templates.get(0), patient);
         addTestPoint(test);
@@ -104,7 +90,7 @@ public class DBinit {
         return testRepository.saveAndFlush(test);
     }
 
-    private void addDevicePoint(Long deviceId, Frequency frequency, Integer intensityLevel, Double volumeValue) {
+    private void addDevicePoint(Long deviceId, Integer frequency, Integer intensityLevel, Double volumeValue) {
         DevicePoint point = new DevicePoint();
         point.setDevice(deviceRepository.getOne(deviceId));
         point.setVolumeValue(new BigDecimal(volumeValue));
@@ -125,7 +111,7 @@ public class DBinit {
         return devices;
     }
 
-    private void addTemplatePointForTest(Template template, Frequency frequency, Integer intensityLevel) {
+    private void addTemplatePointForTest(Template template, Integer frequency, Integer intensityLevel) {
         //TODO fix it
         /*TemplatePoint templatePoint = new TemplatePoint();
         templatePoint.setTemplate(template);

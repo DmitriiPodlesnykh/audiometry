@@ -1,7 +1,6 @@
 package com.vsu.amm.audiometry.component.sound;
 
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
-import com.vsu.amm.audiometry.enums.BaseIntensityLevel;
 import org.apache.log4j.Logger;
 
 import static java.lang.Math.pow;
@@ -10,8 +9,8 @@ class SoundUtils {
 
     private static final Logger log = Logger.getLogger(SoundUtils.class);
 
-    public static double createAmplitudeValue(BaseIntensityLevel intensityLevel, double amplitudeAtZeroIntensityLevel) {
-        log.info("createAmplitudeValue: intensityLevel = " + intensityLevel.getValue() +
+    public static double createAmplitudeValue(Integer intensityLevel, double amplitudeAtZeroIntensityLevel) {
+        log.info("createAmplitudeValue: intensityLevel = " + intensityLevel +
                 "; amplitudeAtZeroIntensityLevel = " + amplitudeAtZeroIntensityLevel);
         double ratio = getRatio(intensityLevel);
         log.info("current amplitude value =  amplitudeAtZeroIntensityLevel*ratio = " +amplitudeAtZeroIntensityLevel*ratio);
@@ -19,10 +18,10 @@ class SoundUtils {
     }
 
 
-    private static double getRatio(BaseIntensityLevel intensityLevel) {
-        log.info("  intensityLevel.getValue() = " + intensityLevel.getValue());
-        log.info("      intensityLevel.getValue()/20) = " + (double)intensityLevel.getValue()/20);
-        double result = pow(10, (double)intensityLevel.getValue()/20);
+    private static double getRatio(Integer intensityLevel) {
+        log.info("  intensityLevel.getValue() = " + intensityLevel);
+        log.info("      intensityLevel.getValue()/20) = " + (double)intensityLevel/20);
+        double result = pow(10, (double)intensityLevel/20);
         log.info("          pow(10, intensityLevel.getValue()/20) = " +result);
         return result;
     }

@@ -1,7 +1,5 @@
 package com.vsu.amm.audiometry.model.entity;
 
-import com.vsu.amm.audiometry.enums.Frequency;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -64,12 +62,12 @@ public class DevicePoint {
         this.soundValue = soundValue;
     }
 
-    public Frequency getFrequency() {
-        return Frequency.parse(this.frequency);
+    public Integer getFrequency() {
+        return frequency;
     }
 
-    public void setFrequency(Frequency frequency) {
-        this.frequency = frequency.getValue();
+    public void setFrequency(Integer frequency) {
+        this.frequency = frequency;
     }
 
     public List<TestPoint> getTestPoints() {

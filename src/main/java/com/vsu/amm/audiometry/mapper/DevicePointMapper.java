@@ -10,7 +10,6 @@ public interface DevicePointMapper {
     //@Mapping(source = "frequency", target = "Frequency.parse()")
     //DevicePoint mapToEntity(CreateDevicePointRequest dto);
 
-    @Mapping(source = "frequency.value", target = "frequency")
     CreateDevicePointRequest mapToCreateDevicePointRequest(DevicePoint entity);
 
     //DevicePointElement mapToDevicePointElement(DevicePoint entity);

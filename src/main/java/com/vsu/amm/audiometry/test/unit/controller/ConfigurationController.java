@@ -1,16 +1,18 @@
 package com.vsu.amm.audiometry.test.unit.controller;
 
 import com.vsu.amm.audiometry.model.dto.DeviceResponse;
-import com.vsu.amm.audiometry.enums.Frequency;
 import com.vsu.amm.audiometry.service.DevicePointService;
 import com.vsu.amm.audiometry.service.DeviceService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -23,9 +25,11 @@ public class ConfigurationController {
 
     @Autowired
     private DeviceService deviceService;
-
     @Autowired
     private DevicePointService devicePointService;
+
+    @Qualifier("availableFrequenciesSet")
+    private Set<Integer> availableFrequencies;
 
     @RequestMapping(value = "/devices/new", method = GET)
     public String getAddDeviceForm(ModelMap modelMap) {
@@ -44,7 +48,7 @@ public class ConfigurationController {
 
     @RequestMapping(value = "/devices/{deviceId}/add", method = GET)
     public String addDevicePointForm(@PathVariable("deviceId") Long deviceId, ModelMap modelMap) {
-        modelMap.addAttribute("frequencyListValues", Frequency.getAvailableValues());
+        modelMap.addAttribute("frequencyListValues", availableFrequencies);
         return "/addDevicePoint";
     }
 
