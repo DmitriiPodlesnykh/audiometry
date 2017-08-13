@@ -26,13 +26,13 @@ public class DevicePointServiceTest {
     @Test
     public void should_point_save_and_obtain_Id_and_deviceId_field() {
         CreateDevicePointRequest pointRequest = new CreateDevicePointRequest();
-        pointRequest.setSoundValue(CONSTANT_VALUE);
+        pointRequest.setVolumeValue(CONSTANT_VALUE);
         pointRequest.setIntensityLevel(CONSTANT_VALUE);
         pointRequest.setFrequency(CONSTANT_VALUE);
 
         DevicePointElement pointElement = devicePointService.save(pointRequest);
 
-        Assert.assertEquals(pointElement.getSoundValue(), CONSTANT_VALUE, DELTA);
+        Assert.assertEquals(pointElement.getVolumeValue(), CONSTANT_VALUE, DELTA);
         Assert.assertEquals(pointElement.getFrequency(), CONSTANT_VALUE);
         Assert.assertEquals(pointElement.getIntensityLevel(), CONSTANT_VALUE);
 

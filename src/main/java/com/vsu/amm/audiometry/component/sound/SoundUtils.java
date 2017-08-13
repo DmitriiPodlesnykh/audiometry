@@ -30,7 +30,7 @@ class SoundUtils {
 
     static Double calculateSoundVolume(Integer intensityLevel, DevicePointElement intensityZero) {
 
-        return calculateDeltaVolume(intensityLevel)*intensityZero.getSoundValue();
+        return calculateDeltaVolume(intensityLevel)*intensityZero.getVolumeValue();
         //return 0.01;
     }
 

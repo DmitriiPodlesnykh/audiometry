@@ -6,7 +6,7 @@ public class DevicePointElement extends AbstractPointElement implements Comparab
 
     private Long deviceId;
 
-    private double soundValue;
+    private double volumeValue;
 
     public Long getDeviceId() {
         return deviceId;
@@ -24,12 +24,12 @@ public class DevicePointElement extends AbstractPointElement implements Comparab
         this.id = id;
     }
 
-    public double getSoundValue() {
-        return soundValue;
+    public double getVolumeValue() {
+        return volumeValue;
     }
 
-    public void setSoundValue(double soundValue) {
-        this.soundValue = soundValue;
+    public void setVolumeValue(double volumeValue) {
+        this.volumeValue = volumeValue;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DevicePointElement extends AbstractPointElement implements Comparab
                 ", id=" + id +
                 ", intensityLevel=" + intensityLevel +
                 ", deviceId=" + deviceId +
-                ", soundValue=" + soundValue +
+                ", soundValue=" + volumeValue +
                 '}';
     }
 
@@ -60,10 +60,10 @@ public class DevicePointElement extends AbstractPointElement implements Comparab
         }
 
         if(this.intensityLevel > response.intensityLevel
-                && this.soundValue > response.soundValue) {
+                && this.volumeValue > response.volumeValue) {
             return MORE;
         } else if(this.intensityLevel < response.intensityLevel
-                && this.soundValue < response.soundValue) {
+                && this.volumeValue < response.volumeValue) {
             return LESS;
         } else if(this.intensityLevel == response.intensityLevel) {
             return EQUAL;

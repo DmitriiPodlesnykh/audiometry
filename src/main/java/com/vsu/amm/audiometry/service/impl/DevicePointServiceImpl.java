@@ -1,12 +1,13 @@
 package com.vsu.amm.audiometry.service.impl;
 
-import com.vsu.amm.audiometry.component.mapper.impl.DevicePointMapper;
+import com.vsu.amm.audiometry.mapper.DevicePointMapper;
 import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
 import com.vsu.amm.audiometry.repository.DevicePointRepository;
 import com.vsu.amm.audiometry.service.DevicePointService;
 import org.apache.log4j.Logger;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +23,10 @@ public class DevicePointServiceImpl implements DevicePointService{
     @Autowired
     DevicePointRepository devicePointRepository;
 
-    @Autowired
-    DevicePointMapper mapper;
-
-
     @Override
     public DevicePointElement save(CreateDevicePointRequest pointRequest) {
         DevicePointElement pointElement = new DevicePointElement();
-        pointElement.setSoundValue(pointRequest.getSoundValue());
+        pointElement.setVolumeValue(pointRequest.getVolumeValue());
         pointElement.setIntensityLevel(pointRequest.getIntensityLevel());
         pointElement.setFrequency(pointRequest.getFrequency());
         pointElement.setDeviceId(999L);
@@ -39,15 +36,15 @@ public class DevicePointServiceImpl implements DevicePointService{
 
     @Override
     public DevicePointElement update(DevicePointElement pointDto) {
-        DevicePoint point = mapper.mapToEntity(pointDto);
+        DevicePoint point = DevicePointMapper.INSTANCE.toEntity(pointDto);
         point = devicePointRepository.saveAndFlush(point);
-        return mapper.mapToDto(point);
+        return DevicePointMapper.INSTANCE.toDevicePointElement(point);
     }
 
     @Override
     public DevicePointElement getOne(Long id) {
         DevicePoint point = devicePointRepository.getOne(id);
-        return mapper.mapToDto(point);
+        return DevicePointMapper.INSTANCE.toDevicePointElement(point);
     }
 
     @Override
@@ -58,7 +55,7 @@ public class DevicePointServiceImpl implements DevicePointService{
         }
         List<DevicePointElement> pointDtos = new ArrayList<DevicePointElement>();
         for (DevicePoint point : points) {
-            DevicePointElement pointDto = mapper.mapToDto(point);
+            DevicePointElement pointDto = DevicePointMapper.INSTANCE.toDevicePointElement(point);
             pointDtos.add(pointDto);
         }
         LOGGER.info(pointDtos.toString());
@@ -73,12 +70,10 @@ public class DevicePointServiceImpl implements DevicePointService{
         }
         List<DevicePointElement> pointDtos = new ArrayList<DevicePointElement>();
         for (DevicePoint point : devicePoints) {
-            DevicePointElement pointDto = mapper.mapToDto(point);
+            DevicePointElement pointDto = DevicePointMapper.INSTANCE.toDevicePointElement(point);
             pointDtos.add(pointDto);
         }
         LOGGER.info(pointDtos.toString());
         return pointDtos;
     }
-
-
 }

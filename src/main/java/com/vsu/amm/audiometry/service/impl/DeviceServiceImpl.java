@@ -1,7 +1,7 @@
 package com.vsu.amm.audiometry.service.impl;
 
-import com.vsu.amm.audiometry.component.mapper.impl.DeviceMapper;
 import com.vsu.amm.audiometry.component.sound.SoundPointsGenerator;
+import com.vsu.amm.audiometry.mapper.DeviceMapper;
 import com.vsu.amm.audiometry.model.dto.CreateDeviceRequest;
 import com.vsu.amm.audiometry.model.dto.DeviceResponse;
 import com.vsu.amm.audiometry.model.entity.Device;
@@ -10,10 +10,13 @@ import com.vsu.amm.audiometry.repository.DevicePointRepository;
 import com.vsu.amm.audiometry.repository.DeviceRepository;
 import com.vsu.amm.audiometry.service.DeviceService;
 import org.apache.log4j.Logger;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,12 +32,16 @@ public class DeviceServiceImpl implements DeviceService {
     private DevicePointRepository devicePointRepository;
 
     @Autowired
-    private DeviceMapper mapper;
-
-    @Autowired
     private SoundPointsGenerator soundPointsGenerator;
 
+    private DeviceMapper deviceMapper;
+
     private static final int ZERO_INTENSITY_1000HZ_POINT_NUMBER = 0;
+
+    @PostConstruct
+    private void setup() {
+        deviceMapper = Mappers.getMapper(DeviceMapper.class);
+    }
 
     @Override
     public DeviceResponse generatedPointsAndSave(DeviceResponse deviceResponse) {
@@ -52,7 +59,7 @@ public class DeviceServiceImpl implements DeviceService {
     public DeviceResponse createNew() {
         Device device = new Device();
         device = deviceRepository.saveAndFlush(device);
-        return mapper.mapToDto(device);
+        return deviceMapper.mapToDeviceResponse(device);
     }
 
     @Override
@@ -61,7 +68,7 @@ public class DeviceServiceImpl implements DeviceService {
         // mapper.mapToEntity(dto);
         if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
             // TODO to fix it on bulk case
-            List<DevicePoint> points = device.getDevicePoints();
+            Collection<DevicePoint> points = device.getDevicePoints();
             device.setDevicePoints(Collections.EMPTY_LIST);
             device = deviceRepository.saveAndFlush(device);
             for (DevicePoint point : points) {
@@ -75,13 +82,13 @@ public class DeviceServiceImpl implements DeviceService {
         } else {
             device = deviceRepository.saveAndFlush(device);
         }
-        return mapper.mapToDto(device);
+        return deviceMapper.mapToDeviceResponse(device);
     }
 
     @Override
     public DeviceResponse getOne(Long id) {
         Device device = deviceRepository.findDeviceWithPointsByIdQuery(id);
-        return mapper.mapToDto(device);
+        return deviceMapper.mapToDeviceResponse(device);
     }
 
     @Override
@@ -92,7 +99,7 @@ public class DeviceServiceImpl implements DeviceService {
         }
         List<DeviceResponse> deviceDos = new ArrayList<DeviceResponse>();
         for (Device device : devices) {
-            DeviceResponse deviceResponse = mapper.mapToDto(device);
+            DeviceResponse deviceResponse = deviceMapper.mapToDeviceResponse(device);
             deviceDos.add(deviceResponse);
         }
         return deviceDos;
@@ -108,7 +115,7 @@ public class DeviceServiceImpl implements DeviceService {
             device.setSoundCardName(deviceResponse.getSoundCardName());
         }
         device = deviceRepository.saveAndFlush(device);
-        return mapper.mapToDto(device);
+        return deviceMapper.mapToDeviceResponse(device);
     }
 
     @Override
@@ -116,6 +123,6 @@ public class DeviceServiceImpl implements DeviceService {
         Device device = deviceRepository.findOne(deviceId);
         device = soundPointsGenerator.generateBasePoints(device);
         device = deviceRepository.saveAndFlush(device);
-        return mapper.mapToDto(device);
+        return deviceMapper.mapToDeviceResponse(device);
     }
 }

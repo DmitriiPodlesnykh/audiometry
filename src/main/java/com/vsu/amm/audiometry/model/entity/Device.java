@@ -2,6 +2,7 @@ package com.vsu.amm.audiometry.model.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,17 @@ public class Device {
     private String headPhoneName;
 
     @OneToMany(mappedBy = "device")
-    private List<DevicePoint> devicePoints = new ArrayList<DevicePoint>();
+    private Collection<DevicePoint> devicePoints = new ArrayList<DevicePoint>();
+
+    public Device(){
+
+    }
+
+    public Device(String soundCardName, String headPhoneName, List<DevicePoint> devicePoints) {
+        this.soundCardName = soundCardName;
+        this.headPhoneName = headPhoneName;
+        this.devicePoints = devicePoints;
+    }
 
     public Long getId() {
         return id;
@@ -46,11 +57,11 @@ public class Device {
         this.headPhoneName = headphoneName;
     }
 
-    public List<DevicePoint> getDevicePoints() {
+    public Collection<DevicePoint> getDevicePoints() {
         return devicePoints;
     }
 
-    public void setDevicePoints(List<DevicePoint> devicePoints) {
+    public void setDevicePoints(Collection<DevicePoint> devicePoints) {
         this.devicePoints = devicePoints;
     }
 

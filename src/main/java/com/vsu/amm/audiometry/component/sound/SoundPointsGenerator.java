@@ -22,7 +22,7 @@ public class SoundPointsGenerator {
     public Collection<DevicePointElement> generatePoints(DevicePointElement startPoint) {
         Collection<DevicePointElement> points = new ArrayList<DevicePointElement>();
 
-        double amplitudeAtZeroIntensityLevel = startPoint.getSoundValue();
+        double amplitudeAtZeroIntensityLevel = startPoint.getVolumeValue();
 //todo fix it
 //        for (BaseIntensityLevel intensityLevel : BaseIntensityLevel.values()) {
 //            if (intensityLevel.equals(BaseIntensityLevel.ZERO_INTENSITY_VALUE)) {
@@ -40,7 +40,7 @@ public class SoundPointsGenerator {
                 DevicePointElement pointDto = new DevicePointElement();
                 pointDto.setIntensityLevel(intensityLevel);
                 pointDto.setFrequency(frequency);
-                pointDto.setSoundValue(amplitude);
+                pointDto.setVolumeValue(amplitude);
                 points.add(pointDto);
         }
         return points;
@@ -72,7 +72,7 @@ public class SoundPointsGenerator {
         pointDto.setIntensityLevel(intensityLevel);
 
         Double soundValue = SoundUtils.calculateSoundVolume(intensityLevel, deviceZero);
-        pointDto.setSoundValue(soundValue);
+        pointDto.setVolumeValue(soundValue);
 
         return pointDto;
     }

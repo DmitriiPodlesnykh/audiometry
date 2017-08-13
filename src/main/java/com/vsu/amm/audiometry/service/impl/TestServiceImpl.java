@@ -1,7 +1,6 @@
 package com.vsu.amm.audiometry.service.impl;
 
-import com.vsu.amm.audiometry.component.mapper.impl.CreateTestDtoMapper;
-import com.vsu.amm.audiometry.component.mapper.impl.TestMapper;
+import com.vsu.amm.audiometry.mapper.TestMapper;
 import com.vsu.amm.audiometry.model.dto.CreateTestRequest;
 import com.vsu.amm.audiometry.model.dto.PatientDto;
 import com.vsu.amm.audiometry.model.dto.TestResponse;
@@ -9,7 +8,6 @@ import com.vsu.amm.audiometry.model.entity.Test;
 import com.vsu.amm.audiometry.repository.TestRepository;
 import com.vsu.amm.audiometry.service.TestService;
 import org.apache.log4j.Logger;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,21 +21,10 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private TestRepository testRepository;
 
-    @Autowired
-    private TestMapper testMapper;
-    private final CreateTestDtoMapper createTestDtoMapper;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    public TestServiceImpl(CreateTestDtoMapper createTestDtoMapper) {
-        this.createTestDtoMapper = createTestDtoMapper;
-    }
-
     @Override
     public TestResponse save(CreateTestRequest requestDto) {
-        Test test = modelMapper.map(requestDto, Test.class);
+        Test test = TestMapper.INSTANCE.mapToEntity(requestDto);
+                //modelMapper.map(requestDto, Test.class);
         if (test != null) {
             LOGGER.info(test);
         } else {
@@ -49,7 +36,7 @@ public class TestServiceImpl implements TestService {
         } else {
             LOGGER.info("test is empty");
         }
-        TestResponse testResponse = modelMapper.map(test, TestResponse.class);
+        TestResponse testResponse = TestMapper.INSTANCE.mapToTestResponse(test);
         if (testResponse != null) {
             LOGGER.info(testResponse);
         } else {
@@ -61,7 +48,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public TestResponse getTestById(Long id) {
         LOGGER.info("id = " + id.toString());
-        return testMapper.mapToDto(testRepository.findOne(id));
+        return TestMapper.INSTANCE.mapToTestResponse(testRepository.findOne(id));
     }
 
     @Override
@@ -77,6 +64,8 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<TestResponse> getAll() {
         List<Test> tests = testRepository.findAll();
-        return testMapper.mapToDto(tests);
+        //return testMapper.mapToDto(tests);
+        //todo fix it
+        return null;
     }
 }

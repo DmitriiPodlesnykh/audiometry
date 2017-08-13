@@ -25,10 +25,29 @@ public class DevicePoint {
     private Integer frequency;
 
     @Column(name = "VOLUME_VALUE")
-    private BigDecimal soundValue;
+    private BigDecimal volumeValue;
 
     @ManyToMany(mappedBy = "devicePoints")
     private List<TestPoint> testPoints = new ArrayList<TestPoint>();
+
+    public DevicePoint(){
+
+    }
+
+    public DevicePoint(Integer intensityLevel, Integer frequency, BigDecimal volumeValue) {
+        this.intensityLevel = intensityLevel;
+        this.frequency = frequency;
+        this.volumeValue = volumeValue;
+    }
+
+    public DevicePoint(Device device, Integer intensityLevel, Integer frequency,
+                       BigDecimal volumeValue, List<TestPoint> testPoints) {
+        this.device = device;
+        this.intensityLevel = intensityLevel;
+        this.frequency = frequency;
+        this.volumeValue = volumeValue;
+        this.testPoints = testPoints;
+    }
 
     public Long getId() {
         return id;
@@ -54,12 +73,12 @@ public class DevicePoint {
         this.intensityLevel = intensityLevel;
     }
 
-    public BigDecimal getSoundValue() {
-        return soundValue;
+    public BigDecimal getVolumeValue() {
+        return volumeValue;
     }
 
-    public void setVolumeValue(BigDecimal soundValue) {
-        this.soundValue = soundValue;
+    public void setVolumeValue(BigDecimal volumeValue) {
+        this.volumeValue = volumeValue;
     }
 
     public Integer getFrequency() {
@@ -85,7 +104,7 @@ public class DevicePoint {
                 ", deviceId=" + (device != null ? device.getId() : "is empty") +
                 ", intensityLevel=" + intensityLevel +
                 ", frequency=" + frequency +
-                ", volumeValue=" + soundValue +
+                ", volumeValue=" + volumeValue +
                 ", testPoints=" + testPoints.toString() +
                 '}';
     }

@@ -1,6 +1,5 @@
 package com.vsu.amm.audiometry;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +35,8 @@ public class MainConfiguration extends WebMvcConfigurerAdapter implements Embedd
 
     }
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper();
+//    }
 }
