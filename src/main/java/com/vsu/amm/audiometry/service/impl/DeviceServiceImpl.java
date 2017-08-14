@@ -34,14 +34,7 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private SoundPointsGenerator soundPointsGenerator;
 
-    private DeviceMapper deviceMapper;
-
     private static final int ZERO_INTENSITY_1000HZ_POINT_NUMBER = 0;
-
-    @PostConstruct
-    private void setup() {
-        deviceMapper = Mappers.getMapper(DeviceMapper.class);
-    }
 
     @Override
     public DeviceResponse generatedPointsAndSave(DeviceResponse deviceResponse) {
@@ -59,7 +52,7 @@ public class DeviceServiceImpl implements DeviceService {
     public DeviceResponse createNew() {
         Device device = new Device();
         device = deviceRepository.saveAndFlush(device);
-        return deviceMapper.mapToDeviceResponse(device);
+        return DeviceMapper.INSTANCE.toDeviceResponse(device);
     }
 
     @Override
@@ -82,13 +75,13 @@ public class DeviceServiceImpl implements DeviceService {
         } else {
             device = deviceRepository.saveAndFlush(device);
         }
-        return deviceMapper.mapToDeviceResponse(device);
+        return DeviceMapper.INSTANCE.toDeviceResponse(device);
     }
 
     @Override
     public DeviceResponse getOne(Long id) {
         Device device = deviceRepository.findDeviceWithPointsByIdQuery(id);
-        return deviceMapper.mapToDeviceResponse(device);
+        return DeviceMapper.INSTANCE.toDeviceResponse(device);
     }
 
     @Override
@@ -99,7 +92,7 @@ public class DeviceServiceImpl implements DeviceService {
         }
         List<DeviceResponse> deviceDos = new ArrayList<DeviceResponse>();
         for (Device device : devices) {
-            DeviceResponse deviceResponse = deviceMapper.mapToDeviceResponse(device);
+            DeviceResponse deviceResponse = DeviceMapper.INSTANCE.toDeviceResponse(device);
             deviceDos.add(deviceResponse);
         }
         return deviceDos;
@@ -115,7 +108,7 @@ public class DeviceServiceImpl implements DeviceService {
             device.setSoundCardName(deviceResponse.getSoundCardName());
         }
         device = deviceRepository.saveAndFlush(device);
-        return deviceMapper.mapToDeviceResponse(device);
+        return DeviceMapper.INSTANCE.toDeviceResponse(device);
     }
 
     @Override
@@ -123,6 +116,6 @@ public class DeviceServiceImpl implements DeviceService {
         Device device = deviceRepository.findOne(deviceId);
         device = soundPointsGenerator.generateBasePoints(device);
         device = deviceRepository.saveAndFlush(device);
-        return deviceMapper.mapToDeviceResponse(device);
+        return DeviceMapper.INSTANCE.toDeviceResponse(device);
     }
 }

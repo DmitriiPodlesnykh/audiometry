@@ -36,7 +36,7 @@ public class DevicePointServiceImpl implements DevicePointService{
 
     @Override
     public DevicePointElement update(DevicePointElement pointDto) {
-        DevicePoint point = DevicePointMapper.INSTANCE.toEntity(pointDto);
+        DevicePoint point = DevicePointMapper.INSTANCE.fromDevicePointElement(pointDto);
         point = devicePointRepository.saveAndFlush(point);
         return DevicePointMapper.INSTANCE.toDevicePointElement(point);
     }

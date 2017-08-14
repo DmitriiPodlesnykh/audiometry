@@ -50,7 +50,7 @@ public class DevicePointMapperTest {
         dto.setFrequency(TEST_FREQUENCY_VALUE);
         dto.setIntensityLevel(TEST_INTENSITY_LEVEL);
 
-        DevicePoint entity = DevicePointMapper.INSTANCE.toEntity(dto);
+        DevicePoint entity = DevicePointMapper.INSTANCE.fromCreateDevicePointRequest(dto);
 
         assertEquals(entity.getFrequency(), TEST_FREQUENCY_VALUE);
         assertEquals(entity.getIntensityLevel(), TEST_INTENSITY_LEVEL, DELTA);
@@ -80,7 +80,7 @@ public class DevicePointMapperTest {
         dto.setFrequency(TEST_FREQUENCY_VALUE);
         dto.setIntensityLevel(TEST_INTENSITY_LEVEL);
 
-        DevicePoint entity = DevicePointMapper.INSTANCE.toEntity(dto);
+        DevicePoint entity = DevicePointMapper.INSTANCE.fromDevicePointElement(dto);
 
         assertEquals(entity.getFrequency(), TEST_FREQUENCY_VALUE);
         assertEquals(entity.getIntensityLevel(), TEST_INTENSITY_LEVEL, DELTA);
@@ -97,15 +97,14 @@ public class DevicePointMapperTest {
         dto1.setVolumeValue(TEST_VOLUME_VALUE.doubleValue());
         dto1.setIntensityLevel(TEST_INTENSITY_LEVEL);
         dto1.setFrequency(TEST_FREQUENCY_VALUE);
-        //todo fix it
-        //        dtos.add(dto1);
-//
-//        Set<DevicePoint> entitySet = DevicePointMapper.INSTANCE.createDevicePointRequestPointsToDevicePoints(dtos);
-//
-//        DevicePoint entity = entitySet.iterator().next();
-//
-//        assertEquals(entity.getFrequency(), TEST_FREQUENCY_VALUE);
-//        assertEquals(entity.getIntensityLevel(), TEST_INTENSITY_LEVEL, DELTA);
-//        assertEquals(entity.getVolumeValue(), TEST_VOLUME_VALUE);
+        dtos.add(dto1);
+
+        Set<DevicePoint> entitySet = DevicePointMapper.INSTANCE.createDevicePointRequestPointsToDevicePoints(dtos);
+
+        DevicePoint entity = entitySet.iterator().next();
+
+        assertEquals(entity.getFrequency(), TEST_FREQUENCY_VALUE);
+        assertEquals(entity.getIntensityLevel(), TEST_INTENSITY_LEVEL, DELTA);
+        assertEquals(entity.getVolumeValue(), TEST_VOLUME_VALUE);
     }
 }

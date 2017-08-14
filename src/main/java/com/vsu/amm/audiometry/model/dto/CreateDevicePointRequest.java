@@ -33,6 +33,24 @@ public class CreateDevicePointRequest extends AbstractPointElement implements Co
 
     @Override
     public int compareTo(Object o) {
-        return 0;
+        int MORE = 1;
+        int LESS = -1;
+        int EQUAL = 0;
+
+        CreateDevicePointRequest compareObject = (CreateDevicePointRequest) o;
+        if (this.intensityLevel > compareObject.getIntensityLevel()) {
+            return MORE;
+        } else if (this.intensityLevel < compareObject.getIntensityLevel()) {
+            return LESS;
+        } else if (this.frequency > compareObject.getFrequency()) {
+            return MORE;
+        } else if (this.frequency < compareObject.getFrequency()) {
+            return LESS;
+        } else if (this.getVolumeValue() > compareObject.getVolumeValue()) {
+            return MORE;
+        } else if (this.getVolumeValue() > compareObject.getVolumeValue()) {
+            return LESS;
+        } else
+            return EQUAL;
     }
 }
