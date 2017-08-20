@@ -36,14 +36,10 @@ public class DevicePointServiceImpl implements DevicePointService{
     }
 
     @Override
-    public DevicePointElement save(CreateDevicePointRequest pointRequest) {
-        DevicePointElement pointElement = new DevicePointElement();
-        pointElement.setVolumeValue(pointRequest.getVolumeValue());
-        pointElement.setIntensityLevel(pointRequest.getIntensityLevel());
-        pointElement.setFrequency(pointRequest.getFrequency());
-        pointElement.setDeviceId(999L);
-        pointElement.setId(9999L);
-        return pointElement;
+    public DevicePointElement save(CreateDevicePointRequest dto) {
+        DevicePoint entity = DevicePointMapper.INSTANCE.fromCreateDevicePointRequest(dto);
+        devicePointRepository.saveAndFlush(entity);
+        return DevicePointMapper.INSTANCE.toDevicePointElement(entity);
     }
 
     @Override

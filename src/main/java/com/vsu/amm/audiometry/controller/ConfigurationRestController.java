@@ -1,8 +1,6 @@
 package com.vsu.amm.audiometry.controller;
 
-import com.vsu.amm.audiometry.model.dto.DevicePointElement;
 import com.vsu.amm.audiometry.model.dto.DeviceResponse;
-import com.vsu.amm.audiometry.service.DevicePointService;
 import com.vsu.amm.audiometry.service.DeviceService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +21,10 @@ public class ConfigurationRestController {
     @Autowired
     private DeviceService deviceService;
 
-    @Autowired
-    private DevicePointService devicePointService;
 
-
-    @RequestMapping(value="/devices/new", method = GET)
+    @RequestMapping(value = "/devices/new", method = GET)
     public DeviceResponse getAddDeviceForm(@RequestBody DeviceResponse deviceResponse) {
         return deviceService.generatedPointsAndSave(deviceResponse);
-    }
-
-    @RequestMapping(value = "/devices/{deviceId}/{devicePointId}", method = GET)
-    public DevicePointElement getDevicePoint(@PathVariable("deviceId") Long deviceID,
-                                             @PathVariable("devicePointId") Long devicePointId) {
-        return devicePointService.getOne(devicePointId);
     }
 
     @RequestMapping(value = "/devices/{deviceId}/generate/allpoints", method = POST)

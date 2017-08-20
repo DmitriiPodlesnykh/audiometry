@@ -1,8 +1,10 @@
 package com.vsu.amm.audiometry.test.unit.mapper;
 
+import com.vsu.amm.audiometry.mapper.DeviceMapper;
 import com.vsu.amm.audiometry.mapper.DevicePointMapper;
 import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
+import com.vsu.amm.audiometry.model.dto.DevicePointResponse;
 import com.vsu.amm.audiometry.model.entity.Device;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
 import org.junit.Before;
@@ -27,7 +29,6 @@ public class DevicePointMapperTest {
 
     @Before
     public void setup() {
-
        device = new Device();
        device.setId(TEST_DEVICE_ID);
     }
@@ -68,7 +69,6 @@ public class DevicePointMapperTest {
         assertEquals(dto.getFrequency(), TEST_FREQUENCY_VALUE.intValue());
         assertEquals(dto.getVolumeValue(), TEST_VOLUME_VALUE.doubleValue(), DELTA);
         assertEquals(dto.getDeviceId(), TEST_DEVICE_ID);
-        //assertEquals(dto.get);
     }
 
     @Test
@@ -106,5 +106,30 @@ public class DevicePointMapperTest {
         assertEquals(entity.getFrequency(), TEST_FREQUENCY_VALUE);
         assertEquals(entity.getIntensityLevel(), TEST_INTENSITY_LEVEL, DELTA);
         assertEquals(entity.getVolumeValue(), TEST_VOLUME_VALUE);
+    }
+
+    @Test
+    public void when_convert_devicePointResponse_to_entity_correct() {
+        DevicePointResponse dto =
+                new DevicePointResponse(TEST_FREQUENCY_VALUE, TEST_INTENSITY_LEVEL,
+                        TEST_VOLUME_VALUE.doubleValue(), TEST_ID);
+
+        DevicePoint entity = DevicePointMapper.INSTANCE.fromDevicePointResponse(dto);
+
+        assertEquals(entity.getFrequency(), TEST_FREQUENCY_VALUE);
+        assertEquals(entity.getIntensityLevel(), TEST_INTENSITY_LEVEL, DELTA);
+        assertEquals(entity.getVolumeValue(), TEST_VOLUME_VALUE);
+        assertEquals(entity.getId(), TEST_ID);
+    }
+
+    @Test
+    public void when_convert_entity_to_devicePointResponse_correct() {
+        DevicePoint entity = new DevicePoint(device, TEST_INTENSITY_LEVEL, TEST_FREQUENCY_VALUE,
+                TEST_VOLUME_VALUE, null);
+
+        DevicePointResponse dto = DevicePointMapper.INSTANCE.toDevicePointResponse(entity);
+        assertEquals(dto.getIntensityLevel(), TEST_INTENSITY_LEVEL);
+        assertEquals(dto.getFrequency(), TEST_FREQUENCY_VALUE.intValue());
+        assertEquals(dto.getVolumeValue(), TEST_VOLUME_VALUE.doubleValue(), DELTA);
     }
 }

@@ -60,7 +60,7 @@ public class DeviceMapperTest {
     @Test
     public void when_convert_createDeviceRequest_to_entity_correct() {
         Set<CreateDevicePointRequest> pointRequests = new HashSet<CreateDevicePointRequest>();
-        pointRequests.add(new CreateDevicePointRequest(TEST_FREQUENCY_VALUE,
+        pointRequests.add(new CreateDevicePointRequest(TEST_DEVICE_ID, TEST_FREQUENCY_VALUE,
                 TEST_INTENSITY_LEVEL, TEST_VOLUME_VALUE.doubleValue()));
         CreateDeviceRequest dto = new CreateDeviceRequest(TEST_SOUND_CARD_NAME, TEST_HEADPHONE_NAME, pointRequests);
 

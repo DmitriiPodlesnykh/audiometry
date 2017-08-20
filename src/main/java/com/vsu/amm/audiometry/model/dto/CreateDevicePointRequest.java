@@ -2,15 +2,25 @@ package com.vsu.amm.audiometry.model.dto;
 
 public class CreateDevicePointRequest extends AbstractPointElement implements Comparable{
 
+    private Long deviceId;
+
     private double volumeValue;
 
     public CreateDevicePointRequest() {
-
     }
 
-    public CreateDevicePointRequest(int frequency, int intensityLevel, double volumeValue) {
+    public CreateDevicePointRequest(Long deviceId, int frequency, int intensityLevel, double volumeValue) {
         super(frequency, intensityLevel);
+        this.deviceId = deviceId;
         this.volumeValue = volumeValue;
+    }
+
+    public Long getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(Long deviceId) {
+        this.deviceId = deviceId;
     }
 
     public double getVolumeValue() {
@@ -34,6 +44,7 @@ public class CreateDevicePointRequest extends AbstractPointElement implements Co
     @Override
     public String toString() {
         return "CreateDevicePointRequest{" +
+                "deviceId=" + deviceId +
                 "frequency=" + frequency +
                 ", intensityLevel=" + intensityLevel +
                 ", soundValue=" + volumeValue +

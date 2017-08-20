@@ -49,16 +49,19 @@ public class DeviceRestController {
     }
 
     @RequestMapping(value = "/{deviceId}", method = GET)
-    public DeviceResponse getDevice(@PathVariable("deviceId") Long deviceID) {
-        return deviceService.getOne(deviceID);
+    public DeviceResponse getDevice(@PathVariable("deviceId") Long deviceId) {
+        return deviceService.getOne(deviceId);
     }
-
 
     @RequestMapping(value = "/{deviceID}", method = PUT)
     public DevicePointElement createPoint(@PathVariable Long deviceID,
                                           @RequestBody @Valid CreateDevicePointRequest pointDto) {
-        //todo fix it
-        //return devicePointService.save(pointDto);
-        return new DevicePointElement();
+        return devicePointService.save(pointDto);
+    }
+
+    @RequestMapping(value = "/devices/{deviceId}/{devicePointId}", method = GET)
+    public DevicePointElement getDevicePoint(@PathVariable("deviceId") Long deviceID,
+                                             @PathVariable("devicePointId") Long devicePointId) {
+        return devicePointService.getOne(devicePointId);
     }
 }

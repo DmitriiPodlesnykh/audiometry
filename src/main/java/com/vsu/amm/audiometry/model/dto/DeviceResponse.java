@@ -10,7 +10,6 @@ public class DeviceResponse extends AbstractDeviceDto{
     private Set<DevicePointResponse> points = new TreeSet<>();
 
     public DeviceResponse() {
-
     }
 
     public DeviceResponse(String soundCardName, String headphoneName, Long id, Set<DevicePointResponse> points) {

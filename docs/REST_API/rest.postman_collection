@@ -25,9 +25,51 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"soundCardName\": \"soundCard\",\n    \"headphoneName\": \"headphone\",\n    \"id\": 105,\n    \"points\": [\n        {\n            \"frequency\": 1000,\n            \"intensityLevel\": 20,\n            \"id\": null,\n            \"deviceId\": null,\n            \"volumeValue\": 0.5\n        },\n        {\n            \"frequency\": 2000,\n            \"intensityLevel\": 20,\n            \"id\": null,\n            \"deviceId\": null,\n            \"volumeValue\": 0.5\n        }\n    ]\n}"
+							"raw": "{\n    \"soundCardName\": \"soundCard\",\n    \"headphoneName\": \"headphone\",\n    \"id\": 105,\n    \"points\": [\n        {\n            \"frequency\": 1000,\n            \"intensityLevel\": 20,\n            \"volumeValue\": 0.5\n        },\n        {\n            \"frequency\": 2000,\n            \"intensityLevel\": 20,\n            \"volumeValue\": 0.5\n        }\n    ]\n}"
 						},
 						"description": "add device"
+					},
+					"response": []
+				},
+				{
+					"name": "get all devices",
+					"request": {
+						"url": "http://localhost:8080/rest/devices",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update device with id=1",
+					"request": {
+						"url": "http://localhost:8080/rest/devices/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"headphoneName\" : \"RFRF\",\n    \"soundCardName\" : \"rfrfrf\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get device with id =1",
+					"request": {
+						"url": "http://localhost:8080/rest/devices/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
 					},
 					"response": []
 				}
