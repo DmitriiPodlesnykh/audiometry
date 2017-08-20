@@ -6,6 +6,14 @@ public abstract class AbstractPointElement {
 
     protected int intensityLevel;
 
+    public AbstractPointElement() {
+    }
+
+    public AbstractPointElement(int frequency, int intensityLevel) {
+        this.frequency = frequency;
+        this.intensityLevel = intensityLevel;
+    }
+
     public int getFrequency() {
         return frequency;
     }

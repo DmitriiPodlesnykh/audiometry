@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "MED_DEVICE_POINTS")
-public class DevicePoint {
+public class DevicePoint implements Comparable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class DevicePoint {
     @ManyToMany(mappedBy = "devicePoints")
     private List<TestPoint> testPoints = new ArrayList<TestPoint>();
 
-    public DevicePoint(){
+    public DevicePoint() {
 
     }
 
@@ -107,5 +107,27 @@ public class DevicePoint {
                 ", volumeValue=" + volumeValue +
                 ", testPoints=" + testPoints.toString() +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int MORE = 1;
+        int LESS = -1;
+        int EQUAL = 0;
+
+        DevicePoint devicePoint = (DevicePoint) o;
+        if (this.id != null && devicePoint.getId() != null && devicePoint.getId() == this.id) {
+            return EQUAL;
+        }
+        if (this.intensityLevel > devicePoint.getIntensityLevel()) {
+            return MORE;
+        } else if (this.intensityLevel < devicePoint.getIntensityLevel()) {
+            return LESS;
+        } else if (this.frequency > devicePoint.getFrequency()) {
+            return MORE;
+        } else if (this.frequency < devicePoint.getFrequency()) {
+            return LESS;
+        }
+        return EQUAL;
     }
 }

@@ -1,7 +1,6 @@
 package com.vsu.amm.audiometry.service.impl;
 
-
-import com.vsu.amm.audiometry.component.mapper.impl.TemplateMapper;
+import com.vsu.amm.audiometry.mapper.TemplateMapper;
 import com.vsu.amm.audiometry.model.dto.TemplateDto;
 import com.vsu.amm.audiometry.model.entity.Template;
 import com.vsu.amm.audiometry.repository.TemplateRepository;
@@ -19,15 +18,12 @@ public class TemplateServiceImpl implements TemplateService {
     private static final Logger LOGGER = Logger.getLogger(TemplateServiceImpl.class);
 
     @Autowired
-    private TemplateMapper templateMapper;
-
-    @Autowired
     private TemplateRepository templateRepository;
 
 
     @Override
     public TemplateDto save(TemplateDto templateDto) {
-        Template template = templateMapper.mapToEntity(templateDto);
+        Template template = TemplateMapper.INSTANCE.fromTemplateDto(templateDto);
         //TODO fix it
         /*if (template.getTemplatePoints() != null && !template.getTemplatePoints().isEmpty()) {
             // TODO to fix it on bulk case
@@ -43,7 +39,7 @@ public class TemplateServiceImpl implements TemplateService {
             template.setTemplatePoints(templatePoints);
         }*/
         template = templateRepository.saveAndFlush(template);
-        return templateMapper.mapToDto(template);
+        return TemplateMapper.INSTANCE.toTemplateDto(template);
     }
 
     private List<TemplateDto> convertToListTemplateDtos(List<Template> templates) {
@@ -54,7 +50,7 @@ public class TemplateServiceImpl implements TemplateService {
         List<TemplateDto> dtos = new ArrayList<TemplateDto>();
 
         for (Template t : templates) {
-            TemplateDto templateDto = templateMapper.mapToDto(t);
+            TemplateDto templateDto = TemplateMapper.INSTANCE.toTemplateDto(t);
             dtos.add(templateDto);
         }
         return dtos;
@@ -68,7 +64,7 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Override
     public TemplateDto getOne(Long id) {
-        return templateMapper.mapToDto(templateRepository.findOne(id));
+        return TemplateMapper.INSTANCE.toTemplateDto(templateRepository.findOne(id));
     }
 
     @Override

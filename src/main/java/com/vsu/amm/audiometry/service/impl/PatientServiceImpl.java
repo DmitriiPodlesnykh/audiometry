@@ -1,6 +1,6 @@
 package com.vsu.amm.audiometry.service.impl;
 
-import com.vsu.amm.audiometry.component.mapper.impl.PatientMapper;
+import com.vsu.amm.audiometry.mapper.PatientMapper;
 import com.vsu.amm.audiometry.model.dto.PatientDto;
 import com.vsu.amm.audiometry.model.entity.Patient;
 import com.vsu.amm.audiometry.repository.PatientRepository;
@@ -19,7 +19,12 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
     private final UserServiceImpl userService;
-    private final PatientMapper patientMapper;
+
+    @Autowired
+    PatientServiceImpl(PatientRepository patientRepository, UserServiceImpl userService) {
+        this.patientRepository = patientRepository;
+        this.userService = userService;
+    }
 
     @Override
     public PatientDto save(PatientDto patientDto) {
@@ -31,7 +36,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setDescription(patientDto.getDescription());
         //patient.setDoctor(userService.getOne(patientDto.getDoctorId()));
         patient = patientRepository.save(patient);
-        return patientMapper.mapToDto(patient);
+        return PatientMapper.INSTANCE.toPatientDto(patient);
     }
 
     @Override
@@ -42,7 +47,7 @@ public class PatientServiceImpl implements PatientService {
 
         List<PatientDto> patientsDto = new ArrayList<PatientDto>();
         for (Patient patient : patientRepository.findAll()) {
-            PatientDto patientDto = patientMapper.mapToDto(patient);
+            PatientDto patientDto = PatientMapper.INSTANCE.toPatientDto(patient);
             LOGGER.info("patient = " + patient.toString() + " ; + patientDto = " + patientDto.toString());
             patientsDto.add(patientDto);
         }
@@ -59,12 +64,5 @@ public class PatientServiceImpl implements PatientService {
 
     public List<Patient> getAllPatientsOfTheDoctor(Long doctorId) {
         return patientRepository.findByDoctorId(doctorId);
-    }
-
-    @Autowired
-    PatientServiceImpl(PatientRepository patientRepository, UserServiceImpl userService, PatientMapper patientMapper) {
-        this.patientRepository = patientRepository;
-        this.userService = userService;
-        this.patientMapper = patientMapper;
     }
 }

@@ -2,9 +2,18 @@ package com.vsu.amm.audiometry.model.dto;
 
 public abstract class AbstractDeviceDto {
 
-    protected String soundCardName;
+    private String soundCardName;
 
-    protected String headphoneName;
+    private String headphoneName;
+
+    AbstractDeviceDto() {
+
+    }
+
+    public AbstractDeviceDto(String soundCardName, String headphoneName) {
+        this.soundCardName = soundCardName;
+        this.headphoneName = headphoneName;
+    }
 
     public String getSoundCardName() {
         return soundCardName;

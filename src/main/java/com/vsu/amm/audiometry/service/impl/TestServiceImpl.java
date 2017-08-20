@@ -36,7 +36,7 @@ public class TestServiceImpl implements TestService {
         } else {
             LOGGER.info("test is empty");
         }
-        TestResponse testResponse = TestMapper.INSTANCE.mapToTestResponse(test);
+        TestResponse testResponse = TestMapper.INSTANCE.toTestResponse(test);
         if (testResponse != null) {
             LOGGER.info(testResponse);
         } else {
@@ -48,7 +48,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public TestResponse getTestById(Long id) {
         LOGGER.info("id = " + id.toString());
-        return TestMapper.INSTANCE.mapToTestResponse(testRepository.findOne(id));
+        return TestMapper.INSTANCE.toTestResponse(testRepository.findOne(id));
     }
 
     @Override

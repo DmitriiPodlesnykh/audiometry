@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "MED_DEVICES")
@@ -27,7 +28,7 @@ public class Device {
 
     }
 
-    public Device(String soundCardName, String headPhoneName, List<DevicePoint> devicePoints) {
+    public Device(String soundCardName, String headPhoneName, Set<DevicePoint> devicePoints) {
         this.soundCardName = soundCardName;
         this.headPhoneName = headPhoneName;
         this.devicePoints = devicePoints;

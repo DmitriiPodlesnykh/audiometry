@@ -7,6 +7,15 @@ public class CreateDeviceRequest extends AbstractDeviceDto {
 
     private Set<CreateDevicePointRequest> points = new HashSet<CreateDevicePointRequest>();
 
+    public CreateDeviceRequest() {
+
+    }
+
+    public CreateDeviceRequest(String soundCardName, String headphoneName, Set<CreateDevicePointRequest> points) {
+        super(soundCardName, headphoneName);
+        this.points = points;
+    }
+
     public Set<CreateDevicePointRequest> getPoints() {
         return points;
     }
@@ -18,8 +27,8 @@ public class CreateDeviceRequest extends AbstractDeviceDto {
     @Override
     public String toString() {
         return "CreateDeviceRequest{" +
-                "soundCardName='" + soundCardName + '\'' +
-                ", headphoneName='" + headphoneName + '\'' +
+                "soundCardName='" + super.getSoundCardName() + '\'' +
+                ", headphoneName='" + super.getHeadphoneName() + '\'' +
                 ", points=" + points +
                 '}';
     }

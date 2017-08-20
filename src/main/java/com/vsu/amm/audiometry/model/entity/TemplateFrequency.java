@@ -17,6 +17,10 @@ public class TemplateFrequency {
 
     private Integer value;
 
+    public TemplateFrequency() {
+
+    }
+
     public TemplateFrequency(Long id, Template template, Integer value) {
         this.id = id;
         this.template = template;

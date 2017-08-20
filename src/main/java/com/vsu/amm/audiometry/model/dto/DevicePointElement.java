@@ -32,6 +32,17 @@ public class DevicePointElement extends AbstractPointElement implements Comparab
         this.volumeValue = volumeValue;
     }
 
+    public DevicePointElement() {
+
+    }
+
+    public DevicePointElement(int frequency, int intensityLevel, Long id, Long deviceId, double volumeValue) {
+        super(frequency, intensityLevel);
+        this.id = id;
+        this.deviceId = deviceId;
+        this.volumeValue = volumeValue;
+    }
+
     @Override
     public String toString() {
         return "DevicePointElement{" +

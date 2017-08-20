@@ -4,6 +4,15 @@ public class CreateDevicePointRequest extends AbstractPointElement implements Co
 
     private double volumeValue;
 
+    public CreateDevicePointRequest() {
+
+    }
+
+    public CreateDevicePointRequest(int frequency, int intensityLevel, double volumeValue) {
+        super(frequency, intensityLevel);
+        this.volumeValue = volumeValue;
+    }
+
     public double getVolumeValue() {
         return volumeValue;
     }
