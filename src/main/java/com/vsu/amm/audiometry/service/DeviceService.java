@@ -9,7 +9,7 @@ public interface DeviceService {
 
     DeviceResponse save(CreateDeviceRequest dto);
 
-    DeviceResponse createNew();
+    DeviceResponse create();
 
     DeviceResponse getOne(Long id);
 

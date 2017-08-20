@@ -7,13 +7,13 @@ public class DeviceResponse extends AbstractDeviceDto{
 
     private Long id;
 
-    private Set<DevicePointElement> points = new TreeSet<DevicePointElement>();
+    private Set<DevicePointResponse> points = new TreeSet<>();
 
     public DeviceResponse() {
 
     }
 
-    public DeviceResponse(String soundCardName, String headphoneName, Long id, Set<DevicePointElement> points) {
+    public DeviceResponse(String soundCardName, String headphoneName, Long id, Set<DevicePointResponse> points) {
         super(soundCardName, headphoneName);
         this.id = id;
         this.points = points;
@@ -27,11 +27,11 @@ public class DeviceResponse extends AbstractDeviceDto{
         this.id = id;
     }
 
-    public Set<DevicePointElement> getPoints() {
+    public Set<DevicePointResponse> getPoints() {
         return points;
     }
 
-    public void setPoints(Set<DevicePointElement> points) {
+    public void setPoints(Set<DevicePointResponse> points) {
         this.points = points;
     }
 

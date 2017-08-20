@@ -1,4 +1,4 @@
-package com.vsu.amm.audiometry.test.unit.controller;
+package com.vsu.amm.audiometry.controller;
 
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
 import com.vsu.amm.audiometry.model.dto.DeviceResponse;

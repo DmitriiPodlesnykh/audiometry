@@ -1,12 +1,10 @@
 package com.vsu.amm.audiometry.model.dto;
 
-public class DevicePointElement extends AbstractPointElement implements Comparable{
+public class DevicePointElement extends AbstractDevicePointDto implements Comparable{
 
     private Long id;
 
     private Long deviceId;
-
-    private double volumeValue;
 
     public Long getDeviceId() {
         return deviceId;
@@ -24,62 +22,13 @@ public class DevicePointElement extends AbstractPointElement implements Comparab
         this.id = id;
     }
 
-    public double getVolumeValue() {
-        return volumeValue;
-    }
-
-    public void setVolumeValue(double volumeValue) {
-        this.volumeValue = volumeValue;
-    }
-
     public DevicePointElement() {
 
     }
 
-    public DevicePointElement(int frequency, int intensityLevel, Long id, Long deviceId, double volumeValue) {
-        super(frequency, intensityLevel);
+    public DevicePointElement(int frequency, int intensityLevel, double volumeValue, Long id, Long deviceId) {
+        super(frequency, intensityLevel, volumeValue);
         this.id = id;
         this.deviceId = deviceId;
-        this.volumeValue = volumeValue;
-    }
-
-    @Override
-    public String toString() {
-        return "DevicePointElement{" +
-                "frequency=" + frequency +
-                ", id=" + id +
-                ", intensityLevel=" + intensityLevel +
-                ", deviceId=" + deviceId +
-                ", soundValue=" + volumeValue +
-                '}';
-    }
-
-    @Override
-    public int compareTo(Object o) {
-        int MORE = 1;
-        int LESS = -1;
-        int EQUAL = 0;
-
-        DevicePointElement response = (DevicePointElement) o;
-
-        if(this.id.equals(response.deviceId)) {
-            return EQUAL;
-        }
-
-        if (!this.deviceId.equals(response.deviceId)) {
-            return LESS;
-        }
-
-        if(this.intensityLevel > response.intensityLevel
-                && this.volumeValue > response.volumeValue) {
-            return MORE;
-        } else if(this.intensityLevel < response.intensityLevel
-                && this.volumeValue < response.volumeValue) {
-            return LESS;
-        } else if(this.intensityLevel == response.intensityLevel) {
-            return EQUAL;
-        }
-
-        return MORE;
     }
 }

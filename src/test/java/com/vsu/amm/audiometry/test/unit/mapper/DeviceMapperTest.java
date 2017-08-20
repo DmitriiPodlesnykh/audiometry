@@ -1,10 +1,7 @@
 package com.vsu.amm.audiometry.test.unit.mapper;
 
 import com.vsu.amm.audiometry.mapper.DeviceMapper;
-import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
-import com.vsu.amm.audiometry.model.dto.CreateDeviceRequest;
-import com.vsu.amm.audiometry.model.dto.DevicePointElement;
-import com.vsu.amm.audiometry.model.dto.DeviceResponse;
+import com.vsu.amm.audiometry.model.dto.*;
 import com.vsu.amm.audiometry.model.entity.Device;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
 import org.junit.Test;
@@ -14,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DeviceMapperTest {
 
@@ -43,13 +40,17 @@ public class DeviceMapperTest {
 
     @Test
     public void when_convert_deviceResponse_to_entity_correct() {
-        Set<DevicePointElement> pointElements = new TreeSet<DevicePointElement>();
-        pointElements.add(new DevicePointElement(TEST_FREQUENCY_VALUE, TEST_INTENSITY_LEVEL,
-                1L, TEST_DEVICE_ID, TEST_VOLUME_VALUE.doubleValue()));
+        Set<DevicePointResponse> pointElements = new TreeSet<>();
+
+        DevicePointResponse pointElement = new DevicePointResponse();
+        pointElement.setFrequency(TEST_FREQUENCY_VALUE);
+        pointElement.setIntensityLevel(TEST_INTENSITY_LEVEL);
+        pointElement.setVolumeValue(TEST_VOLUME_VALUE.doubleValue());
+        pointElements.add(pointElement);
+
         DeviceResponse dto = new DeviceResponse(TEST_SOUND_CARD_NAME, TEST_HEADPHONE_NAME, TEST_DEVICE_ID, pointElements);
 
         Device entity = DeviceMapper.INSTANCE.fromDeviceResponse(dto);
-
         assertEquals(entity.getId(), TEST_DEVICE_ID);
         assertEquals(entity.getDevicePoints().size(), 1);
         assertEquals(entity.getHeadphoneName(), TEST_HEADPHONE_NAME);

@@ -3,6 +3,7 @@ package com.vsu.amm.audiometry.service.impl;
 import com.vsu.amm.audiometry.mapper.DevicePointMapper;
 import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
+import com.vsu.amm.audiometry.model.entity.Device;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
 import com.vsu.amm.audiometry.repository.DevicePointRepository;
 import com.vsu.amm.audiometry.service.DevicePointService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DevicePointServiceImpl implements DevicePointService{
@@ -22,6 +24,16 @@ public class DevicePointServiceImpl implements DevicePointService{
 
     @Autowired
     DevicePointRepository devicePointRepository;
+
+    @Override
+    public Set<DevicePoint> update(Device device) {
+        for(DevicePoint point : device.getDevicePoints()) {
+            point.setDevice(device);
+            point.setId(devicePointRepository.save(point).getId());
+        }
+        devicePointRepository.flush();
+        return device.getDevicePoints();
+    }
 
     @Override
     public DevicePointElement save(CreateDevicePointRequest pointRequest) {

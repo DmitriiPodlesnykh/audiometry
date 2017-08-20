@@ -23,4 +23,5 @@ public interface DeviceMapper {
 
     @Mapping(source = "points", target = "devicePoints")
     Device toEntity(CreateDeviceRequest dto);
+
 }

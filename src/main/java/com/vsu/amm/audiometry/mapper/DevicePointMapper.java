@@ -2,6 +2,7 @@ package com.vsu.amm.audiometry.mapper;
 
 import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.audiometry.model.dto.DevicePointElement;
+import com.vsu.amm.audiometry.model.dto.DevicePointResponse;
 import com.vsu.amm.audiometry.model.entity.DevicePoint;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -25,6 +26,11 @@ public interface DevicePointMapper {
 
     @InheritInverseConfiguration
     DevicePoint fromDevicePointElement(DevicePointElement dto);
+
+    DevicePointResponse toDevicePointResponse(DevicePoint entity);
+
+    @InheritInverseConfiguration
+    DevicePoint fromDevicePointResponse(DevicePointResponse dto);
 
     Set<DevicePoint> createDevicePointRequestPointsToDevicePoints(Set<CreateDevicePointRequest> dtoSet);
 }

@@ -1,4 +1,4 @@
-package com.vsu.amm.audiometry.test.unit.controller;
+package com.vsu.amm.audiometry.controller;
 
 import com.vsu.amm.audiometry.model.dto.CreateDevicePointRequest;
 import com.vsu.amm.audiometry.model.dto.CreateDeviceRequest;
@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping("rest/devices")
@@ -40,11 +38,8 @@ public class DeviceRestController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    public DeviceResponse create(@RequestBody CreateDeviceRequest deviceResponse) {
-        //todo fix it
-        //deviceResponse = deviceService.save(deviceResponse);
-        //return deviceResponse;
-        return new DeviceResponse();
+    public DeviceResponse create(@RequestBody CreateDeviceRequest dto) {
+        return deviceService.save(dto);
     }
 
     @RequestMapping(value = "/{deviceId}", method = POST)

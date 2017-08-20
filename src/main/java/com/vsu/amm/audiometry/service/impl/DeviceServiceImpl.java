@@ -5,36 +5,36 @@ import com.vsu.amm.audiometry.mapper.DeviceMapper;
 import com.vsu.amm.audiometry.model.dto.CreateDeviceRequest;
 import com.vsu.amm.audiometry.model.dto.DeviceResponse;
 import com.vsu.amm.audiometry.model.entity.Device;
-import com.vsu.amm.audiometry.model.entity.DevicePoint;
-import com.vsu.amm.audiometry.repository.DevicePointRepository;
 import com.vsu.amm.audiometry.repository.DeviceRepository;
+import com.vsu.amm.audiometry.service.DevicePointService;
 import com.vsu.amm.audiometry.service.DeviceService;
 import org.apache.log4j.Logger;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
 
-    private static final Logger log = Logger.getLogger(DeviceServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(DeviceServiceImpl.class);
 
-    @Autowired
-    private DeviceRepository deviceRepository;
-
-    @Autowired
-    private DevicePointRepository devicePointRepository;
-
-    @Autowired
-    private SoundPointsGenerator soundPointsGenerator;
+    private final DeviceRepository deviceRepository;
+    private final SoundPointsGenerator soundPointsGenerator;
+    private final DevicePointService devicePointService;
 
     private static final int ZERO_INTENSITY_1000HZ_POINT_NUMBER = 0;
+
+    @Autowired
+    public DeviceServiceImpl(DeviceRepository deviceRepository,
+                             SoundPointsGenerator soundPointsGenerator,
+                             DevicePointService devicePointService) {
+        this.deviceRepository = deviceRepository;
+        this.soundPointsGenerator = soundPointsGenerator;
+        this.devicePointService = devicePointService;
+    }
 
     @Override
     public DeviceResponse generatedPointsAndSave(DeviceResponse deviceResponse) {
@@ -49,7 +49,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DeviceResponse createNew() {
+    public DeviceResponse create() {
         Device device = new Device();
         device = deviceRepository.saveAndFlush(device);
         return DeviceMapper.INSTANCE.toDeviceResponse(device);
@@ -57,24 +57,12 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceResponse save(CreateDeviceRequest dto) {
-        Device device = new Device();//TODO fix it
-        // mapper.mapToEntity(dto);
-        if (device.getDevicePoints() != null && !device.getDevicePoints().isEmpty()) {
-            // TODO to fix it on bulk case
-            Collection<DevicePoint> points = device.getDevicePoints();
-            device.setDevicePoints(Collections.EMPTY_LIST);
-            device = deviceRepository.saveAndFlush(device);
-            for (DevicePoint point : points) {
-                log.info("point before add device = " + point.toString());
-                point.setDevice(device);
-                point = devicePointRepository.saveAndFlush(point);
-                log.info("point = " + point.toString());
-            }
-            device.setDevicePoints(points);
-            device = deviceRepository.saveAndFlush(device);
-        } else {
-            device = deviceRepository.saveAndFlush(device);
-        }
+        Device device = DeviceMapper.INSTANCE.toEntity(dto);
+        device = deviceRepository.saveAndFlush(device);
+        device.setDevicePoints(devicePointService.update(device));
+
+        LOGGER.info("device = " + device.toString());
+        LOGGER.info("DeviceResponse = " + DeviceMapper.INSTANCE.toDeviceResponse(device));
         return DeviceMapper.INSTANCE.toDeviceResponse(device);
     }
 

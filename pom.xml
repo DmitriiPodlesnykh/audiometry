@@ -50,8 +50,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
-
-        <!---->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -97,24 +95,23 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.5.3.RELEASE</version>
+            <version>${spring-boot-starter-test-version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>1.5.3.RELEASE</version>
+            <version>${spring-boot-starter-actuator-version}</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
+            <artifactId>mapstruct-jdk8</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
     </dependencies>
@@ -130,8 +127,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
-                    <source>1.8</source> <!-- or higher, depending on your project -->
-                    <target>1.8</target> <!-- or higher, depending on your project -->
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -151,5 +148,9 @@
         <postgresql-version>9.4.1211.jre7</postgresql-version>
         <spring-data-jpa-version>1.10.5.RELEASE</spring-data-jpa-version>
         <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
+        <spring-boot-starter-actuator-version>1.5.3.RELEASE</spring-boot-starter-actuator-version>
+        <spring-boot-starter-test-version>1.5.3.RELEASE</spring-boot-starter-test-version>
+        <java-version>1.8</java-version>
+        <junit-version>4.12</junit-version>
     </properties>
 </project>

@@ -29,7 +29,7 @@ public class CreateDeviceRequest extends AbstractDeviceDto {
         return "CreateDeviceRequest{" +
                 "soundCardName='" + super.getSoundCardName() + '\'' +
                 ", headphoneName='" + super.getHeadphoneName() + '\'' +
-                ", points=" + points +
+                ", points=" + points.toString() +
                 '}';
     }
 }

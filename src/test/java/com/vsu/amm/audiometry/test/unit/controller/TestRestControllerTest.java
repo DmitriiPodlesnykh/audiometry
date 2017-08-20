@@ -1,5 +1,6 @@
 package com.vsu.amm.audiometry.test.unit.controller;
 
+import com.vsu.amm.audiometry.controller.TestRestController;
 import com.vsu.amm.audiometry.model.dto.CreateTestRequest;
 import com.vsu.amm.audiometry.service.TestService;
 import com.vsu.amm.audiometry.test.unit.AbstractTest;

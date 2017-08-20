@@ -1,10 +1,7 @@
 package com.vsu.amm.audiometry.model.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "MED_DEVICES")
@@ -22,7 +19,7 @@ public class Device {
     private String headPhoneName;
 
     @OneToMany(mappedBy = "device")
-    private Collection<DevicePoint> devicePoints = new ArrayList<DevicePoint>();
+    private Set<DevicePoint> devicePoints = new HashSet<>();
 
     public Device(){
 
@@ -58,18 +55,18 @@ public class Device {
         this.headPhoneName = headphoneName;
     }
 
-    public Collection<DevicePoint> getDevicePoints() {
+    public Set<DevicePoint> getDevicePoints() {
         return devicePoints;
     }
 
-    public void setDevicePoints(Collection<DevicePoint> devicePoints) {
+    public void setDevicePoints(Set<DevicePoint> devicePoints) {
         this.devicePoints = devicePoints;
     }
 
     @Override
     public String toString() {
         return "Device{" +
-                "id=" + (id != null ? id : 0) +
+                "id=" + (id != null ? id : "empty") +
                 ", soundCardName='" + (soundCardName != null ? soundCardName : "is empty") + '\'' +
                 ", headphoneName='" + (headPhoneName != null ? headPhoneName : "is empty") + '\'' +
                 ", devicePoints=" + (devicePoints != null ? devicePoints : "is empty") +
