@@ -1,0 +1,94 @@
+{
+	"variables": [],
+	"info": {
+		"name": "audiometry rest",
+		"_postman_id": "a343210e-b5f1-85c3-0a66-3eab6aba3751",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Device",
+			"description": "",
+			"item": [
+				{
+					"name": "create device",
+					"request": {
+						"url": "http://localhost:8080/rest/devices",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"soundCardName\": \"soundCard\",\n    \"headphoneName\": \"headphone\",\n    \"id\": 105,\n    \"points\": [\n        {\n            \"frequency\": 1000,\n            \"intensityLevel\": 20,\n            \"volumeValue\": 0.5\n        },\n        {\n            \"frequency\": 2000,\n            \"intensityLevel\": 20,\n            \"volumeValue\": 0.5\n        }\n    ]\n}"
+						},
+						"description": "add device"
+					},
+					"response": []
+				},
+				{
+					"name": "get all devices",
+					"request": {
+						"url": "http://localhost:8080/rest/devices",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update device with id=1",
+					"request": {
+						"url": "http://localhost:8080/rest/devices/1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"headphoneName\" : \"RFRF\",\n    \"soundCardName\" : \"rfrfrf\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get device with id =1",
+					"request": {
+						"url": "http://localhost:8080/rest/devices/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "Test",
+			"description": "",
+			"item": []
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": []
+		}
+	]
+}

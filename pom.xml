@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.vsu.amm</groupId>
-    <artifactId>medframe</artifactId>
+    <artifactId>audiometry</artifactId>
     <version>${project-version}</version>
 
     <parent>
@@ -50,8 +50,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
-
-        <!---->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -66,11 +64,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.jmnarloch</groupId>
-            <artifactId>modelmapper-spring-boot-starter</artifactId>
-            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
@@ -102,28 +95,25 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>1.5.3.RELEASE</version>
+            <version>${spring-boot-starter-test-version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>1.5.3.RELEASE</version>
+            <version>${spring-boot-starter-actuator-version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>1.3.0.RELEASE</version>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${org.mapstruct.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -131,6 +121,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -141,5 +147,10 @@
         <spring-boot-starter-jetty-version>1.4.1.RELEASE</spring-boot-starter-jetty-version>
         <postgresql-version>9.4.1211.jre7</postgresql-version>
         <spring-data-jpa-version>1.10.5.RELEASE</spring-data-jpa-version>
+        <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
+        <spring-boot-starter-actuator-version>1.5.3.RELEASE</spring-boot-starter-actuator-version>
+        <spring-boot-starter-test-version>1.5.3.RELEASE</spring-boot-starter-test-version>
+        <java-version>1.8</java-version>
+        <junit-version>4.12</junit-version>
     </properties>
 </project>
