@@ -1,8 +1,10 @@
 package com.vsu.amm.medframe;
 
+import com.vsu.amm.medframe.config.SecurityConfig;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringValueResolver;
@@ -15,6 +17,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan("com.vsu.amm.medframe")
 @EnableJpaRepositories
 @EnableTransactionManagement
+@Import(
+        {
+                SecurityConfig.class
+        }
+)
 public class MainConfiguration extends WebMvcConfigurerAdapter implements EmbeddedValueResolverAware {
 
     @Override
